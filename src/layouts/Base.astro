@@ -1,0 +1,210 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+import { plain } from '../lib/val';
+// Hashed URLs of the two font files the first paint actually needs.
+import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import archivoLatinExt from '@fontsource-variable/archivo/files/archivo-latin-ext-wdth-normal.woff2?url';
+import plexLatin from '@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-400-normal.woff2?url';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Extra JSON-LD graphs for this page. Organization + WebSite are added globally. */
+  schema?: Record<string, unknown>[];
+  /** Breadcrumb trail without the home entry. */
+  crumbs?: { label: string; href: string }[];
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  schema = [],
+  crumbs = [],
+  ogImage = '/og/hydracut.png',
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, site.meta.url).href;
+const fullTitle = title === site.meta.title ? title : `${title} | ${site.meta.brand}`;
+
+const organization = {
+  '@type': 'Organization',
+  '@id': `${site.meta.url}/#organizacja`,
+  name: plain(site.contact.company),
+  url: site.meta.url,
+  telephone: plain(site.contact.phone),
+  email: plain(site.contact.email),
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: plain(site.contact.street),
+    addressLocality: plain(site.contact.city),
+    addressCountry: 'PL',
+  },
+};
+
+const website = {
+  '@type': 'WebSite',
+  '@id': `${site.meta.url}/#witryna`,
+  url: site.meta.url,
+  name: site.meta.brand,
+  inLanguage: 'pl-PL',
+  publisher: { '@id': `${site.meta.url}/#organizacja` },
+};
+
+const breadcrumbs =
+  crumbs.length > 0
+    ? [
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [{ label: 'Strona główna', href: '/' }, ...crumbs].map((c, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: c.label,
+            item: new URL(c.href, site.meta.url).href,
+          })),
+        },
+      ]
+    : [];
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [organization, website, ...breadcrumbs, ...schema],
+};
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta
+      name="robots"
+      content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'}
+    />
+    <meta name="theme-color" content="#0b0c0e" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="author" content={site.meta.maker} />
+    <meta name="generator" content="Astro" />
+
+    {/* Set the theme before first paint so the page never flashes the wrong one. */}
+    <script is:inline>
+      (() => {
+        try {
+          const saved = localStorage.getItem('hc-theme');
+          const system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          document.documentElement.dataset.theme = saved || system;
+        } catch {
+          document.documentElement.dataset.theme = 'dark';
+        }
+      })();
+    </script>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:site_name" content={site.meta.brand} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, site.meta.url).href} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={archivoLatinExt} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={plexLatin} as="font" type="font/woff2" crossorigin />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(graph)} />
+    <slot name="head" />
+  </head>
+
+  <body>
+    <a href="#tresc" class="skip">Przejdź do treści</a>
+    <Header />
+    <main id="tresc">
+      <slot />
+    </main>
+    <Footer />
+
+    <div class="sticky-cta">
+      <a href={`tel:${plain(site.contact.phoneHref)}`} class="sticky-cta__phone mono">Zadzwoń</a>
+      <a href="/kontakt/" class="sticky-cta__ask mono">Zapytaj o cenę</a>
+    </div>
+
+    <style is:global>
+      .skip {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: translateY(-200%);
+        background: var(--color-amber);
+        color: var(--color-ink);
+        padding: 0.75rem 1.25rem;
+        font-family: var(--font-mono);
+        z-index: 100;
+      }
+      .skip:focus { transform: none; }
+
+      .sticky-cta {
+        position: fixed;
+        inset-inline: 0;
+        bottom: 0;
+        z-index: 55;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border-top: 1px solid var(--rule);
+        background: color-mix(in srgb, var(--bg) 96%, transparent);
+        backdrop-filter: blur(6px);
+      }
+      .sticky-cta a {
+        text-align: center;
+        padding: 1rem;
+        font-size: 0.75rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .sticky-cta__ask { background: var(--color-amber); color: var(--color-ink); font-weight: 500; }
+      body { padding-bottom: 52px; }
+      @media (min-width: 1120px) {
+        .sticky-cta { display: none; }
+        body { padding-bottom: 0; }
+      }
+    </style>
+
+    <script>
+      // Reveal on scroll. Nothing depends on it: content is visible without JS
+      // for crawlers, the class is only added when JS runs.
+      const items = document.querySelectorAll('.reveal');
+      if (items.length && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry, i) => {
+              if (!entry.isIntersecting) return;
+              const el = entry.target as HTMLElement;
+              el.style.transitionDelay = `${Math.min(i * 60, 240)}ms`;
+              el.classList.add('is-in');
+              io.unobserve(el);
+            });
+          },
+          { rootMargin: '0px 0px -12% 0px', threshold: 0.05 },
+        );
+        items.forEach((el) => io.observe(el));
+      } else {
+        items.forEach((el) => el.classList.add('is-in'));
+      }
+    </script>
+    <noscript>
+      <style>.reveal { opacity: 1; transform: none; }</style>
+    </noscript>
+  </body>
+</html>

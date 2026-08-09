@@ -1,0 +1,65 @@
+---
+import { site } from '../data/site';
+---
+
+<section class="strip" aria-label="Kluczowe parametry">
+  <div class="shell strip__grid">
+    {
+      site.stats.map((s) => (
+        <div class="strip__cell">
+          <p class="strip__val mono">
+            {s.value}
+            <span class="strip__unit">{s.unit}</span>
+          </p>
+          <p class="label">{s.label}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .strip {
+    border-block: 1px solid var(--rule);
+    background: var(--elev);
+  }
+  .strip__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .strip__cell {
+    padding: 1.5rem 0;
+    padding-inline-end: 1.25rem;
+  }
+  .strip__cell + .strip__cell {
+    border-inline-start: 1px solid var(--rule);
+    padding-inline-start: 1.25rem;
+  }
+  .strip__cell:nth-child(3) { border-inline-start: 0; padding-inline-start: 0; }
+  .strip__val {
+    font-size: clamp(1.125rem, 1.75vw, 1.5rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+  .strip__unit {
+    font-size: 0.6em;
+    color: var(--muted);
+    margin-inline-start: 0.35em;
+  }
+  .strip .label { margin-top: 0.45rem; }
+
+  @media (max-width: 400px) {
+    .strip__val { font-size: 1rem; }
+  }
+  @media (min-width: 640px) {
+    .strip__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .strip__cell:nth-child(3) { border-inline-start: 1px solid var(--rule); padding-inline-start: 1.25rem; }
+    .strip__cell:nth-child(4) { border-inline-start: 0; padding-inline-start: 0; }
+  }
+  @media (min-width: 1000px) {
+    .strip__grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .strip__cell:nth-child(4) { border-inline-start: 1px solid var(--rule); padding-inline-start: 1.25rem; }
+  }
+</style>

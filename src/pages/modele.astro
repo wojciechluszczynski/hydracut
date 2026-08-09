@@ -1,0 +1,206 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import NextLinks from '../components/NextLinks.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import { site } from '../data/site';
+
+const p = site.pages.models;
+const m = site.models;
+const crumbs = [{ label: 'Modele', href: '/modele/' }];
+
+const schema = m.items.map((item) => ({
+  '@type': 'Product',
+  name: `HydraCut ${item.name}`,
+  category: 'Obwodowa piła hydrauliczna do rur',
+  description: `${item.note} Zakres cięcia ${item.range}, ${item.blade}, masa ${item.weight}.`,
+  brand: { '@type': 'Brand', name: site.meta.brand },
+  manufacturer: { '@id': `${site.meta.url}/#organizacja` },
+  additionalProperty: m.rows.map((r) => ({
+    '@type': 'PropertyValue',
+    name: r.k,
+    value: item.name === 'HPO600' ? r.a : r.b,
+  })),
+  offers: {
+    '@type': 'Offer',
+    priceCurrency: 'PLN',
+    availability: 'https://schema.org/InStock',
+    url: `${site.meta.url}/kontakt/`,
+    seller: { '@id': `${site.meta.url}/#organizacja` },
+  },
+}));
+---
+
+<Base title={p.title} description={p.description} schema={schema} crumbs={crumbs}>
+  <PageHero
+    h1={p.h1}
+    lead={p.lead}
+    crumbs={crumbs}
+    image={site.media.machine.src}
+    imageAlt={site.media.machine.alt}
+  />
+
+  <section class="band">
+    <div class="shell">
+      <div class="cards">
+        {
+          m.items.map((item) => (
+            <article class="card reveal">
+              <h2 class="card__name">{item.name}</h2>
+              <p class="card__range mono">{item.range}</p>
+              <p class="muted card__note">{item.note}</p>
+              <dl class="card__mini mono">
+                <div>
+                  <dt>Tarcza</dt>
+                  <dd>{item.blade}</dd>
+                </div>
+                <div>
+                  <dt>Masa</dt>
+                  <dd>{item.weight}</dd>
+                </div>
+              </dl>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="tableWrap">
+        <table class="cmp">
+          <caption class="sr-only">Porównanie parametrów HydraCut HPO600 i HPO1200</caption>
+          <thead>
+            <tr>
+              <th scope="col">Parametr</th>
+              <th scope="col">HPO600</th>
+              <th scope="col">HPO1200</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              m.rows.map((r) => (
+                <tr>
+                  <th scope="row">{r.k}</th>
+                  <td class="mono">{r.a}</td>
+                  <td class="mono">{r.b}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <p class="overlap muted">{m.overlap}</p>
+    </div>
+  </section>
+
+  <section class="band band--paper">
+    <div class="shell pick">
+      <div class="pick__text">
+        <h2 class="display-l">Jak wybrać?</h2>
+        <ol class="pick__list">
+          <li>
+            <span class="mono pick__idx">01</span>
+            <p>Sprawdź największą średnicę rury, jaką realnie tniesz. To ona wyznacza model.</p>
+          </li>
+          <li>
+            <span class="mono pick__idx">02</span>
+            <p>Do 603 mm wystarczy HPO600. Powyżej potrzebny jest HPO1200, który schodzi do 1206 mm.</p>
+          </li>
+          <li>
+            <span class="mono pick__idx">03</span>
+            <p>
+              W przedziale 355 do 603 mm pracują oba. Wtedy decyduje tarcza: 200 mm w HPO600, 230 mm
+              w HPO1200.
+            </p>
+          </li>
+          <li>
+            <span class="mono pick__idx">04</span>
+            <p>Sprawdź agregat. Oba modele potrzebują 20 do 30 l/min i około 140 bar, źródło trzyliniowe.</p>
+          </li>
+        </ol>
+      </div>
+      <PhotoSlot {...site.photos.detail} class="pick__photo" />
+    </div>
+  </section>
+
+  <section class="band band--tight">
+    <div class="shell cta">
+      <h2 class="display-l">Nie wiesz, który model?</h2>
+      <p class="lead muted">Napisz, jakie rury tniesz. Dobierzemy model i podamy cenę.</p>
+      <a href="/kontakt/" class="btn btn--solid">Zapytaj o dobór</a>
+    </div>
+
+    <div class="shell">
+      <NextLinks
+        items={[
+          { label: 'Dane techniczne', href: '/dane-techniczne/', note: 'Pełna specyfikacja obu modeli' },
+          { label: 'Jak to działa', href: '/jak-to-dziala/', note: 'Cztery kroki w wykopie' },
+          { label: 'Zastosowania', href: '/zastosowania/', note: 'Gdzie piła pracuje' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cards {
+    display: grid;
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .card { background: var(--bg); padding: clamp(1.75rem, 3vw, 2.5rem); }
+  .card__name {
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+    font-stretch: 108%;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .card__range { color: var(--accent-text); font-size: 1.05rem; margin-top: 0.6rem; }
+  .card__note { margin-top: 1rem; max-width: 40ch; }
+  .card__mini { display: flex; gap: 2.5rem; margin-top: 1.75rem; font-size: 0.8125rem; }
+  .card__mini dt {
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+  }
+  .card__mini dd { margin: 0.35rem 0 0; }
+
+  .tableWrap { margin-top: clamp(3rem, 5vw, 4.5rem); overflow-x: auto; }
+  .cmp { width: 100%; border-collapse: collapse; min-width: 34rem; }
+  .cmp th,
+  .cmp td {
+    text-align: left;
+    padding: 0.9rem 1rem 0.9rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .cmp thead th {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .cmp tbody th { font-weight: 500; font-size: 0.9375rem; }
+  .cmp td { font-size: 0.875rem; color: var(--muted); }
+  .overlap { margin-top: 1.75rem; max-width: 62ch; }
+
+  .pick { display: grid; gap: 3rem; }
+  .pick__list { list-style: none; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+  .pick__list li {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 1rem;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pick__idx { font-size: 0.7rem; color: var(--accent-text); padding-top: 0.25rem; }
+  .pick__list p { color: var(--muted); line-height: 1.6; }
+
+  @media (min-width: 900px) {
+    .cards { grid-template-columns: 1fr 1fr; }
+    .pick { grid-template-columns: 1.3fr 1fr; align-items: start; gap: 4rem; }
+  }
+</style>

@@ -1,0 +1,68 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import NextLinks from '../components/NextLinks.astro';
+import Faq from '../components/Faq.astro';
+import { site } from '../data/site';
+import { plain } from '../lib/val';
+
+const p = site.pages.faq;
+const crumbs = [{ label: 'FAQ', href: '/faq/' }];
+
+const schema = [
+  {
+    '@type': 'FAQPage',
+    mainEntity: site.faq.items.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: plain(item.a) },
+    })),
+  },
+];
+---
+
+<Base title={p.title} description={p.description} crumbs={crumbs} schema={schema}>
+  <PageHero h1={p.h1} lead={p.lead} crumbs={crumbs}
+    image={site.media.trench.src}
+    imageAlt={site.media.trench.alt}
+  />
+
+  <section class="band">
+    <div class="shell faq-page">
+      <Faq items={site.faq.items} />
+      <aside class="faq-page__aside">
+        <p class="label">Nie ma Twojego pytania?</p>
+        <p class="faq-page__txt">
+          Zadzwoń albo wyślij zapytanie. Odpowiadamy w ciągu jednego dnia roboczego.
+        </p>
+        <a href="/kontakt/" class="btn btn--solid">Zapytaj o cenę</a>
+      </aside>
+    </div>
+
+    <div class="shell">
+      <NextLinks
+        items={[
+          { label: 'Dane techniczne', href: '/dane-techniczne/', note: 'Wszystkie parametry w jednej tabeli.' },
+          { label: 'Jak to działa', href: '/jak-to-dziala/', note: 'Cztery kroki pracy i zasady bezpieczeństwa.' },
+          { label: 'Kontakt', href: '/kontakt/', note: 'Zapytanie o cenę, termin i dobór tarczy.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .faq-page { display: grid; gap: 3rem; }
+  .faq-page__aside {
+    display: grid;
+    gap: 1.1rem;
+    justify-items: start;
+    align-content: start;
+    padding: 1.75rem;
+    border: 1px solid var(--rule);
+  }
+  .faq-page__txt { font-size: 0.9375rem; color: var(--muted); max-width: 32ch; }
+  @media (min-width: 960px) {
+    .faq-page { grid-template-columns: 1.8fr 1fr; gap: 4rem; align-items: start; }
+  }
+</style>

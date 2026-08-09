@@ -1,0 +1,193 @@
+---
+import { site } from '../data/site';
+import { plain } from '../lib/val';
+import ThemeToggle from './ThemeToggle.astro';
+
+const path = Astro.url.pathname;
+const phone = plain(site.contact.phone);
+const phoneHref = plain(site.contact.phoneHref);
+---
+
+<header class="hdr">
+  <div class="shell hdr__inner">
+    <a href="/" class="wordmark" aria-label={`${site.meta.brand}, strona główna`}>
+      <img src="/logo/hydracut-wordmark-light.png" alt={site.meta.brand} width="739" height="155" class="wordmark__img wordmark__img--dark" />
+      <img src="/logo/hydracut-wordmark-dark.png" alt="" aria-hidden="true" width="739" height="155" class="wordmark__img wordmark__img--light" />
+    </a>
+
+    <nav class="hdr__nav" aria-label="Nawigacja główna">
+      {
+        site.nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={['hdr__link', { 'is-active': item.href !== '/' && path.startsWith(item.href) }]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="hdr__aside">
+      <a href={`tel:${phoneHref}`} class="hdr__phone mono">{phone}</a>
+      <ThemeToggle />
+      <a href="/kontakt/" class="btn btn--solid hdr__cta">Zapytaj o cenę</a>
+      <button class="hdr__burger" type="button" aria-expanded="false" aria-controls="menu-mobilne">
+        <span class="sr-only">Menu</span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="hdr__panel" id="menu-mobilne" hidden>
+    <nav class="shell" aria-label="Nawigacja mobilna">
+      {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href={`tel:${phoneHref}`} class="mono hdr__panel-phone">{phone}</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .hdr {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .hdr__inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    height: 72px;
+  }
+
+  .wordmark__img { height: 22px; width: auto; display: block; }
+  /* Znak producenta w dwóch wariantach: jasny na ciemnym tle, ciemny na jasnym. */
+  :root:not([data-theme='light']) .wordmark__img--light,
+  :root[data-theme='light'] .wordmark__img--dark { display: none; }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 118%;
+    font-size: 1.125rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    flex: none;
+  }
+  .wordmark__mark {
+    width: 10px;
+    height: 10px;
+    background: var(--color-amber);
+  }
+
+  .hdr__nav {
+    display: none;
+    gap: clamp(0.9rem, 1.2vw, 1.45rem);
+    margin-inline-start: auto;
+  }
+  .hdr__link {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--muted);
+    padding-block: 0.35rem;
+    border-bottom: 1px solid transparent;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+  .hdr__link:hover { color: var(--fg); }
+  .hdr__link.is-active { color: var(--fg); border-color: var(--accent-text); }
+
+  .hdr__aside {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-inline-start: auto;
+  }
+  .hdr__phone {
+    display: none;
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    color: var(--fg);
+  }
+  .hdr__cta { display: none; padding: 0.7rem 1.15rem; }
+
+  .hdr__burger {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-content: center;
+    gap: 6px;
+    background: none;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .hdr__burger span[aria-hidden] {
+    display: block;
+    width: 18px;
+    height: 1px;
+    background: var(--fg);
+    transition: transform 200ms ease, opacity 200ms ease;
+  }
+  .hdr__burger[aria-expanded='true'] span:nth-child(2) { transform: translateY(3.5px) rotate(45deg); }
+  .hdr__burger[aria-expanded='true'] span:nth-child(3) { transform: translateY(-3.5px) rotate(-45deg); }
+
+  .hdr__panel {
+    border-top: 1px solid var(--rule);
+    background: var(--bg);
+  }
+  .hdr__panel nav {
+    display: flex;
+    flex-direction: column;
+    padding-block: 1rem 2rem;
+  }
+  .hdr__panel a {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-stretch: 110%;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    padding-block: 0.7rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .hdr__panel-phone {
+    font-family: var(--font-mono) !important;
+    font-size: 1rem !important;
+    text-transform: none !important;
+    color: var(--accent-text);
+    border-bottom: 0 !important;
+    padding-top: 1.25rem !important;
+  }
+
+  @media (min-width: 1400px) {
+    .hdr__nav { display: flex; }
+    .hdr__aside { margin-inline-start: 0; }
+    .hdr__phone, .hdr__cta { display: inline-flex; }
+    .hdr__burger { display: none; }
+    .hdr__panel { display: none !important; }
+  }
+  @media (min-width: 700px) and (max-width: 1399.98px) {
+    .hdr__phone { display: inline-flex; }
+  }
+</style>
+
+<script>
+  const burger = document.querySelector<HTMLButtonElement>('.hdr__burger');
+  const panel = document.querySelector<HTMLElement>('.hdr__panel');
+  burger?.addEventListener('click', () => {
+    const open = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', String(!open));
+    if (panel) panel.hidden = open;
+  });
+</script>

@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import NextLinks from '../components/NextLinks.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import { site } from '../data/site';
+
+const p = site.pages.uses;
+const crumbs = [{ label: 'Zastosowania', href: '/zastosowania/' }];
+const photos = [site.photos.hero, site.photos.edge, site.photos.ring];
+---
+
+<Base title={p.title} description={p.description} crumbs={crumbs}>
+  <PageHero h1={p.h1} lead={p.lead} crumbs={crumbs}
+    image={site.media.yard.src}
+    imageAlt={site.media.yard.alt}
+  />
+
+  <section class="band">
+    <div class="shell">
+      <div class="cases">
+        {
+          p.details.map((item, i) => (
+            <article class="case reveal">
+              <span class="case__idx mono">{String(i + 1).padStart(2, '0')}</span>
+              <div class="case__body">
+                <h2 class="case__title">{item.title}</h2>
+                <p class="muted">{item.body}</p>
+              </div>
+              {i % 2 === 0 && <PhotoSlot {...photos[i / 2]} class="case__photo" />}
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--paper band--tight">
+    <div class="shell cta">
+      <h2 class="display-l">Twoja nawierzchnia, nasz dobór</h2>
+      <p class="lead muted">
+        Napisz, w czym tniesz i na jakich średnicach pracujesz. Odpowiemy ceną i doborem tarczy.
+      </p>
+      <a href="/kontakt/" class="btn btn--solid">Zapytaj o cenę</a>
+    </div>
+
+    <div class="shell">
+      <NextLinks
+        items={[
+          {
+            label: 'Dane techniczne',
+            href: '/dane-techniczne/',
+            note: 'Głębokość, średnica cięcia, silnik, masa i wyposażenie standardowe.',
+          },
+          { label: 'Jak to działa', href: '/jak-to-dziala/', note: 'Przebieg cięcia po obwodzie krok po kroku.' },
+          { label: 'FAQ', href: '/faq/', note: 'Odpowiedzi na pytania o tarcze, transport, obsługę i cenę.' },
+        ]}
+      />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .cases { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+  .case {
+    display: grid;
+    gap: 1.25rem;
+    padding-block: clamp(2rem, 3.5vw, 3rem);
+    border-bottom: 1px solid var(--rule);
+  }
+  .case__idx { font-size: 0.75rem; color: var(--accent-text); letter-spacing: 0.2em; }
+  .case__title { font-size: clamp(1.25rem, 2vw, 1.625rem); margin-bottom: 0.9rem; }
+  .case__body p { max-width: 64ch; font-size: 0.9375rem; }
+  .case__photo { max-width: 420px; }
+
+  @media (min-width: 900px) {
+    .case { grid-template-columns: 4rem minmax(0, 1fr) 320px; gap: 2.5rem; align-items: start; }
+    .case__photo { max-width: none; }
+  }
+
+  .cta { display: grid; gap: 1.5rem; justify-items: start; }
+  .cta .lead { max-width: 52ch; }
+</style>

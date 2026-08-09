@@ -1,0 +1,110 @@
+---
+import { site } from '../data/site';
+import { plain } from '../lib/val';
+import Val from './Val.astro';
+
+const year = 2026;
+const phoneHref = plain(site.contact.phoneHref);
+const email = plain(site.contact.email);
+---
+
+<footer class="ftr">
+  <div class="shell">
+    <div class="ftr__top">
+      <div>
+        <p class="wordmark">
+          <span class="wordmark__mark" aria-hidden="true"></span>{site.meta.brand}
+        </p>
+        <p class="ftr__claim">Obwodowa piła hydrauliczna do cięcia rur w wykopie.</p>
+      </div>
+
+      <nav class="ftr__nav" aria-label="Nawigacja w stopce">
+        <p class="label">Strona</p>
+        {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+        <a href="/do-pobrania/">Do pobrania</a>
+      </nav>
+
+      <div class="ftr__contact">
+        <p class="label">Kontakt</p>
+        <a href={`tel:${phoneHref}`} class="mono"><Val text={site.contact.phone} /></a>
+        <a href={`mailto:${email}`} class="mono"><Val text={site.contact.email} /></a>
+        <p class="mono ftr__hours">{site.contact.hours}</p>
+      </div>
+
+      <div class="ftr__company">
+        <p class="label">Dane firmy</p>
+        <p><Val text={site.contact.company} /></p>
+        <p><Val text={site.contact.street} /></p>
+        <p><Val text={site.contact.city} /></p>
+        <p class="mono">NIP <Val text={site.contact.nip} /></p>
+        <p class="mono">REGON <Val text={site.contact.regon} /></p>
+      </div>
+    </div>
+
+    <div class="ftr__bottom">
+      <p class="mono">© {year} <Val text={site.contact.company} />. Wszystkie prawa zastrzeżone.</p>
+      <a href="/polityka-prywatnosci/" class="mono">Polityka prywatności</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ftr {
+    border-top: 1px solid var(--rule);
+    padding-block: clamp(3rem, 6vw, 5rem) 2rem;
+    background: var(--bg);
+  }
+
+  .ftr__top {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
+    padding-bottom: 3rem;
+  }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 118%;
+    font-size: 1.125rem;
+    text-transform: uppercase;
+  }
+  .wordmark__mark { width: 10px; height: 10px; background: var(--color-amber); }
+
+  .ftr__claim {
+    color: var(--muted);
+    max-width: 32ch;
+    margin-top: 0.9rem;
+    font-size: 0.9375rem;
+  }
+
+  .ftr__nav, .ftr__contact, .ftr__company {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    font-size: 0.9375rem;
+  }
+  .ftr__nav .label, .ftr__contact .label, .ftr__company .label { margin-bottom: 0.5rem; }
+  .ftr__nav a:hover, .ftr__contact a:hover { color: var(--accent-text); }
+  .ftr__company p { color: var(--muted); }
+  .ftr__hours { color: var(--muted); font-size: 0.8125rem; }
+
+  .ftr__bottom {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .ftr__bottom a:hover { color: var(--accent-text); }
+
+  @media (min-width: 780px) {
+    .ftr__top { grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2rem; }
+  }
+</style>

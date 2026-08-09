@@ -1,0 +1,25 @@
+---
+import Val from './Val.astro';
+
+interface Props {
+  caption: string;
+  rows: readonly { k: string; v: string }[];
+}
+const { caption, rows } = Astro.props;
+---
+
+<table class="spec">
+  <caption class="sr-only">{caption}</caption>
+  <tbody>
+    {
+      rows.map((row) => (
+        <tr>
+          <th scope="row">{row.k}</th>
+          <td>
+            <Val text={row.v} />
+          </td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>

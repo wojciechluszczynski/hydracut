@@ -1,0 +1,77 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import Val from '../../components/Val.astro';
+import { site } from '../../data/site';
+import { plain } from '../../lib/val';
+
+const p = site.pages.contact;
+const crumbs = [{ label: 'Kontakt', href: '/kontakt/' }];
+
+const schema = [
+  {
+    '@type': 'ContactPage',
+    name: p.title,
+    description: p.description,
+    mainEntity: { '@id': `${site.meta.url}/#organizacja` },
+  },
+];
+---
+
+<Base title={p.title} description={p.description} crumbs={crumbs} schema={schema}>
+  <PageHero h1={p.h1} lead={p.lead} crumbs={crumbs}
+    image={site.media.dusk.src}
+    imageAlt={site.media.dusk.alt}
+  />
+
+  <section class="band band--paper">
+    <div class="shell kt">
+      <div class="kt__data">
+        <dl>
+          <div>
+            <dt class="label">Telefon</dt>
+            <dd class="mono">
+              <a href={`tel:${plain(site.contact.phoneHref)}`}><Val text={site.contact.phone} /></a>
+            </dd>
+          </div>
+          <div>
+            <dt class="label">E-mail</dt>
+            <dd class="mono">
+              <a href={`mailto:${plain(site.contact.email)}`}><Val text={site.contact.email} /></a>
+            </dd>
+          </div>
+          <div>
+            <dt class="label">Godziny pracy</dt>
+            <dd class="mono">{site.contact.hours}</dd>
+          </div>
+          <div>
+            <dt class="label">Adres</dt>
+            <dd class="mono">
+              <Val text={site.contact.company} /><br />
+              <Val text={site.contact.street} /><br />
+              <Val text={site.contact.city} /><br />
+              NIP <Val text={site.contact.nip} />
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="kt__form">
+        <h2 class="display-m kt__h2">Zapytanie ofertowe</h2>
+        <LeadForm />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .kt { display: grid; gap: 3rem; }
+  .kt__data dl { display: grid; gap: 1.75rem; }
+  .kt__data dd { margin-top: 0.4rem; font-size: 0.9375rem; line-height: 1.7; }
+  .kt__data a:hover { color: var(--accent-text); }
+  .kt__h2 { margin-bottom: 2rem; }
+  @media (min-width: 900px) {
+    .kt { grid-template-columns: 1fr 1.5fr; gap: 4.5rem; align-items: start; }
+  }
+</style>

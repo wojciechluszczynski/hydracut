@@ -1,0 +1,21 @@
+---
+import { splitTbd } from '../lib/val';
+
+interface Props {
+  text: string;
+  class?: string;
+}
+
+const { text, class: cls } = Astro.props;
+const { text: value, tbd } = splitTbd(text);
+---
+
+{
+  tbd ? (
+    <span class:list={['tbd', cls]} title="Dana niepotwierdzona, do uzupełnienia">
+      {value}
+    </span>
+  ) : (
+    <span class:list={[cls]}>{value}</span>
+  )
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 72" width="420" height="72" role="img" aria-label="HydraCut">
+  <title>HydraCut</title>
+  <g transform="translate(4 4)">
+    <circle cx="32" cy="32" r="21" fill="none" stroke="#FFB800" stroke-width="7"
+            stroke-dasharray="105 27" transform="rotate(-118 32 32)"/>
+    <rect x="45" y="14" width="11" height="11" fill="#FFB800" transform="rotate(35 50.5 19.5)"/>
+    <circle cx="32" cy="32" r="8" fill="none" stroke="currentColor" stroke-width="3"/>
+  </g>
+  <text x="88" y="47"
+        font-family="Archivo, Archivo Variable, Helvetica Neue, Arial, sans-serif"
+        font-size="38" font-weight="800" font-stretch="118%" letter-spacing="0.5"
+        fill="currentColor">HORNET<tspan fill="#FFB800">CUT</tspan></text>
+  <text x="90" y="64"
+        font-family="IBM Plex Mono, ui-monospace, monospace"
+        font-size="10.5" letter-spacing="4.2" fill="#8A8F98">WYCINARKA OKRĘGÓW</text>
+</svg>

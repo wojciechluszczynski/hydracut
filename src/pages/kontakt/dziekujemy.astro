@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import { site } from '../../data/site';
+import { plain } from '../../lib/val';
+import Val from '../../components/Val.astro';
+
+const p = site.pages.thanks;
+---
+
+<Base title={p.title} description={p.description} noindex>
+  <section class="band thanks">
+    <div class="shell">
+      <p class="label">Formularz</p>
+      <h1 class="display-xl">{p.h1}</h1>
+      <p class="lead muted thanks__lead">{p.lead}</p>
+      <div class="thanks__row">
+        <a href={`tel:${plain(site.contact.phoneHref)}`} class="btn btn--solid">
+          <Val text={site.contact.phone} />
+        </a>
+        <a href="/" class="link-amber">Wróć na stronę główną</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .thanks { min-height: 60vh; display: grid; align-items: center; }
+  .thanks .label { margin-bottom: 1.25rem; }
+  .thanks__lead { margin-top: 1.5rem; }
+  .thanks__row { display: flex; flex-wrap: wrap; align-items: center; gap: 1.75rem; margin-top: 2.5rem; }
+</style>

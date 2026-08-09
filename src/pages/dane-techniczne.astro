@@ -1,0 +1,98 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import NextLinks from '../components/NextLinks.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import SpecTable from '../components/SpecTable.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import { site } from '../data/site';
+import { plain } from '../lib/val';
+
+const p = site.pages.specs;
+const crumbs = [{ label: 'Dane techniczne', href: '/dane-techniczne/' }];
+
+const schema = [
+  {
+    '@type': 'Product',
+    name: site.meta.model,
+    description: p.description,
+    brand: { '@type': 'Brand', name: site.meta.brand },
+    additionalProperty: p.blocks
+      .flatMap((b) => b.rows)
+      .filter((r) => !r.v.startsWith('?'))
+      .map((r) => ({ '@type': 'PropertyValue', name: r.k, value: plain(r.v) })),
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'PLN',
+      availability: 'https://schema.org/InStock',
+      url: `${site.meta.url}/kontakt/`,
+    },
+  },
+];
+---
+
+<Base title={p.title} description={p.description} crumbs={crumbs} schema={schema}>
+  <PageHero h1={p.h1} lead={p.lead} crumbs={crumbs}
+    image={site.media.lowangle.src}
+    imageAlt={site.media.lowangle.alt}
+  />
+
+  <section class="band band--paper">
+    <div class="shell">
+      <div class="tech">
+        <div class="tech__tables">
+          {
+            p.blocks.map((block, i) => (
+              <div class="tech__block reveal">
+                <Eyebrow index={String(i + 1).padStart(2, '0')} label={block.h2} />
+                <h2 class="sr-only">{block.h2}</h2>
+                <SpecTable caption={`${block.h2}: ${site.meta.model}`} rows={block.rows} />
+              </div>
+            ))
+          }
+          <p class="tech__note mono">{p.note}</p>
+        </div>
+
+        <aside class="tech__aside">
+          <PhotoSlot {...site.photos.transport} />
+          <div class="tech__cta">
+            <p class="label">Zapytanie</p>
+            <p class="tech__ctaTxt">
+              Potrzebujesz karty produktu w PDF albo doboru tarczy pod konkretną nawierzchnię?
+            </p>
+            <a href="/kontakt/" class="btn btn--ghost">Napisz do nas</a>
+          </div>
+        </aside>
+      </div>
+          <NextLinks items={[
+        { label: 'Jak to działa', href: '/jak-to-dziala/', note: 'Cztery kroki od założenia łańcucha do zejścia się linii cięcia.' },
+        { label: 'Zastosowania', href: '/zastosowania/', note: 'Wymiana odcinków, wcinki, awarie wodociągowe, kolektory, rozbiórki.' },
+        { label: 'Do pobrania', href: '/do-pobrania/', note: 'Karta produktu, DTR i deklaracja zgodności w PDF.' },
+      ]} />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .tech { display: grid; gap: 3rem; }
+  .tech__block + .tech__block { margin-top: clamp(2.5rem, 4vw, 3.5rem); }
+  .tech__note {
+    margin-top: 2.5rem;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 60ch;
+  }
+  .tech__cta {
+    margin-top: 2rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+  }
+  .tech__ctaTxt { font-size: 0.9375rem; color: var(--muted); max-width: 34ch; }
+  @media (min-width: 960px) {
+    .tech { grid-template-columns: 1.6fr 1fr; gap: 4.5rem; align-items: start; }
+  }
+</style>

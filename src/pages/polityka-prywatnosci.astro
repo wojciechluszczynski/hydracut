@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Val from '../components/Val.astro';
+import { site } from '../data/site';
+
+const p = site.pages.privacy;
+const crumbs = [{ label: 'Polityka prywatności', href: '/polityka-prywatnosci/' }];
+---
+
+<Base title={p.title} description={p.description} crumbs={crumbs} noindex>
+  <PageHero h1={p.h1} crumbs={crumbs} />
+
+  <section class="band">
+    <div class="shell prose">
+      <h2>Administrator danych</h2>
+      <p>
+        Administratorem danych osobowych podanych w formularzu kontaktowym jest
+        <Val text={site.contact.company} />, <Val text={site.contact.street} />,
+        <Val text={site.contact.city} />, NIP <Val text={site.contact.nip} />.
+        Kontakt w sprawach danych osobowych: <Val text={site.contact.email} />.
+      </p>
+
+      <h2>Jakie dane zbieramy</h2>
+      <p>
+        Wyłącznie te, które sam podajesz w formularzu: imię i nazwisko, nazwę firmy, numer telefonu,
+        adres e-mail, wybrany zakres średnic rur i treść wiadomości. Zapisujemy też adres IP
+        oraz datę wysłania, żeby ograniczyć spam.
+      </p>
+
+      <h2>Po co je przetwarzamy</h2>
+      <p>
+        Żeby odpowiedzieć na zapytanie i przedstawić ofertę. Podstawą prawną jest art. 6 ust. 1 lit. b
+        RODO (działania przed zawarciem umowy) oraz art. 6 ust. 1 lit. f RODO (prawnie uzasadniony
+        interes w postaci obsługi korespondencji i ochrony przed nadużyciami).
+      </p>
+
+      <h2>Jak długo je trzymamy</h2>
+      <p>
+        Korespondencję handlową przechowujemy przez okres niezbędny do obsługi zapytania, a następnie
+        <Val text="?przez okres do uzupełnienia" /> na potrzeby ewentualnych roszczeń. Dane z formularza
+        nie trafiają do systemu marketing automation ani na listę mailingową.
+      </p>
+
+      <h2>Komu je przekazujemy</h2>
+      <p>
+        Dostawcy hostingu, na którym działa serwis i skrzynka pocztowa. Nie sprzedajemy danych i nie
+        przekazujemy ich poza Europejski Obszar Gospodarczy.
+      </p>
+
+      <h2>Twoje prawa</h2>
+      <p>
+        Masz prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania,
+        przenoszenia oraz wniesienia sprzeciwu. Możesz też złożyć skargę do Prezesa Urzędu Ochrony
+        Danych Osobowych. Żeby skorzystać z tych praw, napisz na adres podany wyżej.
+      </p>
+
+      <h2>Pliki cookie</h2>
+      <p>
+        Serwis nie używa plików cookie do śledzenia i nie osadza skryptów reklamowych.
+        Film promocyjny ładuje się dopiero po kliknięciu w podgląd, więc do tego momentu przeglądarka
+        nie łączy się z serwerami YouTube.
+        <Val text="?Jeżeli uruchomimy Google Analytics, uzupełnimy tę sekcję o informację o zgodzie." />
+      </p>
+
+      <h2>Zmiany polityki</h2>
+      <p>Aktualna wersja obowiązuje od dnia publikacji na tej stronie.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .prose { max-width: 68ch; }
+  .prose h2 {
+    font-size: 1.0625rem;
+    margin-top: 2.75rem;
+    margin-bottom: 0.85rem;
+    font-stretch: 104%;
+  }
+  .prose h2:first-child { margin-top: 0; }
+  .prose p { color: var(--muted); font-size: 0.9375rem; line-height: 1.65; }
+</style>

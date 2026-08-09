@@ -1,0 +1,772 @@
+---
+import Base from '../layouts/Base.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+import CutDiagram from '../components/CutDiagram.astro';
+import StatStrip from '../components/StatStrip.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import VideoSlot from '../components/VideoSlot.astro';
+import SpecTable from '../components/SpecTable.astro';
+import Faq from '../components/Faq.astro';
+import LeadForm from '../components/LeadForm.astro';
+import Val from '../components/Val.astro';
+import Icon from '../components/Icon.astro';
+import TextureBand from '../components/TextureBand.astro';
+import { site } from '../data/site';
+import { plain } from '../lib/val';
+
+const homeFaq = site.faq.items.filter((i) => i.home);
+
+const schema = [
+  {
+    '@type': 'Product',
+    '@id': `${site.meta.url}/#produkt`,
+    name: site.meta.model,
+    category: 'Obwodowa piła hydrauliczna do cięcia rur',
+    description: site.meta.description,
+    brand: { '@type': 'Brand', name: site.meta.brand },
+    manufacturer: { '@id': `${site.meta.url}/#organizacja` },
+    url: site.meta.url,
+    additionalProperty: site.specs.rows
+      .filter((r) => !r.v.startsWith('?'))
+      .map((r) => ({ '@type': 'PropertyValue', name: r.k, value: r.v })),
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'PLN',
+      availability: 'https://schema.org/InStock',
+      url: `${site.meta.url}/kontakt/`,
+      seller: { '@id': `${site.meta.url}/#organizacja` },
+    },
+  },
+  {
+    '@type': 'HowTo',
+    name: 'Jak przeciąć rurę po obwodzie w wykopie',
+    totalTime: 'PT30M',
+    tool: [{ '@type': 'HowToTool', name: site.meta.model }],
+    step: site.how.steps.map((s, i) => ({
+      '@type': 'HowToStep',
+      position: i + 1,
+      name: s.title,
+      text: s.body,
+    })),
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: homeFaq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: { '@type': 'Answer', text: plain(item.a) },
+    })),
+  },
+];
+---
+
+<Base title={site.meta.title} description={site.meta.description} schema={schema}>
+  {/* ------------------------------------------------ 01 HERO */}
+  <section class="hero" id="pila">
+    <div class="shell hero__grid">
+      <div class="hero__text">
+        <p class="label hero__eyebrow">{site.hero.eyebrow}</p>
+        <h1 class="display-xl">
+          {site.hero.h1.split('\n').map((line, i) => (
+            <>
+              {i > 0 && <br />}
+              {line}
+            </>
+          ))}
+        </h1>
+        <p class="lead muted hero__lead">{site.hero.lead}</p>
+        <div class="hero__cta">
+          <a href={site.hero.ctaPrimary.href} class="btn btn--solid">{site.hero.ctaPrimary.label}</a>
+          <a href={site.hero.ctaSecondary.href} class="link-amber">{site.hero.ctaSecondary.label}</a>
+        </div>
+      </div>
+
+      <div class="hero__dgm">
+        <CutDiagram />
+      </div>
+    </div>
+  </section>
+
+  <StatStrip />
+
+  {/* ------------------------------------------------ 02 PAIN AND GAIN */}
+  <section class="band band--paper">
+    <div class="shell">
+      <Eyebrow index="02" label={site.pains.eyebrow} />
+      <div class="pg__head">
+        <h2 class="display-l">{site.pains.h2}</h2>
+        <p class="lead muted">{site.pains.lead}</p>
+      </div>
+
+      <img
+        src={site.media.pain.src}
+        srcset={`${site.media.pain.src.replace('.webp', '-800.webp')} 800w, ${site.media.pain.src} 1600w`}
+        sizes="(max-width: 900px) 100vw, 1320px"
+        alt={site.media.pain.alt}
+        width="1600"
+        height="893"
+        loading="lazy"
+        decoding="async"
+        class="pg__photo reveal"
+      />
+
+      <div class="pg">
+        <p class="pg__col label">Tak jest zwykle</p>
+        <p class="pg__col label pg__col--gain">Z HydraCut HPO</p>
+        {
+          site.pains.rows.map((row) => (
+            <>
+              <p class="pg__pain reveal">{row.pain}</p>
+              <p class="pg__gain reveal">{row.gain}</p>
+            </>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ------------------------------------------------ 03 METHOD COMPARISON */}
+  <section class="band">
+    <div class="shell">
+      <Eyebrow index="03" label={site.why.eyebrow} />
+      <div class="why__head">
+        <h2 class="display-l">{site.why.h2}</h2>
+        <div class="why__body">
+          {site.why.body.map((p) => <p class="muted">{p}</p>)}
+        </div>
+      </div>
+
+      <figure class="why__shot reveal">
+        <PhotoSlot {...site.photos.edge} />
+        <figcaption class="mono why__cap">
+          Łańcuch prowadzący założony na rurze. To on trzyma tarczę w jednej płaszczyźnie.
+        </figcaption>
+      </figure>
+
+      <div class="why__rows">
+        {
+          site.why.rows.map((row) => (
+            <div class:list={['why__row', 'reveal', { 'is-hero': row.highlight }]}>
+              <p class="why__method">
+                {row.highlight && <span class="why__dot" aria-hidden="true" />}
+                {row.method}
+              </p>
+              <ul class="why__marks mono">
+                {row.marks.map((m) => (
+                  <li>{m}</li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ------------------------------------------------ 04 HOW IT WORKS */}
+  <section class="band band--paper">
+    <div class="shell">
+      <Eyebrow index="04" label={site.how.eyebrow} />
+      <h2 class="display-l how__h2">{site.how.h2}</h2>
+
+      <ol class="how__steps">
+        {
+          site.how.steps.map((step, i) => (
+            <li class="how__step reveal">
+              <span class="how__idx mono">{String(i + 1).padStart(2, '0')}</span>
+              <h3 class="how__title">{step.title}</h3>
+              <p class="muted">{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="how__video">
+        <VideoSlot
+          youtubeId={site.how.video.youtubeId}
+          file={site.how.video.file}
+          poster={site.how.video.poster}
+          caption={site.how.video.caption}
+          title={site.how.video.title}
+        />
+      </div>
+    </div>
+  </section>
+
+  <TextureBand
+    video={site.media.loop.video}
+    poster={site.media.loop.poster}
+    quote="Rura nie musi wyjechać na powierzchnię, żeby dało się ją przeciąć."
+    source="Z rozmowy na budowie"
+  />
+
+  {/* ------------------------------------------------ 05 PEOPLE */}
+  <section class="band">
+    <div class="shell">
+      <Eyebrow index="05" label={site.people.eyebrow} />
+      <div class="pp">
+        <div class="pp__text">
+          <h2 class="display-l">{site.people.h2}</h2>
+          <p class="lead muted pp__body">{site.people.body}</p>
+
+          <blockquote class="pp__quote">
+            <p><Val text={site.people.quote.text} /></p>
+            <footer class="mono">
+              <Val text={site.people.quote.author} />, <Val text={site.people.quote.role} />
+            </footer>
+          </blockquote>
+
+          <dl class="pp__facts">
+            {
+              site.people.facts.map((f) => (
+                <div>
+                  <dt class="label">{f.k}</dt>
+                  <dd class="mono">
+                    <Val text={f.v} />
+                  </dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+
+        <div class="pp__shots">
+          <PhotoSlot {...site.photos.crew} />
+        </div>
+      </div>
+
+      <div class="shots" role="group" aria-label="Zdjęcia z budowy, przewiń w bok">
+        <PhotoSlot {...site.photos.work} />
+        <PhotoSlot {...site.photos.handover} />
+        <PhotoSlot {...site.photos.site} />
+        <PhotoSlot {...site.photos.transport} />
+      </div>
+    </div>
+  </section>
+
+  {/* ------------------------------------------------ 06 MODELE */}
+  <section class="band" id="modele">
+    <div class="shell">
+      <Eyebrow index="06" label={site.models.eyebrow} />
+      <div class="md__head">
+        <h2 class="display-l">{site.models.h2}</h2>
+        <p class="lead muted">{site.models.lead}</p>
+      </div>
+
+      <div class="md__cards">
+        {
+          site.models.items.map((m) => (
+            <article class="md__card reveal">
+              <h3 class="md__name">{m.name}</h3>
+              <p class="md__range mono">{m.range}</p>
+              <p class="muted md__note">{m.note}</p>
+              <dl class="md__mini mono">
+                <div><dt>Tarcza</dt><dd>{m.blade}</dd></div>
+                <div><dt>Masa</dt><dd>{m.weight}</dd></div>
+              </dl>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="md__tableWrap">
+        <table class="md__table">
+          <caption class="sr-only">Porównanie modeli HydraCut HPO600 i HPO1200</caption>
+          <thead>
+            <tr>
+              <th scope="col">Parametr</th>
+              <th scope="col">HPO600</th>
+              <th scope="col">HPO1200</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              site.models.rows.map((r) => (
+                <tr>
+                  <th scope="row">{r.k}</th>
+                  <td class="mono">{r.a}</td>
+                  <td class="mono">{r.b}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <p class="md__overlap muted">{site.models.overlap}</p>
+    </div>
+  </section>
+
+  {/* ------------------------------------------------ 06 USES */}
+  <section class="band band--paper">
+    <div class="shell">
+      <Eyebrow index="06" label={site.uses.eyebrow} />
+      <div class="uses__head">
+        <h2 class="display-l">{site.uses.h2}</h2>
+        <a href="/zastosowania/" class="link-amber">Rozwinięte opisy</a>
+      </div>
+
+      <div class="uses__layout">
+        <div class="matrix uses__matrix">
+          {
+            site.uses.items.map((item) => (
+              <div class="reveal">
+                <Icon name={item.icon} class="uses__ico" />
+                <h3 class="uses__title">{item.title}</h3>
+                <p class="muted uses__body">{item.body}</p>
+              </div>
+            ))
+          }
+        </div>
+        <PhotoSlot {...site.photos.hero} class="uses__photo" />
+      </div>
+    </div>
+  </section>
+
+  {/* ------------------------------------------------ 07 EQUIPMENT */}
+  <section class="band">
+    <div class="shell">
+      <Eyebrow index="07" label={site.equipment.eyebrow} />
+      <div class="eq">
+        <div class="eq__left">
+          <h2 class="display-l">{site.equipment.h2}</h2>
+          <PhotoSlot {...site.photos.detail} class="eq__photo" />
+        </div>
+        <dl class="eq__list">
+          {
+            site.equipment.items.map((item) => (
+              <div class="eq__item reveal">
+                <dt>{item.title}</dt>
+                <dd class="muted">{item.body}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  {/* ------------------------------------------------ 08 SPECS */}
+  <section class="band band--paper">
+    <div class="shell">
+      <Eyebrow index="08" label={site.specs.eyebrow} />
+      <div class="specs">
+        <div class="specs__left">
+          <h2 class="display-l">{site.specs.h2}</h2>
+          <p class="muted specs__note">
+            Dane katalogowe maszyny w konfiguracji standardowej. Pozycje z podkreśleniem czekają na
+            potwierdzenie w dokumentacji technicznej.
+          </p>
+          <a href="/dane-techniczne/" class="link-amber">Pełna specyfikacja</a>
+        </div>
+        <div class="specs__table">
+          <SpecTable caption={site.specs.caption} rows={site.specs.rows} />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ------------------------------------------------ 09 MAKER */}
+  <section class="band band--tight">
+    <div class="shell">
+      <Eyebrow index="09" label={site.maker.eyebrow} />
+      <div class="mk">
+        <div>
+          <h2 class="display-l">{site.maker.h2}</h2>
+          <p class="lead muted mk__body">{site.maker.body}</p>
+          <p class="mk__links">
+            {
+              site.maker.links.map((l) => (
+                <a href={l.href} class="link-amber" rel="noopener">
+                  {l.label}
+                </a>
+              ))
+            }
+          </p>
+        </div>
+        <dl class="mk__facts">
+          {
+            site.maker.facts.map((f) => (
+              <div class="mk__fact">
+                <dt class="label">{f.k}</dt>
+                <dd class="mono">
+                  <Val text={f.v} />
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  {/* ------------------------------------------------ 10 FAQ */}
+  <section class="band">
+    <div class="shell">
+      <Eyebrow index="10" label={site.faq.eyebrow} />
+      <div class="faq__layout">
+        <div>
+          <h2 class="display-l">{site.faq.h2}</h2>
+          <a href="/faq/" class="link-amber faq__more">Wszystkie pytania</a>
+        </div>
+        <Faq items={homeFaq} />
+      </div>
+    </div>
+  </section>
+
+  {/* ------------------------------------------------ 11 CONTACT */}
+  <section class="band band--paper" id="kontakt">
+    <div class="shell">
+      <Eyebrow index="11" label={site.form.eyebrow} />
+      <div class="ct">
+        <div class="ct__left">
+          <h2 class="display-l">{site.form.h2}</h2>
+          <p class="lead muted ct__intro">{site.form.intro}</p>
+          <dl class="ct__data mono">
+            <div>
+              <dt class="label">Telefon</dt>
+              <dd>
+                <a href={`tel:${plain(site.contact.phoneHref)}`}><Val text={site.contact.phone} /></a>
+              </dd>
+            </div>
+            <div>
+              <dt class="label">E-mail</dt>
+              <dd>
+                <a href={`mailto:${plain(site.contact.email)}`}><Val text={site.contact.email} /></a>
+              </dd>
+            </div>
+            <div>
+              <dt class="label">Godziny</dt>
+              <dd>{site.contact.hours}</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="ct__form">
+          <LeadForm />
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* 06 modele --------------------------------------------------- */
+  .md__head { display: grid; gap: 1.5rem; }
+  .md__cards {
+    display: grid;
+    gap: 1px;
+    margin-top: clamp(2.5rem, 4vw, 3.5rem);
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+  .md__card { background: var(--bg); padding: clamp(1.5rem, 3vw, 2.25rem); }
+  .md__name {
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    font-stretch: 108%;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .md__range { color: var(--accent-text); font-size: 1rem; margin-top: 0.5rem; }
+  .md__note { margin-top: 0.9rem; font-size: 0.9375rem; max-width: 42ch; }
+  .md__mini { display: flex; gap: 2rem; margin-top: 1.5rem; font-size: 0.75rem; }
+  .md__mini dt { color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; font-size: 0.65rem; }
+  .md__mini dd { margin: 0.3rem 0 0; }
+
+  .md__tableWrap { margin-top: clamp(2.5rem, 4vw, 3.5rem); overflow-x: auto; }
+  .md__table { width: 100%; border-collapse: collapse; min-width: 34rem; }
+  .md__table th,
+  .md__table td { text-align: left; padding: 0.85rem 1rem 0.85rem 0; border-bottom: 1px solid var(--rule); }
+  .md__table thead th {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    border-bottom-width: 1px;
+  }
+  .md__table tbody th { font-weight: 500; font-size: 0.9375rem; }
+  .md__table td { font-size: 0.875rem; color: var(--muted); }
+  .md__overlap { margin-top: 1.75rem; max-width: 62ch; font-size: 0.9375rem; }
+
+  @media (min-width: 900px) {
+    .md__head { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; }
+    .md__cards { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* 01 hero ---------------------------------------------------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(3rem, 7vw, 6rem) clamp(2.5rem, 5vw, 4rem);
+  }
+
+  /* Siatka rysunkowa w tle. Dryfuje bardzo wolno, wygaszona maską,
+     żeby nie konkurowała z rysunkiem CAD po prawej. */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: -12% -8%;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(to right, var(--rule) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--rule) 1px, transparent 1px);
+    background-size: 72px 72px;
+    opacity: 0.55;
+    -webkit-mask-image: radial-gradient(115% 85% at 72% 45%, #000 12%, transparent 72%);
+    mask-image: radial-gradient(115% 85% at 72% 45%, #000 12%, transparent 72%);
+    animation: grid-drift 120s linear infinite;
+  }
+  .hero > * { position: relative; z-index: 1; }
+
+  @keyframes grid-drift {
+    to { background-position: 72px 72px, 72px 72px; }
+  }
+  .hero__grid {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .hero__eyebrow { margin-bottom: 1.5rem; }
+  .hero__lead { margin-top: 1.75rem; }
+  .hero__cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.75rem;
+    margin-top: 2.5rem;
+  }
+  @media (min-width: 1000px) {
+    .hero__grid { grid-template-columns: 6fr 6fr; }
+    .hero__text { padding-block: 2rem; }
+  }
+
+  /* 02 pain and gain ------------------------------------------- */
+  .pg__head { display: grid; gap: 1.5rem; margin-bottom: clamp(2.5rem, 4vw, 3.5rem); }
+  @media (min-width: 900px) {
+    .pg__head { grid-template-columns: 1.1fr 1fr; gap: 3.5rem; align-items: end; }
+  }
+  .pg { display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--rule); }
+  .pg__col { padding-block: 0.9rem; display: none; }
+  .pg__pain,
+  .pg__gain {
+    padding-block: 1.15rem;
+    border-bottom: 1px solid var(--rule);
+    font-size: 0.9375rem;
+  }
+  .pg__pain { color: var(--muted); }
+  .pg__gain { font-weight: 500; padding-left: 1.5rem; position: relative; }
+  .pg__gain::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1.6rem;
+    width: 8px;
+    height: 8px;
+    background: var(--color-amber);
+  }
+  @media (min-width: 820px) {
+    .pg { grid-template-columns: 1fr 1fr; column-gap: 3rem; }
+    .pg__col { display: block; border-bottom: 1px solid var(--rule); }
+    .pg__photo {
+    display: block;
+    width: 100%;
+    height: clamp(200px, 30vw, 380px);
+    object-fit: cover;
+    margin-block: clamp(2rem, 4vw, 3rem);
+    border: 1px solid var(--rule);
+    filter: saturate(0.85) contrast(1.05);
+  }
+  .pg__col--gain { color: var(--accent-text); }
+    .pg__pain, .pg__gain { padding-block: 1.35rem; }
+  }
+
+  /* 03 method comparison --------------------------------------- */
+  .why__head { display: grid; gap: 2rem; }
+  .why__body { display: grid; gap: 1.1rem; max-width: 60ch; }
+  @media (min-width: 900px) {
+    .why__head { grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: start; }
+  }
+  .why__figure { margin-top: clamp(2.5rem, 4vw, 3.5rem); }
+  .why__shot { margin: clamp(2.5rem, 4vw, 3.5rem) 0 0; }
+  .why__cap {
+    margin-top: 0.9rem;
+    font-size: 0.72rem;
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: 60ch;
+  }
+  .why__rows { margin-top: clamp(3rem, 5vw, 4.5rem); border-top: 1px solid var(--rule); }
+  .why__row {
+    display: grid;
+    gap: 0.85rem;
+    padding-block: 1.6rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .why__method {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-stretch: 108%;
+    text-transform: uppercase;
+    font-size: 1.0625rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .why__row.is-hero .why__method { font-weight: 800; }
+  .why__dot { width: 9px; height: 9px; background: var(--color-amber); flex: none; }
+  .why__marks {
+    display: grid;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    color: var(--muted);
+    list-style: none;
+  }
+  .why__marks li::before { content: '· '; color: var(--accent-text); }
+  @media (min-width: 900px) {
+    .why__row { grid-template-columns: 1fr 2fr; gap: 3rem; align-items: baseline; }
+    .why__marks { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  }
+
+  /* 04 how ----------------------------------------------------- */
+  .how__h2 { max-width: 16ch; }
+  .how__steps {
+    display: grid;
+    gap: 0;
+    margin-top: clamp(2.5rem, 4vw, 3.5rem);
+    list-style: none;
+    border-top: 1px solid var(--rule);
+  }
+  .how__step { padding-block: 1.75rem; border-bottom: 1px solid var(--rule); }
+  .how__idx { display: block; font-size: 0.75rem; color: var(--accent-text); letter-spacing: 0.2em; }
+  .how__title { font-size: 1.125rem; margin-block: 0.75rem 0.6rem; font-stretch: 106%; }
+  .how__step p { font-size: 0.9375rem; max-width: 42ch; }
+  @media (min-width: 900px) {
+    .how__steps { grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--rule); }
+    .how__step { border-bottom: 0; padding: 2rem 1.75rem 2.25rem 0; }
+    .how__step + .how__step { border-left: 1px solid var(--rule); padding-left: 1.75rem; }
+  }
+  .how__video { margin-top: clamp(2.5rem, 4vw, 3.5rem); max-width: 980px; }
+
+  /* 05 people -------------------------------------------------- */
+  .pp { display: grid; gap: 2.5rem; }
+  .pp__body { margin-top: 1.5rem; }
+  .pp__quote { margin: 2.25rem 0 0; padding-left: 1.5rem; border-left: 2px solid var(--color-amber); }
+  .pp__quote p { font-size: 1.0625rem; line-height: 1.5; max-width: 48ch; }
+  .pp__quote footer { margin-top: 0.85rem; font-size: 0.75rem; color: var(--muted); letter-spacing: 0.08em; }
+  .pp__facts { display: grid; gap: 0; margin-top: 2.25rem; border-top: 1px solid var(--rule); }
+  .pp__facts > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pp__facts dd { font-size: 0.875rem; text-align: right; }
+  .pp__shots { display: grid; gap: 1.25rem; align-content: start; }
+
+  /* Przewijany pas zdjęć. Bez biblioteki: scroll-snap i pasek przewijania,
+     który na desktopie pokazuje trzy kadry, a na telefonie półtora. */
+  .shots {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(min(78vw, 460px), 1fr);
+    gap: 1.25rem;
+    margin-top: clamp(2rem, 4vw, 3rem);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    padding-bottom: 1rem;
+    scrollbar-width: thin;
+  }
+  .shots > * { scroll-snap-align: start; }
+  .shots::-webkit-scrollbar { height: 3px; }
+  .shots::-webkit-scrollbar-thumb { background: var(--rule); }
+  @media (min-width: 960px) {
+    .pp { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  }
+
+  /* 06 uses ---------------------------------------------------- */
+  .uses__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: clamp(2rem, 3.5vw, 3rem);
+  }
+  .uses__layout { display: grid; gap: 1.5rem; }
+  .uses__matrix { grid-template-columns: 1fr; }
+  .uses__ico { margin-bottom: 1.1rem; }
+  .uses__title { font-size: 1rem; font-stretch: 104%; margin-bottom: 0.6rem; }
+  .uses__body { font-size: 0.875rem; max-width: 34ch; }
+  @media (min-width: 700px) {
+    .uses__matrix { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1080px) {
+    .uses__layout { grid-template-columns: 1.35fr 1fr; align-items: stretch; }
+    .uses__photo { height: 100%; object-fit: cover; }
+    .uses__matrix { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  /* 07 equipment ----------------------------------------------- */
+  .eq { display: grid; gap: 2.5rem; }
+  .eq__photo { margin-top: 2rem; }
+  .eq__list { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+  .eq__item { padding-block: 1.15rem; border-bottom: 1px solid var(--rule); }
+  .eq__item dt {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-stretch: 104%;
+    text-transform: uppercase;
+    font-size: 0.9375rem;
+  }
+  .eq__item dd { font-size: 0.875rem; margin-top: 0.3rem; }
+  @media (min-width: 900px) {
+    .eq { grid-template-columns: 1fr 1.15fr; gap: 4rem; align-items: start; }
+  }
+
+  /* 08 specs --------------------------------------------------- */
+  .specs { display: grid; gap: 2.5rem; }
+  .specs__note { margin-block: 1.5rem; font-size: 0.9375rem; max-width: 40ch; }
+  @media (min-width: 900px) {
+    .specs { grid-template-columns: 1fr 1.25fr; gap: 4rem; align-items: start; }
+  }
+
+  /* 09 maker --------------------------------------------------- */
+  .mk { display: grid; gap: 2.5rem; }
+  .mk__body { margin-top: 1.5rem; }
+  .mk__links { display: flex; gap: 1.75rem; margin-top: 1.75rem; }
+  .mk__facts { display: grid; gap: 0; border-top: 1px solid var(--rule); align-self: start; }
+  .mk__fact {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 0.95rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .mk__fact dd { font-size: 0.875rem; text-align: right; }
+  @media (min-width: 900px) {
+    .mk { grid-template-columns: 1.5fr 1fr; gap: 4.5rem; align-items: start; }
+  }
+
+  /* 10 faq ----------------------------------------------------- */
+  .faq__layout { display: grid; gap: 2.5rem; }
+  .faq__more { display: inline-block; margin-top: 1.75rem; }
+  @media (min-width: 900px) {
+    .faq__layout { grid-template-columns: 1fr 1.6fr; gap: 4rem; align-items: start; }
+  }
+
+  /* 11 contact ------------------------------------------------- */
+  .ct { display: grid; gap: 3rem; }
+  .ct__intro { margin-top: 1.5rem; }
+  .ct__data { display: grid; gap: 1.25rem; margin-top: 2.5rem; }
+  .ct__data dd { font-size: 1rem; margin-top: 0.35rem; }
+  .ct__data a:hover { color: var(--accent-text); }
+  @media (min-width: 900px) {
+    .ct { grid-template-columns: 1fr 1.2fr; gap: 4.5rem; align-items: start; }
+    .ct__data { grid-template-columns: repeat(3, auto); justify-content: start; gap: 3rem; }
+  }
+</style>

@@ -1,0 +1,252 @@
+---
+/**
+ * Element sygnaturowy: przekrój rury z założonym łańcuchem prowadzącym,
+ * piłą na obwodzie i pierścieniem 35 cm wolnego miejsca dookoła.
+ * Suwak steruje średnicą rury od 203 do 1206 mm i sam wskazuje,
+ * który model ją obejmuje.
+ *
+ * Wszystko rysowane w skali: K pikseli na milimetr.
+ */
+const CX = 300;
+const CY = 268;
+const K = 0.26; // px na mm; 1206 mm + 2 x 350 mm luzu mieści się w kadrze
+const DEFAULT_DIA = 800;
+const CLEARANCE = 350; // mm wolnego miejsca wokół rury, wg karty producenta
+const r0 = (DEFAULT_DIA / 2) * K;
+const rc = (DEFAULT_DIA / 2 + CLEARANCE) * K;
+const DIM_Y = 566;
+---
+
+<figure class="dgm">
+  <svg
+    viewBox="0 0 720 640"
+    role="img"
+    aria-label="Rysunek techniczny: przekrój rury z łańcuchem prowadzącym i piłą obwodową, wokół rury pierścień 350 mm wolnego miejsca. Średnica rury regulowana od 203 do 1206 mm."
+    class="dgm__svg"
+  >
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M 0 1 L 10 5 L 0 9 z" fill="currentColor" fill-opacity="0.55"></path>
+      </marker>
+    </defs>
+
+    {/* ramka rysunku */}
+    <g class="dgm__frame">
+      <path d="M40 60 H80 M40 60 V100" />
+      <path d="M680 60 H640 M680 60 V100" />
+      <path d="M40 600 H80 M40 600 V560" />
+      <path d="M680 600 H640 M680 600 V560" />
+    </g>
+
+    {/* pierścień wolnego miejsca */}
+    <circle id="dgmClear" cx={CX} cy={CY} r={rc} class="dgm__clear" stroke-dasharray="6 6"></circle>
+
+    {/* rura: ścianka i światło */}
+    <circle id="dgmPipe" cx={CX} cy={CY} r={r0} class="dgm__pipe"></circle>
+    <circle id="dgmBore" cx={CX} cy={CY} r={r0 - 7} class="dgm__bore"></circle>
+
+    {/* łańcuch prowadzący: ogniwa rozłożone po obwodzie */}
+    <g id="dgmChain" class="dgm__chain"></g>
+
+    {/* korpus piły na obwodzie rury */}
+    <g id="dgmSaw" class="dgm__saw">
+      <rect x={CX - 26} y={CY - r0 - 34} width="52" height="30" rx="1"></rect>
+      <circle cx={CX} cy={CY - r0 + 2} r="13"></circle>
+      <path d={`M${CX - 30} ${CY - r0 - 4} H${CX + 30}`}></path>
+    </g>
+
+    {/* osie */}
+    <g class="dgm__axis">
+      <path d={`M${CX - rc - 26} ${CY} H${CX + rc + 26}`} stroke-dasharray="14 5 3 5" />
+      <path d={`M${CX} ${CY - rc - 26} V${CY + rc + 26}`} stroke-dasharray="14 5 3 5" />
+    </g>
+
+    {/* wymiar średnicy rury */}
+    <g class="dgm__dim">
+      <line id="dgmDimLine" x1={CX - r0} y1={DIM_Y} x2={CX + r0} y2={DIM_Y} marker-start="url(#arrow)" marker-end="url(#arrow)"></line>
+      <line id="dgmExtL" x1={CX - r0} y1={CY + r0} x2={CX - r0} y2={DIM_Y + 12} stroke-dasharray="3 4"></line>
+      <line id="dgmExtR" x1={CX + r0} y1={CY + r0} x2={CX + r0} y2={DIM_Y + 12} stroke-dasharray="3 4"></line>
+      <text id="dgmDimText" x={CX} y={DIM_Y - 14} text-anchor="middle" class="dgm__t dgm__t--acc">&#216; 800 mm</text>
+    </g>
+
+    {/* opis luzu */}
+    <g class="dgm__labels">
+      <text id="dgmClearLabel" x={CX} y={CY - rc - 12} text-anchor="middle" class="dgm__t dgm__t--s">
+        350 mm WOLNEGO MIEJSCA
+      </text>
+
+    </g>
+
+    {/* tabliczka rysunkowa */}
+    <g class="dgm__plate">
+      <rect x="470" y="452" width="200" height="98"></rect>
+      <path d="M470 478 H670 M470 502 H670 M470 526 H670" />
+      <text x="480" y="471" class="dgm__t dgm__t--s">HYDRACUT HPO</text>
+      <text id="dgmPlateModel" x="480" y="495" class="dgm__t dgm__t--s">MODEL: HPO1200</text>
+      <text x="480" y="519" class="dgm__t dgm__t--s">CIĘCIE PO OBWODZIE</text>
+      <text x="480" y="543" class="dgm__t dgm__t--s">PRZEKRÓJ RURY</text>
+    </g>
+  </svg>
+
+  <label class="dgm__ctl">
+    <span class="label dgm__ctlLabel">Średnica rury</span>
+    <input id="dgmRange" type="range" min="203" max="1206" step="1" value="800" aria-label="Średnica ciętej rury w milimetrach" />
+    <output id="dgmOut" class="mono dgm__out">800 mm</output>
+  </label>
+
+  <p id="dgmModel" class="mono dgm__model">Obejmują ją oba modele</p>
+</figure>
+
+<style>
+  .dgm { margin: 0; }
+  .dgm__svg { width: 100%; height: auto; color: var(--fg); overflow: visible; }
+
+  .dgm__frame path,
+  .dgm__axis path { stroke: currentColor; stroke-opacity: 0.28; fill: none; }
+  .dgm__clear { fill: none; stroke: currentColor; stroke-opacity: 0.35; stroke-width: 1; }
+  .dgm__pipe { fill: none; stroke: currentColor; stroke-opacity: 0.75; stroke-width: 2; }
+  .dgm__bore { fill: none; stroke: currentColor; stroke-opacity: 0.35; stroke-width: 1; }
+
+  .dgm__chain rect { fill: var(--accent-text); fill-opacity: 0.85; }
+
+  .dgm__saw rect,
+  .dgm__saw circle,
+  .dgm__saw path {
+    fill: var(--bg);
+    stroke: var(--accent-text);
+    stroke-width: 1.5;
+  }
+  .dgm__saw circle { fill: none; }
+
+  .dgm__dim line { stroke: currentColor; stroke-opacity: 0.55; }
+  .dgm__plate rect { fill: none; stroke: currentColor; stroke-opacity: 0.3; }
+  .dgm__plate path { stroke: currentColor; stroke-opacity: 0.3; }
+
+  .dgm__t {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    fill: currentColor;
+    fill-opacity: 0.8;
+  }
+  .dgm__t--s { font-size: 11px; letter-spacing: 0.14em; fill-opacity: 0.55; }
+  .dgm__t--acc { fill: var(--accent-text); fill-opacity: 1; font-size: 17px; }
+
+  .dgm__ctl {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .dgm__ctlLabel { white-space: nowrap; }
+  .dgm__out { color: var(--accent-text); font-size: 0.8125rem; white-space: nowrap; }
+
+  .dgm__ctl input[type='range'] {
+    appearance: none;
+    width: 100%;
+    height: 1px;
+    background: var(--rule);
+    outline-offset: 6px;
+  }
+  .dgm__ctl input[type='range']::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 20px;
+    background: var(--accent-text);
+    cursor: ew-resize;
+  }
+  .dgm__ctl input[type='range']::-moz-range-thumb {
+    width: 12px;
+    height: 20px;
+    border: 0;
+    background: var(--accent-text);
+    cursor: ew-resize;
+  }
+
+  .dgm__model {
+    margin-top: 0.85rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  @media (max-width: 640px) {
+    .dgm__ctl { grid-template-columns: 1fr auto; }
+    .dgm__ctlLabel { grid-column: 1 / -1; }
+  }
+</style>
+
+<script>
+  const CX = 300;
+  const CY = 268;
+  const K = 0.26;
+  const CLEARANCE = 350;
+  const DIM_Y = 566;
+  const LINKS = 44; // ogniw łańcucha na obwodzie
+
+  const range = document.getElementById('dgmRange') as HTMLInputElement | null;
+  const out = document.getElementById('dgmOut');
+  const pipe = document.getElementById('dgmPipe');
+  const bore = document.getElementById('dgmBore');
+  const clear = document.getElementById('dgmClear');
+  const clearLabel = document.getElementById('dgmClearLabel');
+  const chain = document.getElementById('dgmChain');
+  const saw = document.getElementById('dgmSaw');
+  const dimLine = document.getElementById('dgmDimLine');
+  const extL = document.getElementById('dgmExtL');
+  const extR = document.getElementById('dgmExtR');
+  const dimText = document.getElementById('dgmDimText');
+  const modelNote = document.getElementById('dgmModel');
+  const plateModel = document.getElementById('dgmPlateModel');
+
+  function draw(dia: number) {
+    const r = (dia / 2) * K;
+    const rc = (dia / 2 + CLEARANCE) * K;
+
+    pipe?.setAttribute('r', String(r));
+    bore?.setAttribute('r', String(Math.max(r - 7, 3)));
+    clear?.setAttribute('r', String(rc));
+    clearLabel?.setAttribute('y', String(CY - rc - 12));
+
+    // łańcuch prowadzący: ogniwa rozłożone równomiernie po obwodzie
+    if (chain) {
+      let d = '';
+      for (let i = 0; i < LINKS; i++) {
+        const a = (i / LINKS) * Math.PI * 2 - Math.PI / 2;
+        const x = CX + Math.cos(a) * r;
+        const y = CY + Math.sin(a) * r;
+        d += `<rect x="${(x - 2.6).toFixed(1)}" y="${(y - 2.6).toFixed(1)}" width="5.2" height="5.2" transform="rotate(${((a * 180) / Math.PI + 45).toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})"/>`;
+      }
+      chain.innerHTML = d;
+    }
+
+    // piła siedzi na górze obwodu
+    saw?.setAttribute('transform', `translate(0 ${(r - 400 * K).toFixed(1)})`);
+
+    dimLine?.setAttribute('x1', String(CX - r));
+    dimLine?.setAttribute('x2', String(CX + r));
+    extL?.setAttribute('x1', String(CX - r));
+    extL?.setAttribute('x2', String(CX - r));
+    extL?.setAttribute('y1', String(CY + r));
+    extR?.setAttribute('x1', String(CX + r));
+    extR?.setAttribute('x2', String(CX + r));
+    extR?.setAttribute('y1', String(CY + r));
+    if (dimText) dimText.textContent = `Ø ${dia} mm`;
+    if (out) out.textContent = `${dia} mm`;
+
+    // który model obejmuje tę średnicę
+    const in600 = dia >= 203 && dia <= 603;
+    const in1200 = dia >= 355 && dia <= 1206;
+    const note = in600 && in1200 ? 'Obejmują ją oba modele' : in600 ? 'Model HPO600' : 'Model HPO1200';
+    if (modelNote) modelNote.textContent = note;
+    if (plateModel) {
+      plateModel.textContent = `MODEL: ${in600 && in1200 ? 'HPO600 / HPO1200' : in600 ? 'HPO600' : 'HPO1200'}`;
+    }
+  }
+
+  if (range) {
+    draw(Number(range.value));
+    range.addEventListener('input', () => draw(Number(range.value)));
+  }
+</script>

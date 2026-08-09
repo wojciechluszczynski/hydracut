@@ -1,0 +1,157 @@
+---
+import { site } from '../data/site';
+import { plain } from '../lib/val';
+
+const f = site.form;
+---
+
+<form class="lead" id="lead" method="post" action={f.endpoint} novalidate>
+  <div class="lead__row">
+    <label class="fld">
+      <span class="label">{f.fields.name} *</span>
+      <input type="text" name="imie" required autocomplete="name" />
+    </label>
+    <label class="fld">
+      <span class="label">{f.fields.company}</span>
+      <input type="text" name="firma" autocomplete="organization" />
+    </label>
+  </div>
+
+  <div class="lead__row">
+    <label class="fld">
+      <span class="label">{f.fields.phone} *</span>
+      <input type="tel" name="telefon" required autocomplete="tel" inputmode="tel" />
+    </label>
+    <label class="fld">
+      <span class="label">{f.fields.email} *</span>
+      <input type="email" name="email" required autocomplete="email" inputmode="email" />
+    </label>
+  </div>
+
+  <label class="fld">
+    <span class="label">{f.fields.scope}</span>
+    <select name="zakres">
+      {f.scopeOptions.map((o) => <option value={o}>{o}</option>)}
+    </select>
+  </label>
+
+  <label class="fld">
+    <span class="label">{f.fields.message}</span>
+    <textarea name="wiadomosc" rows="4" placeholder="Materiał rury, średnica, warunki w wykopie, termin."></textarea>
+  </label>
+
+  <label class="consent">
+    <input type="checkbox" name="zgoda" required />
+    <span>{f.consent}</span>
+  </label>
+
+  {/* honeypot + time trap, both invisible to people */}
+  <div class="trap" aria-hidden="true">
+    <label>Nie wypełniaj tego pola<input type="text" name="firma_www" tabindex="-1" autocomplete="off" /></label>
+  </div>
+  <input type="hidden" name="t" id="lead-t" value="0" />
+
+  <div class="lead__foot">
+    <button type="submit" class="btn btn--solid">{f.submit}</button>
+    <p class="mono lead__note">{site.contact.reply}</p>
+  </div>
+
+  <p class="lead__msg" id="lead-msg" role="status" aria-live="polite" hidden></p>
+</form>
+
+<style>
+  .lead { display: grid; gap: 1.25rem; }
+  .lead__row { display: grid; gap: 1.25rem; }
+  @media (min-width: 620px) {
+    .lead__row { grid-template-columns: 1fr 1fr; }
+  }
+
+  .fld { display: grid; gap: 0.45rem; }
+  .fld input,
+  .fld select,
+  .fld textarea {
+    width: 100%;
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 0.8rem 0.9rem;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    color: inherit;
+  }
+  .fld textarea { resize: vertical; }
+  .fld input:focus,
+  .fld select:focus,
+  .fld textarea:focus {
+    outline: none;
+    border-color: var(--accent-text);
+    box-shadow: inset 0 0 0 1px var(--color-amber);
+  }
+  .fld input:user-invalid { border-color: #c0392b; }
+
+  .consent {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.7rem;
+    align-items: start;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--muted);
+  }
+  .consent input { margin-top: 0.2rem; accent-color: var(--accent-text); width: 16px; height: 16px; }
+
+  .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .lead__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    padding-top: 0.5rem;
+  }
+  .lead__note { font-size: 0.75rem; color: var(--muted); }
+
+  .lead__msg {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--rule);
+    border-left: 2px solid var(--color-amber);
+  }
+</style>
+
+<script define:vars={{ okText: f.success, errText: f.error }}>
+  const form = document.getElementById('lead');
+  const msg = document.getElementById('lead-msg');
+  const stamp = document.getElementById('lead-t');
+  if (stamp) stamp.value = String(Date.now());
+
+  form?.addEventListener('submit', async (event) => {
+    if (!form.checkValidity()) return; // let the browser show its own hints
+    event.preventDefault();
+    const button = form.querySelector('button[type=submit]');
+    button?.setAttribute('disabled', 'true');
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      form.reset();
+      if (stamp) stamp.value = String(Date.now());
+      if (msg) {
+        msg.textContent = okText;
+        msg.hidden = false;
+      }
+    } catch {
+      if (msg) {
+        msg.textContent = errText;
+        msg.hidden = false;
+      }
+    } finally {
+      button?.removeAttribute('disabled');
+    }
+  });
+</script>

@@ -1,0 +1,73 @@
+---
+import Val from './Val.astro';
+
+interface Props {
+  items: readonly { q: string; a: string }[];
+}
+const { items } = Astro.props;
+---
+
+<div class="faq">
+  {
+    items.map((item) => (
+      <details class="faq__item">
+        <summary>
+          <span>{item.q}</span>
+          <span class="faq__sign" aria-hidden="true" />
+        </summary>
+        <p class="faq__a">
+          <Val text={item.a} />
+        </p>
+      </details>
+    ))
+  }
+</div>
+
+<style>
+  .faq { border-top: 1px solid var(--rule); }
+
+  .faq__item { border-bottom: 1px solid var(--rule); }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding-block: 1.35rem;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-stretch: 106%;
+    text-transform: uppercase;
+    font-size: clamp(0.9375rem, 1.5vw, 1.125rem);
+    letter-spacing: -0.005em;
+    line-height: 1.15;
+  }
+  summary::-webkit-details-marker { display: none; }
+
+  .faq__sign {
+    position: relative;
+    flex: none;
+    width: 14px;
+    height: 14px;
+  }
+  .faq__sign::before,
+  .faq__sign::after {
+    content: '';
+    position: absolute;
+    background: var(--color-amber);
+    transition: transform 180ms ease, opacity 180ms ease;
+  }
+  .faq__sign::before { inset: 6px 0 6px 0; height: 2px; }
+  .faq__sign::after { inset: 0 6px 0 6px; width: 2px; }
+  details[open] .faq__sign::after { transform: rotate(90deg); opacity: 0; }
+
+  .faq__a {
+    padding-bottom: 1.5rem;
+    max-width: 68ch;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+</style>

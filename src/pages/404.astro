@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+
+const p = site.pages.notFound;
+---
+
+<Base title={p.title} description={p.description} noindex>
+  <section class="band nf">
+    <div class="shell">
+      <p class="label">404</p>
+      <h1 class="display-xl">{p.h1}</h1>
+      <p class="lead muted nf__lead">{p.lead}</p>
+      <div class="nf__row">
+        <a href="/" class="btn btn--solid">Strona główna</a>
+        <a href="/dane-techniczne/" class="link-amber">Dane techniczne</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { min-height: 60vh; display: grid; align-items: center; }
+  .nf .label { margin-bottom: 1.25rem; }
+  .nf__lead { margin-top: 1.5rem; }
+  .nf__row { display: flex; flex-wrap: wrap; align-items: center; gap: 1.75rem; margin-top: 2.5rem; }
+</style>

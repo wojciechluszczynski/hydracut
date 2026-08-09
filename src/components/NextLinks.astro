@@ -1,0 +1,60 @@
+---
+/** Internal linking block: every page points onward to two or three siblings. */
+interface Props {
+  items: { label: string; href: string; note: string }[];
+  paper?: boolean;
+}
+const { items } = Astro.props;
+---
+
+<nav class="next" aria-label="Dalej na stronie">
+  <p class="label next__label">Dalej</p>
+  <ul class="next__list">
+    {
+      items.map((item) => (
+        <li>
+          <a href={item.href}>
+            <span class="next__t">{item.label}</span>
+            <span class="next__n">{item.note}</span>
+            <span class="next__a mono" aria-hidden="true">
+              &#8594;
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .next { margin-top: clamp(3rem, 5vw, 4.5rem); }
+  .next__label { margin-bottom: 1.25rem; }
+  .next__list { list-style: none; border-top: 1px solid var(--rule); }
+
+  .next__list li { border-bottom: 1px solid var(--rule); }
+
+  .next__list a {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.35rem 1.5rem;
+    padding-block: 1.25rem;
+    align-items: baseline;
+    transition: color 150ms ease;
+  }
+  .next__list a:hover { color: var(--accent-text); }
+  .next__t {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-stretch: 106%;
+    text-transform: uppercase;
+    font-size: 1.0625rem;
+  }
+  .next__n {
+    grid-column: 1;
+    font-size: 0.875rem;
+    color: var(--muted);
+    max-width: 52ch;
+  }
+
+  .next__a { grid-row: 1 / span 2; align-self: center; font-size: 1.125rem; }
+</style>

@@ -1,0 +1,13 @@
+---
+interface Props {
+  index: string;
+  label: string;
+  id?: string;
+}
+const { index, label, id } = Astro.props;
+---
+
+<p class="eyebrow" id={id}>
+  <b>{index}</b>
+  <span>/ {label}</span>
+</p>

@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import NextLinks from '../components/NextLinks.astro';
+import Val from '../components/Val.astro';
+import { site } from '../data/site';
+import { isTbd } from '../lib/val';
+
+const p = site.pages.downloads;
+const crumbs = [{ label: 'Do pobrania', href: '/do-pobrania/' }];
+---
+
+<Base title={p.title} description={p.description} crumbs={crumbs}>
+  <PageHero h1={p.h1} lead={p.lead} crumbs={crumbs}
+    image={site.media.footer.src}
+    imageAlt={site.media.footer.alt}
+  />
+
+  <section class="band">
+    <div class="shell">
+      <ul class="dl">
+        {
+          site.downloads.map((d) => (
+            <li class="dl__row reveal">
+              <span class="dl__title">{d.title}</span>
+              <span class="dl__meta mono">{d.format}</span>
+              <span class="dl__act mono">
+                {isTbd(d.file) ? <Val text={d.file} /> : <a href={d.file} class="link-amber">Pobierz</a>}
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="dl__note mono">
+        Potrzebujesz dokumentu, którego tu nie ma? <a href="/kontakt/" class="link-amber">Napisz</a>
+      </p>
+          <NextLinks items={[
+        { label: 'Dane techniczne', href: '/dane-techniczne/', note: 'Parametry maszyny bez pobierania PDF.' },
+        { label: 'FAQ', href: '/faq/', note: 'Najczęstsze pytania o pracę maszyny.' },
+      ]} />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .dl { list-style: none; border-top: 1px solid var(--rule); }
+  .dl__row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem 1.5rem;
+    align-items: baseline;
+    padding-block: 1.4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .dl__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-stretch: 104%;
+    text-transform: uppercase;
+    font-size: 1rem;
+  }
+  .dl__meta { font-size: 0.6875rem; letter-spacing: 0.18em; color: var(--muted); }
+  .dl__act { font-size: 0.8125rem; color: var(--muted); }
+  .dl__note { margin-top: 2.5rem; font-size: 0.8125rem; color: var(--muted); }
+  @media (min-width: 700px) {
+    .dl__row { grid-template-columns: 1fr 6rem 8rem; }
+    .dl__act { text-align: right; }
+  }
+</style>

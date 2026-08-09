@@ -1,0 +1,80 @@
+---
+/**
+ * Placeholder for a real photograph. No stock, no AI renders: the box states
+ * exactly which shot goes here and in what format. When the file arrives,
+ * pass `src` and it renders the image instead.
+ */
+interface Props {
+  id: string;
+  desc: string;
+  ratio: string;
+  src?: string;
+  alt?: string;
+  class?: string;
+}
+
+const { id, desc, ratio, src, alt, class: cls } = Astro.props;
+const [w, h] = ratio.split(':').map(Number);
+---
+
+{
+  src ? (
+    <img
+      src={src}
+      srcset={`${src.replace('.webp', '-800.webp')} 800w, ${src} 1600w`}
+      sizes="(max-width: 900px) 100vw, 1200px"
+      alt={alt ?? desc}
+      width={w * 400}
+      height={h * 400}
+      loading="lazy"
+      decoding="async"
+      class:list={['photo__img', cls]}
+      style={`aspect-ratio:${w}/${h}`}
+    />
+  ) : (
+    <div class:list={['photo', cls]} style={`aspect-ratio:${w}/${h}`} role="img" aria-label={`Miejsce na zdjęcie: ${desc}`}>
+      <span class="photo__id mono">{id}</span>
+      <span class="photo__desc mono">{desc}</span>
+      <span class="photo__fmt mono">{ratio} &middot; min 2400 px</span>
+    </div>
+  )
+}
+
+<style>
+  .photo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.35rem;
+    padding: 1.25rem;
+    border: 1px solid var(--rule);
+    background:
+      repeating-linear-gradient(
+        135deg,
+        transparent 0 10px,
+        rgba(255, 255, 255, 0.022) 10px 11px
+      ),
+      var(--elev);
+    width: 100%;
+  }
+
+  .photo__id {
+    font-size: 0.625rem;
+    letter-spacing: 0.2em;
+    color: var(--accent-text);
+  }
+  .photo__desc {
+    font-size: 0.8125rem;
+    line-height: 1.35;
+    color: var(--muted);
+    max-width: 34ch;
+  }
+
+  .photo__fmt {
+    font-size: 0.625rem;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    opacity: 0.7;
+  }
+  .photo__img { width: 100%; object-fit: cover; }
+</style>

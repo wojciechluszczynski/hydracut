@@ -2,14 +2,14 @@
 /**
  * Element sygnaturowy: przekrój rury z założonym łańcuchem prowadzącym,
  * piłą na obwodzie i pierścieniem 35 cm wolnego miejsca dookoła.
- * Suwak steruje średnicą rury od 203 do 1206 mm i sam wskazuje,
+ * Suwak steruje średnicą rury od 203 do 1200 mm i sam wskazuje,
  * który model ją obejmuje.
  *
  * Wszystko rysowane w skali: K pikseli na milimetr.
  */
 const CX = 300;
 const CY = 268;
-const K = 0.26; // px na mm; 1206 mm + 2 x 350 mm luzu mieści się w kadrze
+const K = 0.26; // px na mm; 1200 mm + 2 x 350 mm luzu mieści się w kadrze
 const DEFAULT_DIA = 800;
 const CLEARANCE = 350; // mm wolnego miejsca wokół rury, wg karty producenta
 const r0 = (DEFAULT_DIA / 2) * K;
@@ -21,7 +21,7 @@ const DIM_Y = 566;
   <svg
     viewBox="0 0 720 640"
     role="img"
-    aria-label="Rysunek techniczny: przekrój rury z łańcuchem prowadzącym i piłą obwodową, wokół rury pierścień 350 mm wolnego miejsca. Średnica rury regulowana od 203 do 1206 mm."
+    aria-label="Rysunek techniczny: przekrój rury z łańcuchem prowadzącym i piłą obwodową, wokół rury pierścień 350 mm wolnego miejsca. Średnica rury regulowana od 203 do 1200 mm."
     class="dgm__svg"
   >
     <defs>
@@ -90,7 +90,7 @@ const DIM_Y = 566;
 
   <label class="dgm__ctl">
     <span class="label dgm__ctlLabel">Średnica rury</span>
-    <input id="dgmRange" type="range" min="203" max="1206" step="1" value="800" aria-label="Średnica ciętej rury w milimetrach" />
+    <input id="dgmRange" type="range" min="203" max="1200" step="1" value="800" aria-label="Średnica ciętej rury w milimetrach" />
     <output id="dgmOut" class="mono dgm__out">800 mm</output>
   </label>
 
@@ -235,9 +235,9 @@ const DIM_Y = 566;
     if (dimText) dimText.textContent = `Ø ${dia} mm`;
     if (out) out.textContent = `${dia} mm`;
 
-    // który model obejmuje tę średnicę
+    // który model obejmuje tę średnicę. Wspólny przedział to tylko 600-603 mm.
     const in600 = dia >= 203 && dia <= 603;
-    const in1200 = dia >= 355 && dia <= 1206;
+    const in1200 = dia >= 600 && dia <= 1200;
     const note = in600 && in1200 ? 'Obejmują ją oba modele' : in600 ? 'Model HPO600' : 'Model HPO1200';
     if (modelNote) modelNote.textContent = note;
     if (plateModel) {

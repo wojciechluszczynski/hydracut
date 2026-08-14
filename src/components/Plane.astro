@@ -1,0 +1,23 @@
+---
+/**
+ * Wywołanie przekroju: [A]— ETYKIETA ————————————[A]
+ *
+ * Zastępuje numerowany eyebrow. Sekcje HydraCuta nie są numerowane cyframi,
+ * tylko literami płaszczyzn przekroju, bo tak oznacza się przekrój na
+ * rysunku i bo dokładnie to robi maszyna z rurą. Numery arkuszy to język
+ * HornetCuta.
+ */
+interface Props {
+  /** Litera płaszczyzny, np. "A". Powtarza się po obu stronach linii. */
+  mark: string;
+  label: string;
+}
+const { mark, label } = Astro.props;
+---
+
+<p class="plane">
+  <span class="plane__flag" aria-hidden="true">{mark}</span>
+  <span class="plane__label">{label}</span>
+  <span class="plane__line" aria-hidden="true"></span>
+  <span class="plane__flag" aria-hidden="true">{mark}</span>
+</p>

@@ -11,8 +11,7 @@ const phoneHref = plain(site.contact.phoneHref);
 <header class="hdr">
   <div class="shell hdr__inner">
     <a href="/" class="wordmark" aria-label={`${site.meta.brand}, strona główna`}>
-      <img src="/logo/hydracut-wordmark-light.png" alt={site.meta.brand} width="739" height="155" class="wordmark__img wordmark__img--dark" />
-      <img src="/logo/hydracut-wordmark-dark.png" alt="" aria-hidden="true" width="739" height="155" class="wordmark__img wordmark__img--light" />
+      <span class="wordmark__logo" aria-hidden="true"></span>
     </a>
 
     <nav class="hdr__nav" aria-label="Nawigacja główna">
@@ -65,27 +64,25 @@ const phoneHref = plain(site.contact.phoneHref);
     height: 72px;
   }
 
-  .wordmark__img { height: 22px; width: auto; display: block; }
-  /* Znak producenta w dwóch wariantach: jasny na ciemnym tle, ciemny na jasnym. */
-  :root:not([data-theme='light']) .wordmark__img--light,
-  :root[data-theme='light'] .wordmark__img--dark { display: none; }
-
+  /* Znak producenta. Plik "-light" ma jasny tusz (#E8E6E1) i idzie na ciemne
+     tło, "-dark" jest grafitowy i idzie na jasne. Nazwa opisuje kolor farby,
+     nie motyw strony.
+     Tło CSS zamiast dwóch <img>: przeglądarka pobiera wyłącznie ten wariant,
+     który stosuje. Poprzednia wersja ładowała oba i chowała jeden przez
+     display:none, czyli płaciła za każdy nieużyty plik. */
   .wordmark {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-stretch: 118%;
-    font-size: 1.125rem;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
     flex: none;
   }
-  .wordmark__mark {
-    width: 10px;
-    height: 10px;
-    background: var(--color-amber);
+  .wordmark__logo {
+    /* 2928 × 716 w pliku, czyli 4,09:1 */
+    width: 94px;
+    height: 23px;
+    background: url('/logo/hydracut-wordmark-light.svg') left center / contain no-repeat;
+  }
+  :root[data-theme='light'] .wordmark__logo {
+    background-image: url('/logo/hydracut-wordmark-dark.svg');
   }
 
   .hdr__nav {

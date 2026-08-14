@@ -148,8 +148,12 @@ body,
     padding-inline: clamp(1.25rem, 4vw, 3.5rem);
   }
 
-  .band { padding-block: clamp(4.5rem, 9vw, 8.5rem); }
+  /* Rytm sekcji celowo nierówny. Równy padding na każdym pasie sprawia,
+     że strona tyka jak metronom; trzy stopnie pozwalają sekcji oddychać
+     inaczej w zależności od tego, czy niesie rysunek, tabelę czy prozę. */
+  .band { padding-block: clamp(4.5rem, 9vw, 8.5rem); position: relative; }
   .band--tight { padding-block: clamp(3rem, 6vw, 5rem); }
+  .band--wide { padding-block: clamp(6.5rem, 13vw, 12rem); }
 
   .muted { color: var(--muted); }
 
@@ -177,10 +181,17 @@ body,
   }
 
   /* Display sizes ------------------------------------------- */
-  .display-xl { font-size: clamp(2.125rem, 4.4vw, 3.9rem);   overflow-wrap: break-word;
-  hyphens: auto;
-}
-  .display-l  { font-size: clamp(1.75rem, 3.1vw, 2.75rem); }
+  .display-xl {
+    font-size: clamp(2.125rem, 4.4vw, 3.9rem);
+    overflow-wrap: break-word;
+  }
+  .display-l {
+    font-size: clamp(1.75rem, 3.1vw, 2.75rem);
+    /* break-word łamie tylko wtedy, gdy słowo naprawdę nie mieści się
+       w kolumnie. hyphens: auto dzieliło nagłówki przy każdej okazji
+       ("NAJ-WIĘCEJ", "REGU-LACJI"), co w display wygląda amatorsko. */
+    overflow-wrap: break-word;
+  }
   .display-m  { font-size: clamp(1.25rem, 2vw, 1.625rem); }
 
   .lead {
@@ -222,7 +233,9 @@ body,
     color: var(--color-ink);
     font-weight: 500;
   }
-  .btn--solid:hover { background: #ffc933; }
+  /* Rozjaśniony cyjan marki. Wcześniej było tu #ffc933, czyli bursztyn
+     Horneta — przycisk zmieniał kolor na żółty pod kursorem. */
+  .btn--solid:hover { background: #4fdcea; }
   .btn--ghost {
     border-color: var(--rule);
     color: var(--fg);
@@ -297,10 +310,164 @@ body,
   }
 }
 
+/* ------------------------------------------------------------------
+   System przekroju
+   HydraCut pracuje w jednej płaszczyźnie: łańcuch obejmuje rurę, tarcza
+   objeżdża obwód i wraca w punkt startu. Strona jest rysowana jak przekrój,
+   nie jak arkusz z marginesem — tamto jest językiem HornetCuta i tam
+   zostaje. Trzy elementy niosą cały układ:
+
+   .plane — wywołanie przekroju A—A zamiast numerowanego eyebrow. Linia
+            płaszczyzny cięcia jest najgrubszą kreską na stronie, dokładnie
+            jak w rysunku technicznym, i ma jej wzór: długa, krótka, długa.
+   .clamp — obejma. Cztery narożne zaczepy zamiast ramki albo karty, bo
+            maszyna trzyma się rury zaczepami, a nie obudową.
+   .gauge — pionowa podziałka przy prawej krawędzi pasa. Odpowiednik
+            skali na rysunku; Hornet ma swoją poziomą i to inny element.
+   ------------------------------------------------------------------ */
+@layer components {
+  .cut {
+    width: 100%;
+    max-width: var(--shell);
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+  }
+
+  /* Wywołanie przekroju: [A]— ETYKIETA ————————————[A] */
+  .plane {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto;
+    align-items: center;
+    gap: 0.85rem;
+    margin-bottom: clamp(2rem, 3.5vw, 3.25rem);
+  }
+
+  .plane__flag {
+    display: grid;
+    place-content: center;
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--accent-text);
+    color: var(--accent-text);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .plane__label {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+  }
+
+  /* Wzór linii płaszczyzny cięcia wg ISO: długi odcinek, przerwa, krótki,
+     przerwa. Rysowany gradientem, żeby zostać jednym elementem bez SVG. */
+  .plane__line {
+    height: 2px;
+    min-width: 0;
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--accent-text) 0 26px,
+      transparent 26px 33px,
+      var(--accent-text) 33px 41px,
+      transparent 41px 48px
+    );
+    opacity: 0.75;
+  }
+
+  /* Obejma: zaczepy w czterech narożnikach zamiast ramki. */
+  .clamp {
+    position: relative;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .clamp::before,
+  .clamp::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    height: 14px;
+    border-inline: 1px solid var(--accent-text);
+    pointer-events: none;
+  }
+  .clamp::before { top: 0; border-top: 1px solid var(--accent-text); }
+  .clamp::after { bottom: 0; border-bottom: 1px solid var(--accent-text); }
+
+  /* Pionowa podziałka przy prawej krawędzi. Dwa gradienty: gęsta kreska
+     co 12 px i dłuższa co 60 px, czyli co piątą. Poniżej 1100 px znika,
+     bo margines na nią nie istnieje. */
+  @media (min-width: 1100px) {
+    .band--gauge::after {
+      content: '';
+      position: absolute;
+      top: clamp(3rem, 6vw, 5rem);
+      bottom: clamp(3rem, 6vw, 5rem);
+      right: max(1.25rem, calc((100% - var(--shell)) / 2 + 1.25rem));
+      width: 11px;
+      border-right: 1px solid var(--rule);
+      background-image:
+        repeating-linear-gradient(to bottom, var(--rule) 0 1px, transparent 1px 12px),
+        repeating-linear-gradient(to bottom, var(--rule) 0 1px, transparent 1px 60px);
+      background-size: 5px 100%, 11px 100%;
+      background-position: 100% 0, 100% 0;
+      background-repeat: no-repeat;
+      pointer-events: none;
+    }
+  }
+
+  /* Wielka liczba tabelaryczna jako element typograficzny, tak jak
+     tabliczka znamionowa wybija wartość. */
+  .bignum {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+    font-size: clamp(2.75rem, 8vw, 6rem);
+    line-height: 0.86;
+    letter-spacing: -0.03em;
+    color: var(--accent-text);
+  }
+
+  /* Wyjście poza shell dla rysunków, które ma przycinać okno, nie kolumna. */
+  .bleed {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+    max-width: none;
+  }
+
+  /* Geometria przekroju rury w tle: współśrodkowe okręgi przecięte prostą
+     płaszczyzną cięcia. Hornet ma łuk wokół osi poza kadrem i to jest
+     różnica, o którą chodzi. */
+  .bore {
+    position: absolute;
+    pointer-events: none;
+    color: var(--accent-text);
+    opacity: 0.4;
+  }
+  .bore circle {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1;
+    vector-effect: non-scaling-stroke;
+  }
+  .bore line {
+    stroke: currentColor;
+    stroke-width: 2;
+    vector-effect: non-scaling-stroke;
+    stroke-dasharray: 26 7 8 7;
+  }
+}
+
 @layer components {
   /* Grid and flex children default to min-width:auto, which lets a long
      unbreakable value push the whole track wider than the screen. Every
      layout wrapper on the site opts its children out of that. */
+  .plane > *,
   .hero__grid > *,
   .pg > *,
   .pp > *,
@@ -312,6 +479,12 @@ body,
   .ct > *,
   .kt > *,
   .faq__layout > *,
+  .faq-page > *,
+  .pick > *,
+  .cards > *,
+  .md__cards > *,
+  .md__head > *,
+  .pg__head > *,
   .uses__layout > *,
   .tech > *,
   .safety > *,
@@ -320,6 +493,23 @@ body,
   .why__row > *,
   .next__list a > * {
     min-width: 0;
+  }
+}
+
+@layer components {
+  /* Cel dotykowy. Linki tekstowe w okruszkach, stopce i danych kontaktowych
+     miały 17-19 px wysokości, czyli poniżej progu WCAG 2.2 (24 px).
+     Powiększamy samo pole trafienia, nie typografię. */
+  @media (pointer: coarse), (max-width: 700px) {
+    .phero__crumbs a,
+    .art__crumbs a,
+    .ftr__bottom a,
+    .kt__data a,
+    .wordmark {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+    }
   }
 }
 

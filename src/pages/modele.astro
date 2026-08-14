@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Plane from '../components/Plane.astro';
 import PageHero from '../components/PageHero.astro';
 import NextLinks from '../components/NextLinks.astro';
 import PhotoSlot from '../components/PhotoSlot.astro';
@@ -36,12 +37,13 @@ const schema = m.items.map((item) => ({
     h1={p.h1}
     lead={p.lead}
     crumbs={crumbs}
-    image={site.media.machine.src}
-    imageAlt={site.media.machine.alt}
+    photo={site.media.machine}
+  mark="M"
   />
 
   <section class="band">
-    <div class="shell">
+    <div class="cut">
+      <Plane mark="A" label="Porównanie" />
       <div class="cards">
         {
           m.items.map((item) => (
@@ -93,7 +95,10 @@ const schema = m.items.map((item) => ({
   </section>
 
   <section class="band band--paper">
-    <div class="shell pick">
+    <div class="cut">
+      <Plane mark="B" label="Wybór modelu" />
+      <div class="pick">
+
       <div class="pick__text">
         <h2 class="display-l">Jak wybrać?</h2>
         <ol class="pick__list">
@@ -103,33 +108,37 @@ const schema = m.items.map((item) => ({
           </li>
           <li>
             <span class="mono pick__idx">02</span>
-            <p>Do 603 mm wystarczy HPO600. Powyżej potrzebny jest HPO1200, który schodzi do 1206 mm.</p>
+            <p>Do 603 mm wystarczy HPO600. Powyżej potrzebny jest HPO1200, który schodzi do 1200 mm.</p>
           </li>
           <li>
             <span class="mono pick__idx">03</span>
             <p>
-              W przedziale 355 do 603 mm pracują oba. Wtedy decyduje tarcza: 200 mm w HPO600, 230 mm
-              w HPO1200.
+              Zakresy zachodzą na siebie tylko między 600 a 603 mm. Poza tym przedziałem średnica
+              wskazuje jeden model. Tarcza jest ta sama w obu.
             </p>
           </li>
           <li>
             <span class="mono pick__idx">04</span>
-            <p>Sprawdź agregat. Oba modele potrzebują 20 do 30 l/min i około 140 bar, źródło trzyliniowe.</p>
+            <p>
+              Sprawdź agregat. Potrzeba 23 do 26 l/min przy 140 do 160 bar i źródła trzyliniowego,
+              czyli osobnego przyłącza pod linię przecieku.
+            </p>
           </li>
         </ol>
       </div>
       <PhotoSlot {...site.photos.detail} class="pick__photo" />
+      </div>
     </div>
   </section>
 
   <section class="band band--tight">
-    <div class="shell cta">
+    <div class="cut cta">
       <h2 class="display-l">Nie wiesz, który model?</h2>
       <p class="lead muted">Napisz, jakie rury tniesz. Dobierzemy model i podamy cenę.</p>
       <a href="/kontakt/" class="btn btn--solid">Zapytaj o dobór</a>
     </div>
 
-    <div class="shell">
+    <div class="cut">
       <NextLinks
         items={[
           { label: 'Dane techniczne', href: '/dane-techniczne/', note: 'Pełna specyfikacja obu modeli' },

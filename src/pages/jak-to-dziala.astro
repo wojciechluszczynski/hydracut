@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import NextLinks from '../components/NextLinks.astro';
-import Eyebrow from '../components/Eyebrow.astro';
+import Plane from '../components/Plane.astro';
 import VideoSlot from '../components/VideoSlot.astro';
 import PhotoSlot from '../components/PhotoSlot.astro';
 import Val from '../components/Val.astro';
@@ -30,13 +30,13 @@ const schema = [
 
 <Base title={p.title} description={p.description} crumbs={crumbs} schema={schema}>
   <PageHero h1={p.h1} lead={p.lead} crumbs={crumbs}
-    image={site.media.machine.src}
-    imageAlt={site.media.machine.alt}
+    photo={site.media.machine}
+  mark="J"
   />
 
   <section class="band">
-    <div class="shell">
-      <Eyebrow index="01" label="Przebieg pracy" />
+    <div class="cut">
+      <Plane mark="A" label="Przebieg pracy" />
       <ol class="steps">
         {
           site.how.steps.map((step, i) => (
@@ -62,9 +62,9 @@ const schema = [
   </section>
 
   <section class="band band--paper">
-    <div class="shell safety">
+    <div class="cut safety">
       <div>
-        <Eyebrow index="02" label="Bezpieczeństwo" />
+        <Plane mark="B" label="Bezpieczeństwo" />
         <h2 class="display-l">{p.safety.h2}</h2>
         <PhotoSlot {...site.photos.edge} class="safety__photo" />
       </div>
@@ -79,7 +79,7 @@ const schema = [
       </ul>
     </div>
 
-    <div class="shell">
+    <div class="cut">
       <NextLinks
         items={[
           {

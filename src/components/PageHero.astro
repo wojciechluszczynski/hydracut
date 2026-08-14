@@ -1,17 +1,24 @@
 ---
+import Plane from './Plane.astro';
+import Figure from './Figure.astro';
+
 interface Props {
   h1: string;
   lead?: string;
   crumbs: { label: string; href: string }[];
-  /** Zdjęcie kontekstowe pod nagłówkiem. Pas 21:9, ładowany priorytetowo, bo jest LCP. */
-  image?: string;
-  imageAlt?: string;
+  /** Litera płaszczyzny dla nagłówka podstrony. Domyślnie "P" jak podstrona. */
+  mark?: string;
+  /** Wpis z site.media. Renderuje się we własnych proporcjach, bez kadrowania. */
+  photo?: { src: string; alt: string; w: number; h: number };
 }
-const { h1, lead, crumbs, image, imageAlt } = Astro.props;
+const { h1, lead, crumbs, mark = 'P', photo } = Astro.props;
+const label = crumbs.at(-1)?.label ?? '';
 ---
 
+{/* Nagłówek podstrony niesie to samo wywołanie przekroju, co sekcje na
+    stronie głównej. Bez tego podstrony wracały do zwykłego stosu bloków. */}
 <section class="phero">
-  <div class="shell">
+  <div class="cut">
     <nav class="phero__crumbs mono" aria-label="Okruszki">
       <a href="/">Strona główna</a>
       {
@@ -24,6 +31,8 @@ const { h1, lead, crumbs, image, imageAlt } = Astro.props;
       }
     </nav>
 
+    <Plane mark={mark} label={label} />
+
     <h1 class="display-xl">
       {h1.split('\n').map((line, i) => (
         <>
@@ -34,25 +43,9 @@ const { h1, lead, crumbs, image, imageAlt } = Astro.props;
     </h1>
 
     {lead && <p class="lead muted phero__lead">{lead}</p>}
-  </div>
 
-  {
-    image && (
-      <div class="shell">
-        <img
-          src={image}
-          srcset={`${image.replace('.webp', '-800.webp')} 800w, ${image} 1600w`}
-          sizes="(max-width: 900px) 100vw, 1320px"
-          alt={imageAlt ?? ''}
-          width="1800"
-          height="771"
-          fetchpriority="high"
-          decoding="async"
-          class="phero__img"
-        />
-      </div>
-    )
-  }
+    {photo && <Figure {...photo} id={mark} caption={photo.alt} priority class="phero__fig" />}
+  </div>
 </section>
 
 <style>
@@ -68,18 +61,10 @@ const { h1, lead, crumbs, image, imageAlt } = Astro.props;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: clamp(2rem, 4vw, 3rem);
+    margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
   }
   .phero__crumbs a:hover { color: var(--accent-text); }
   .phero__crumbs [aria-current] { color: var(--fg); }
   .phero__lead { margin-top: 1.75rem; }
-  .phero__img {
-    display: block;
-    width: 100%;
-    height: clamp(180px, 26vw, 340px);
-    object-fit: cover;
-    margin-top: clamp(2rem, 4vw, 3rem);
-    border: 1px solid var(--rule);
-    filter: saturate(0.85) contrast(1.05);
-  }
+  .phero__fig { margin-top: clamp(2rem, 4vw, 3rem); }
 </style>

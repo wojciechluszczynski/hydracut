@@ -1,10 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
+import Plane from '../components/Plane.astro';
 import PageHero from '../components/PageHero.astro';
 import NextLinks from '../components/NextLinks.astro';
-import Val from '../components/Val.astro';
+
 import { site } from '../data/site';
-import { isTbd } from '../lib/val';
+
 
 const p = site.pages.downloads;
 const crumbs = [{ label: 'Do pobrania', href: '/do-pobrania/' }];
@@ -12,12 +13,13 @@ const crumbs = [{ label: 'Do pobrania', href: '/do-pobrania/' }];
 
 <Base title={p.title} description={p.description} crumbs={crumbs}>
   <PageHero h1={p.h1} lead={p.lead} crumbs={crumbs}
-    image={site.media.footer.src}
-    imageAlt={site.media.footer.alt}
+    photo={site.media.footer}
+  mark="P"
   />
 
   <section class="band">
-    <div class="shell">
+    <div class="cut">
+      <Plane mark="A" label="Dokumenty" />
       <ul class="dl">
         {
           site.downloads.map((d) => (
@@ -25,7 +27,15 @@ const crumbs = [{ label: 'Do pobrania', href: '/do-pobrania/' }];
               <span class="dl__title">{d.title}</span>
               <span class="dl__meta mono">{d.format}</span>
               <span class="dl__act mono">
-                {isTbd(d.file) ? <Val text={d.file} /> : <a href={d.file} class="link-amber">Pobierz</a>}
+                {/* Pozycja jest do pobrania tylko wtedy, gdy wskazuje na realny
+                    plik. Warunek na isTbd() robił link z opisu "na zapytanie". */}
+                {d.file.startsWith('/') ? (
+                  <a href={d.file} class="link-amber" target="_blank" rel="noopener">
+                    Otwórz PDF
+                  </a>
+                ) : (
+                  <span class="muted">{d.file}</span>
+                )}
               </span>
             </li>
           ))

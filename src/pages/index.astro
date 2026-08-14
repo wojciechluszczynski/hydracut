@@ -1,9 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
-import Eyebrow from '../components/Eyebrow.astro';
+import Plane from '../components/Plane.astro';
 import CutDiagram from '../components/CutDiagram.astro';
 import StatStrip from '../components/StatStrip.astro';
 import PhotoSlot from '../components/PhotoSlot.astro';
+import Figure from '../components/Figure.astro';
 import VideoSlot from '../components/VideoSlot.astro';
 import SpecTable from '../components/SpecTable.astro';
 import Faq from '../components/Faq.astro';
@@ -63,7 +64,7 @@ const schema = [
 <Base title={site.meta.title} description={site.meta.description} schema={schema}>
   {/* ------------------------------------------------ 01 HERO */}
   <section class="hero" id="pila">
-    <div class="shell hero__grid">
+    <div class="cut hero__grid">
       <div class="hero__text">
         <p class="label hero__eyebrow">{site.hero.eyebrow}</p>
         <h1 class="display-xl">
@@ -90,24 +91,17 @@ const schema = [
   <StatStrip />
 
   {/* ------------------------------------------------ 02 PAIN AND GAIN */}
-  <section class="band band--paper">
-    <div class="shell">
-      <Eyebrow index="02" label={site.pains.eyebrow} />
+  <section class="band band--wide">
+    <div class="cut">
+      <Plane mark="A" label={site.pains.eyebrow} />
       <div class="pg__head">
         <h2 class="display-l">{site.pains.h2}</h2>
         <p class="lead muted">{site.pains.lead}</p>
       </div>
-
-      <img
-        src={site.media.pain.src}
-        srcset={`${site.media.pain.src.replace('.webp', '-800.webp')} 800w, ${site.media.pain.src} 1600w`}
-        sizes="(max-width: 900px) 100vw, 1320px"
-        alt={site.media.pain.alt}
-        width="1600"
-        height="893"
-        loading="lazy"
-        decoding="async"
-        class="pg__photo reveal"
+      <Figure
+        {...site.media.pain}
+        caption={site.media.pain.alt} id="A"
+        class="pg__fig reveal"
       />
 
       <div class="pg">
@@ -127,8 +121,8 @@ const schema = [
 
   {/* ------------------------------------------------ 03 METHOD COMPARISON */}
   <section class="band">
-    <div class="shell">
-      <Eyebrow index="03" label={site.why.eyebrow} />
+    <div class="cut">
+      <Plane mark="B" label={site.why.eyebrow} />
       <div class="why__head">
         <h2 class="display-l">{site.why.h2}</h2>
         <div class="why__body">
@@ -164,9 +158,9 @@ const schema = [
   </section>
 
   {/* ------------------------------------------------ 04 HOW IT WORKS */}
-  <section class="band band--paper">
-    <div class="shell">
-      <Eyebrow index="04" label={site.how.eyebrow} />
+  <section class="band band--paper band--gauge">
+    <div class="cut">
+      <Plane mark="C" label={site.how.eyebrow} />
       <h2 class="display-l how__h2">{site.how.h2}</h2>
 
       <ol class="how__steps">
@@ -196,14 +190,14 @@ const schema = [
   <TextureBand
     video={site.media.loop.video}
     poster={site.media.loop.poster}
-    quote="Rura nie musi wyjechać na powierzchnię, żeby dało się ją przeciąć."
-    source="Z rozmowy na budowie"
+    quote="Dzięki hydraulicznemu źródłu zasilania piła może być używana w mokrych warunkach bez uszkodzenia."
+    source="Instrukcja obsługi HPO1200, Fijalo-Poland"
   />
 
   {/* ------------------------------------------------ 05 PEOPLE */}
-  <section class="band">
-    <div class="shell">
-      <Eyebrow index="05" label={site.people.eyebrow} />
+  <section class="band band--tight">
+    <div class="cut">
+      <Plane mark="D" label={site.people.eyebrow} />
       <div class="pp">
         <div class="pp__text">
           <h2 class="display-l">{site.people.h2}</h2>
@@ -245,9 +239,21 @@ const schema = [
   </section>
 
   {/* ------------------------------------------------ 06 MODELE */}
-  <section class="band" id="modele">
-    <div class="shell">
-      <Eyebrow index="06" label={site.models.eyebrow} />
+  <section class="band band--wide band--gauge" id="modele">
+    {/* Dwa przekroje rur o różnej średnicy, przecięte jedną płaszczyzną:
+        to jest cała różnica między modelami, narysowana zamiast opisana. */}
+    <svg class="bore md__bore" viewBox="0 0 1400 620" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <circle cx="330" cy="310" r="96"></circle>
+      <circle cx="330" cy="310" r="108"></circle>
+      <circle cx="330" cy="310" r="283" stroke-dasharray="7 7"></circle>
+      <circle cx="1010" cy="310" r="192"></circle>
+      <circle cx="1010" cy="310" r="204"></circle>
+      <circle cx="1010" cy="310" r="379" stroke-dasharray="7 7"></circle>
+      <line x1="0" y1="310" x2="1400" y2="310"></line>
+    </svg>
+
+    <div class="cut">
+      <Plane mark="E" label={site.models.eyebrow} />
       <div class="md__head">
         <h2 class="display-l">{site.models.h2}</h2>
         <p class="lead muted">{site.models.lead}</p>
@@ -298,9 +304,9 @@ const schema = [
   </section>
 
   {/* ------------------------------------------------ 06 USES */}
-  <section class="band band--paper">
-    <div class="shell">
-      <Eyebrow index="06" label={site.uses.eyebrow} />
+  <section class="band">
+    <div class="cut">
+      <Plane mark="F" label={site.uses.eyebrow} />
       <div class="uses__head">
         <h2 class="display-l">{site.uses.h2}</h2>
         <a href="/zastosowania/" class="link-amber">Rozwinięte opisy</a>
@@ -324,9 +330,9 @@ const schema = [
   </section>
 
   {/* ------------------------------------------------ 07 EQUIPMENT */}
-  <section class="band">
-    <div class="shell">
-      <Eyebrow index="07" label={site.equipment.eyebrow} />
+  <section class="band band--tight">
+    <div class="cut">
+      <Plane mark="G" label={site.equipment.eyebrow} />
       <div class="eq">
         <div class="eq__left">
           <h2 class="display-l">{site.equipment.h2}</h2>
@@ -348,8 +354,8 @@ const schema = [
 
   {/* ------------------------------------------------ 08 SPECS */}
   <section class="band band--paper">
-    <div class="shell">
-      <Eyebrow index="08" label={site.specs.eyebrow} />
+    <div class="cut">
+      <Plane mark="H" label={site.specs.eyebrow} />
       <div class="specs">
         <div class="specs__left">
           <h2 class="display-l">{site.specs.h2}</h2>
@@ -368,8 +374,8 @@ const schema = [
 
   {/* ------------------------------------------------ 09 MAKER */}
   <section class="band band--tight">
-    <div class="shell">
-      <Eyebrow index="09" label={site.maker.eyebrow} />
+    <div class="cut">
+      <Plane mark="I" label={site.maker.eyebrow} />
       <div class="mk">
         <div>
           <h2 class="display-l">{site.maker.h2}</h2>
@@ -402,8 +408,8 @@ const schema = [
 
   {/* ------------------------------------------------ 10 FAQ */}
   <section class="band">
-    <div class="shell">
-      <Eyebrow index="10" label={site.faq.eyebrow} />
+    <div class="cut">
+      <Plane mark="J" label={site.faq.eyebrow} />
       <div class="faq__layout">
         <div>
           <h2 class="display-l">{site.faq.h2}</h2>
@@ -415,9 +421,9 @@ const schema = [
   </section>
 
   {/* ------------------------------------------------ 11 CONTACT */}
-  <section class="band band--paper" id="kontakt">
-    <div class="shell">
-      <Eyebrow index="11" label={site.form.eyebrow} />
+  <section class="band band--wide" id="kontakt">
+    <div class="cut">
+      <Plane mark="K" label={site.form.eyebrow} />
       <div class="ct">
         <div class="ct__left">
           <h2 class="display-l">{site.form.h2}</h2>
@@ -451,6 +457,16 @@ const schema = [
 
 <style>
   /* 06 modele --------------------------------------------------- */
+  /* Geometria siedzi pod treścią i nie może brać wysokości. Reguła
+     ".band > *" nadałaby jej position: relative i rozepchała pas. */
+  .md__bore {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.22;
+  }
+  #modele > .cut { position: relative; z-index: 1; }
+
   .md__head { display: grid; gap: 1.5rem; }
   .md__cards {
     display: grid;
@@ -570,15 +586,7 @@ const schema = [
   @media (min-width: 820px) {
     .pg { grid-template-columns: 1fr 1fr; column-gap: 3rem; }
     .pg__col { display: block; border-bottom: 1px solid var(--rule); }
-    .pg__photo {
-    display: block;
-    width: 100%;
-    height: clamp(200px, 30vw, 380px);
-    object-fit: cover;
-    margin-block: clamp(2rem, 4vw, 3rem);
-    border: 1px solid var(--rule);
-    filter: saturate(0.85) contrast(1.05);
-  }
+    .pg__fig { margin-block: clamp(2rem, 4vw, 3rem); }
   .pg__col--gain { color: var(--accent-text); }
     .pg__pain, .pg__gain { padding-block: 1.35rem; }
   }

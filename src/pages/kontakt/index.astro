@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Plane from '../../components/Plane.astro';
 import PageHero from '../../components/PageHero.astro';
 import LeadForm from '../../components/LeadForm.astro';
 import Val from '../../components/Val.astro';
@@ -21,12 +22,15 @@ const schema = [
 
 <Base title={p.title} description={p.description} crumbs={crumbs} schema={schema}>
   <PageHero h1={p.h1} lead={p.lead} crumbs={crumbs}
-    image={site.media.dusk.src}
-    imageAlt={site.media.dusk.alt}
+    photo={site.media.dusk}
+  mark="K"
   />
 
   <section class="band band--paper">
-    <div class="shell kt">
+    <div class="cut">
+      <Plane mark="A" label="Dane i formularz" />
+      <div class="kt">
+
       <div class="kt__data">
         <dl>
           <div>
@@ -60,6 +64,7 @@ const schema = [
       <div class="kt__form">
         <h2 class="display-m kt__h2">Zapytanie ofertowe</h2>
         <LeadForm />
+      </div>
       </div>
     </div>
   </section>

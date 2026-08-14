@@ -9,12 +9,15 @@ export default defineConfig({
   site: 'https://hydracut.pl',
   trailingSlash: 'always',
   // Inline the CSS: two fewer render-blocking requests on a site this small.
-  build: { format: 'directory', inlineStylesheets: 'always' },
+  // assets: 'assets' zamiast domyślnego '_astro'. Katalog z podkreśleniem na
+  // początku znikał przy operacji "move" w menedżerze plików Hostingera i
+  // wszystkie czcionki zwracały 404. Sprawdzone na Hornecie.
+  build: { format: 'directory', inlineStylesheets: 'always', assets: 'assets' },
   compressHTML: true,
   integrations: [
     sitemap({
       changefreq: 'monthly',
-      lastmod: new Date('2026-08-06'),
+      lastmod: new Date('2026-08-09'),
       filter: (page) => !page.includes('/polityka-prywatnosci'),
     }),
   ],

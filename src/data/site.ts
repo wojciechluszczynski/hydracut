@@ -7,9 +7,21 @@
  * ZNACZNIK "?" NA POCZĄTKU WARTOŚCI = dana niepotwierdzona.
  * Renderuje się z podkreśleniem i dopiskiem "do potwierdzenia".
  *
- * ŹRÓDŁO DANYCH: karta katalogowa producenta "Obwodowa Hydrauliczna Piła
- * do rur HPO600 / HPO1200", Fijalo-Poland. Wszystkie liczby poniżej pochodzą
- * z tej karty, chyba że oznaczono inaczej.
+ * ŹRÓDŁA DANYCH, w kolejności pierwszeństwa:
+ *  1. "Instrukcja obsługi. Obwodowa piła tarczowa do cięcia rur TYP HPO 1200"
+ *     (dokumentacja techniczno-ruchowa producenta) — dla wszystkiego, co
+ *     dotyczy HPO1200 i wymagań hydrauliki.
+ *  2. Karta katalogowa "HPO600 / HPO1200" — dla HPO600, którego instrukcji
+ *     nie ma w materiałach, oraz dla danych sprzedażowych (35 cm, 14 min).
+ *
+ * KARTA I INSTRUKCJA SIĘ ROZJEŻDŻAJĄ w trzech miejscach. Strona idzie za
+ * instrukcją, decyzja Wojciecha z 2026-08-09:
+ *  - zakres HPO1200: instrukcja 600–1200 mm, karta 355–1206 mm,
+ *  - tarcza HPO1200: instrukcja 200 mm, karta 230 mm,
+ *  - masa HPO1200: instrukcja i karta 14 kg, rysunek PH12 20 kg (32,8 kg
+ *    z łańcuchami). PH12 to prawdopodobnie inna konstrukcja, nie HPO.
+ * Karta jest publikowana na stronie jako PDF, więc rozjazd jest widoczny
+ * dla klienta. Do potwierdzenia w Fijalo przez Piotra.
  */
 
 export const site = {
@@ -21,7 +33,7 @@ export const site = {
     lang: 'pl-PL',
     title: 'HydraCut HPO. Obwodowa piła hydrauliczna do cięcia rur',
     description:
-      'Piła obwodowa HydraCut tnie rury po obwodzie w wykopie. Zakres 203 do 1206 mm, potrzeba 35 cm luzu wokół rury, żeliwo fi 800 w 14 minut. Dwa modele, HPO600 i HPO1200.',
+      'Piła obwodowa HydraCut tnie rury po obwodzie w wykopie. Zakres 203 do 1200 mm, potrzeba 35 cm luzu wokół rury, żeliwo fi 800 w 14 minut. Dwa modele, HPO600 i HPO1200.',
     maker: 'Wojciech Łuszczyński, GTM Architect, wojciech.io',
   },
 
@@ -61,7 +73,7 @@ export const site = {
   },
 
   stats: [
-    { value: '203–1206', unit: 'mm', label: 'Zakres średnic rur' },
+    { value: '203–1200', unit: 'mm', label: 'Zakres średnic rur' },
     { value: '35', unit: 'cm', label: 'Wolnego miejsca wokół rury' },
     { value: '14', unit: 'min', label: 'Żeliwo fi 800' },
     { value: '138', unit: 'bar', label: 'Ciśnienie robocze' },
@@ -128,19 +140,19 @@ export const site = {
     steps: [
       {
         title: 'Założenie łańcucha',
-        body: 'Łańcuch prowadzący stały obejmuje rurę i wyznacza płaszczyznę cięcia. To on, a nie ręka operatora, decyduje o tym, gdzie pójdzie tarcza.',
+        body: 'Łańcuch prowadzący stały obejmuje rurę 205 mm od linii cięcia i wyznacza płaszczyznę. To on, a nie ręka operatora, decyduje o tym, gdzie pójdzie tarcza.',
       },
       {
         title: 'Zamocowanie piły',
-        body: 'Piła siada na łańcuchu i zaciska się na rurze. Potrzebuje 35 cm wolnego miejsca dookoła, więc mieści się w ciasnym wykopie.',
+        body: 'Piła siada na łańcuchu prowadzącym, a łańcuch rolkowy blokuje ją od spodu rury. Potrzeba 35 cm wolnego miejsca dookoła, więc mieści się w ciasnym wykopie.',
       },
       {
         title: 'Podłączenie hydrauliki',
-        body: 'Zasilanie z agregatu hydraulicznego lub innego nośnika: przepływ 20 do 30 l/min, ciśnienie około 140 bar, źródło trzyliniowe.',
+        body: 'Zasilanie z agregatu: przepływ 23 do 26 l/min przy 140 do 160 bar. Piła wymaga źródła trzyliniowego, bo osobną linią odprowadza przecieki z pompy.',
       },
       {
         title: 'Cięcie po obwodzie',
-        body: 'Łańcuch ruchomy przesuwa piłę wokół rury. Cięcie schodzi się w punkcie startu, bez efektu spirali i mijania się linii.',
+        body: 'Operator ciągnie wózek rurką prowadzącą, przeciwnie do obrotu tarczy, i w połowie obwodu przechodzi na drugą stronę rury. Cięcie schodzi się w punkcie startu, bez efektu spirali.',
       },
     ],
     video: {
@@ -156,7 +168,7 @@ export const site = {
   models: {
     eyebrow: 'Dwa modele',
     h2: 'HPO600 czy HPO1200?',
-    lead: 'Różnica sprowadza się do zakresu średnic i tarczy. Reszta parametrów jest wspólna, więc wybór zależy wyłącznie od tego, jakie rury tniesz.',
+    lead: 'Różnica sprowadza się do zakresu średnic. Tarcza, hydraulika, obroty i osłona są wspólne, więc wybór zależy wyłącznie od tego, jakie rury tniesz.',
     items: [
       {
         name: 'HPO600',
@@ -167,38 +179,47 @@ export const site = {
       },
       {
         name: 'HPO1200',
-        range: '355–1206 mm',
-        blade: 'tarcza 230 mm',
+        range: '600–1200 mm',
+        blade: 'tarcza 200 mm',
         weight: '14 kg',
         note: 'Kolektory, magistrale i rury wielkich średnic.',
       },
     ],
     rows: [
-      { k: 'Zakres cięcia', a: '203–603 mm', b: '355–1206 mm' },
-      { k: 'Średnica tarczy', a: '200 mm', b: '230 mm' },
+      { k: 'Zakres cięcia', a: '203–603 mm', b: '600–1200 mm' },
+      { k: 'Średnica tarczy', a: '200 mm', b: '200 mm' },
       { k: 'Mocowanie tarczy', a: '22,2 mm', b: '22,2 / 25,4 mm' },
       { k: 'Masa', a: '13 kg', b: '14 kg' },
-      { k: 'Przepływ oleju', a: '20–26 l/min', b: '20–26 l/min' },
+      { k: 'Przepływ oleju', a: '20–26 l/min', b: '26 l/min' },
       { k: 'Ciśnienie robocze', a: '138 bar', b: '138 bar' },
-      { k: 'Obroty maksymalne tarczy', a: '2000 1/min', b: '2000 1/min' },
-      { k: 'Moc akustyczna LWA', a: '93,4 ±1,5 dBA', b: '93,4 ±1,5 dBA' },
-      { k: 'Moc akustyczna LPA', a: '98,5 ±2,3 dBA', b: '98,5 ±2,3 dBA' },
+      /* Karta nazywa 2000 obr/min wartością maksymalną, instrukcja minimalną.
+         To prędkość znamionowa tarczy, więc etykieta bez przymiotnika. */
+      { k: 'Prędkość obrotowa tarczy', a: '2000 1/min', b: '2000 1/min' },
+      /* Oba dokumenty mają zamienione skróty: opisują ciśnienie na stanowisku
+         operatora jako LWA, a moc całego urządzenia jako LPA. Moc akustyczna
+         jest zawsze wyższa od ciśnienia, więc idziemy za opisem, nie skrótem. */
+      { k: 'Ciśnienie akustyczne na stanowisku', a: '93,4 ±1,5 dBA', b: '93,4 ±1,5 dBA' },
+      { k: 'Moc akustyczna urządzenia', a: '98,5 ±2,3 dBA', b: '98,5 ±2,3 dBA' },
     ],
     overlap:
-      'Zakresy nakładają się od 355 do 603 mm. W tym przedziale pracują oba modele, więc jeżeli tniesz głównie w tych średnicach, decyduje reszta parku maszynowego.',
+      'HPO600 kończy się na 603 mm, HPO1200 zaczyna od 600 mm. Poza tym trzymilimetrowym zakładem średnica rury wskazuje jeden model, więc wybór rzadko bywa sporny.',
   },
 
   people: {
     eyebrow: 'Ludzie i maszyna',
     h2: 'Kto tym pracuje?',
-    body: 'Piła jedzie do wykopu z ekipą sieciową, nie z serwisem producenta. Waży 13 albo 14 kilogramów, więc schodzi na dół w rękach. Zasilanie bierze z agregatu, który brygada zwykle i tak ma na budowie.',
+    body: 'Piła jedzie do wykopu z ekipą sieciową, nie z serwisem producenta. Waży 13 albo 14 kilogramów, więc schodzi na dół w rękach. Do cięcia potrzeba dwóch osób: jedna prowadzi piłę, druga obsługuje przepływ oleju na agregacie.',
+    /* Opinii klienta nie wymyślamy. Do czasu, aż Fijalo poda realną,
+       stoi tu zdanie z instrukcji producenta z uczciwym podpisem —
+       tak samo rozwiązane u Horneta. */
     quote: {
-      text: '?Miejsce na opinię użytkownika. Jedno lub dwa zdania o tym, ile trwało cięcie i co się zmieniło na budowie.',
-      author: '?Imię i nazwisko',
-      role: '?Firma, stanowisko',
+      text: 'Piłę stworzono jako bezpieczną alternatywę przy cięciach trudnych i niebezpiecznych ze względu na położenie rury.',
+      author: 'Instrukcja obsługi HPO1200',
+      role: 'Fijalo-Poland',
     },
     facts: [
       { k: 'Masa piły', v: '13 kg (HPO600), 14 kg (HPO1200)' },
+      { k: 'Obsługa', v: 'dwie osoby: piła i agregat' },
       { k: 'Zasilanie', v: 'agregat hydrauliczny, źródło trzyliniowe' },
       { k: 'Kontakt serwisowy', v: 'ten sam numer co do sprzedaży' },
     ],
@@ -226,7 +247,7 @@ export const site = {
       {
         title: 'Kanalizacja i kolektory',
         icon: 'kolektor',
-        body: 'Rury wielkich średnic, do 1206 mm, w ciasnych wykopach i komorach.',
+        body: 'Rury wielkich średnic, do 1200 mm, w ciasnych wykopach i komorach.',
       },
       {
         title: 'Rozbiórki i demontaże',
@@ -248,7 +269,7 @@ export const site = {
       { title: 'Łańcuch prowadzący stały', body: 'Wyznacza płaszczyznę cięcia i trzyma ją przez cały obwód.' },
       { title: 'Łańcuch ruchomy', body: 'Przesuwa piłę wokół rury podczas cięcia.' },
       { title: 'Regulowana osłona tarczy', body: 'Zasłania strefę iskier i odprysków, ustawiana pod średnicę rury.' },
-      { title: 'Tarcza diamentowa', body: '200 mm w HPO600, 230 mm w HPO1200. Żeliwo, stal, PVC, PE.' },
+      { title: 'Tarcza diamentowa', body: '200 mm, US SAWS Tiger Tooth APB08125. Żeliwo, stal, PVC, PE.' },
       { title: 'Skrzynia transportowa', body: 'Piła, łańcuchy i przewody w jednym opakowaniu.' },
       { title: 'Przewody hydrauliczne', body: 'Do podłączenia do agregatu w układzie trzyliniowym.' },
     ],
@@ -260,10 +281,10 @@ export const site = {
     caption: 'Dane techniczne HydraCut HPO600 i HPO1200',
     rows: [
       { k: 'Zakres cięcia, HPO600', v: '203–603 mm' },
-      { k: 'Zakres cięcia, HPO1200', v: '355–1206 mm' },
+      { k: 'Zakres cięcia, HPO1200', v: '600–1200 mm' },
       { k: 'Masa', v: '13 kg / 14 kg' },
-      { k: 'Średnica tarczy', v: '200 mm / 230 mm' },
-      { k: 'Obroty maksymalne tarczy', v: '2000 1/min' },
+      { k: 'Średnica tarczy', v: '200 mm' },
+      { k: 'Prędkość obrotowa tarczy', v: '2000 1/min' },
       { k: 'Przepływ oleju', v: '20–26 l/min' },
       { k: 'Ciśnienie robocze', v: '138 bar' },
       { k: 'Wolne miejsce wokół rury', v: '35 cm' },
@@ -276,7 +297,7 @@ export const site = {
     items: [
       {
         q: 'Jakie rury tnie HydraCut?',
-        a: 'Żeliwne, stalowe, PVC i PE. Zakres średnic zależy od modelu: HPO600 tnie od 203 do 603 mm, HPO1200 od 355 do 1206 mm.',
+        a: 'Żeliwne, stalowe, PVC i PE. Zakres średnic zależy od modelu: HPO600 tnie od 203 do 603 mm, HPO1200 od 600 do 1200 mm.',
         home: true,
       },
       {
@@ -296,7 +317,7 @@ export const site = {
       },
       {
         q: 'Czego potrzeba do zasilania?',
-        a: 'Agregatu hydraulicznego albo innego nośnika z instalacją o przepływie 20 do 30 l/min i ciśnieniu około 140 bar. Wymagane jest źródło trzyliniowe.',
+        a: 'Agregatu o przepływie 23 do 26 l/min i ciśnieniu roboczym 140 do 160 bar, z zaworem nadmiarowym ustawionym na 155 do 165 bar. Piła wymaga źródła trzyliniowego: osobną linią odprowadza przecieki z pompy, a nie każdy agregat ma to przyłącze.',
         home: true,
       },
       {
@@ -306,12 +327,22 @@ export const site = {
       },
       {
         q: 'Który model wybrać, HPO600 czy HPO1200?',
-        a: 'Decyduje zakres średnic. Do 603 mm wystarczy HPO600. Powyżej potrzebny jest HPO1200, który schodzi do 1206 mm. W przedziale 355 do 603 mm pracują oba.',
+        a: 'Decyduje zakres średnic. HPO600 tnie do 603 mm, HPO1200 od 600 mm w górę. Zakład wynosi trzy milimetry, więc poza nim średnica rury wskazuje model.',
+        home: false,
+      },
+      {
+        q: 'Czy tarczę trzeba chłodzić wodą?',
+        a: 'Przy rurach stalowych tak, i to bezwzględnie. Zraszanie podłącza się hydronetką pod szybkozłącze na obudowie tarczy, a ilość wody reguluje zawór kulowy. Bez zraszania stal iskrzy tak, że skraca żywotność pasa prowadzącego.',
         home: false,
       },
       {
         q: 'Jak zabezpieczony jest operator?',
-        a: 'Regulowana osłona tarczy zasłania strefę cięcia na całym obwodzie, chroniąc przed iskrzeniem i odpryskami. Poziom mocy akustycznej LWA wynosi 93,4 dBA.',
+        a: 'Regulowana osłona tarczy zasłania strefę cięcia na całym obwodzie, chroniąc przed iskrzeniem i odpryskami. Ciśnienie akustyczne na stanowisku wynosi 93,4 dBA, ale pod pełnym obciążeniem hałas potrafi przekroczyć 100 dBA, więc ochronniki słuchu są obowiązkowe.',
+        home: false,
+      },
+      {
+        q: 'Ile osób obsługuje piłę?',
+        a: 'Dwie. Jedna prowadzi piłę po rurze, druga steruje przepływem oleju na agregacie. Instrukcja producenta wymaga drugiego operatora przy uruchomieniu i przez cały czas cięcia.',
         home: false,
       },
       {
@@ -321,7 +352,7 @@ export const site = {
       },
       {
         q: 'Ile kosztuje HydraCut?',
-        a: '?Cenę podajemy w odpowiedzi na zapytanie, bo zależy od modelu i konfiguracji zestawu.',
+        a: 'Cena zależy od modelu i konfiguracji zestawu. Podajemy ją w odpowiedzi na zapytanie, zwykle w ciągu jednego dnia roboczego.',
         home: false,
       },
     ],
@@ -413,52 +444,69 @@ export const site = {
     },
   },
 
+  /* w i h to realne wymiary pliku. Komponenty renderują zdjęcie w jego
+     własnych proporcjach — wcześniej wszystkie szły przez sztywną
+     wysokość i cover, przez co ujęcia 4:3 traciły ponad połowę kadru. */
   media: {
-    pain: { src: '/foto/h-crew.webp', alt: 'Ekipa w wykopie przy rurach magistralnych' },
-    dusk: { src: '/foto/h-cutting.webp', alt: 'Operator prowadzi piłę po obwodzie rury' },
-    footer: { src: '/foto/h-trench.webp', alt: 'Głęboki wykop z rurami i ekipą' },
-    trench: { src: '/foto/h-power.webp', alt: 'Stanowisko z agregatem hydraulicznym' },
-    yard: { src: '/foto/h-pipe.webp', alt: 'Przecięta rura wielkiej średnicy' },
-    street: { src: '/foto/h-mount.webp', alt: 'Piła zamocowana na rurze łańcuchem' },
-    lowangle: { src: '/foto/h-saw.webp', alt: 'Piła hydrauliczna z bliska' },
-    machine: { src: '/foto/h-chain.webp', alt: 'Łańcuch prowadzący na rurze' },
+    pain: { src: '/foto/h-crew.webp', alt: 'Ekipa w wykopie przy rurach magistralnych', w: 1200, h: 675 },
+    dusk: { src: '/foto/h-cutting.webp', alt: 'Operator prowadzi piłę po obwodzie rury', w: 900, h: 506 },
+    footer: { src: '/foto/h-trench.webp', alt: 'Głęboki wykop z rurami i ekipą', w: 1600, h: 900 },
+    trench: { src: '/foto/h-power.webp', alt: 'Stanowisko z agregatem hydraulicznym', w: 1600, h: 900 },
+    yard: { src: '/foto/h-pipe.webp', alt: 'Przecięta rura wielkiej średnicy', w: 1600, h: 900 },
+    street: { src: '/foto/h-mount.webp', alt: 'Piła zamocowana na rurze łańcuchem', w: 900, h: 506 },
+    lowangle: { src: '/foto/h-saw.webp', alt: 'Piła hydrauliczna z bliska', w: 1200, h: 900 },
+    machine: { src: '/foto/h-chain.webp', alt: 'Łańcuch prowadzący na rurze', w: 1600, h: 900 },
     loop: { video: '/foto/h-loop.mp4', poster: '/foto/h-loop.webp' },
   },
 
+  /* Publikujemy wyłącznie kartę katalogową. Rysunek wymiarowy podaje masę
+     sprzeczną z instrukcją, a instrukcja HPO1200 wskazuje wyłącznego
+     dystrybutora w Polsce — jedno i drugie do decyzji Fijalo, nie naszej. */
   downloads: [
-    { title: 'Karta katalogowa HPO600 i HPO1200', file: '/do-pobrania/hydracut-hpo.pdf', format: 'PDF' },
-    { title: 'Rysunek wymiarowy HPO1200', file: '?do dostarczenia', format: 'PDF' },
-    { title: 'Instrukcja obsługi', file: '?do dostarczenia', format: 'PDF' },
+    {
+      title: 'Karta katalogowa HPO600 i HPO1200',
+      file: '/do-pobrania/hydracut-hpo600-hpo1200-karta.pdf',
+      format: 'PDF',
+    },
+    { title: 'Rysunek wymiarowy HPO1200', file: 'wysyłamy na zapytanie', format: 'PDF' },
+    { title: 'Instrukcja obsługi HPO1200', file: 'wysyłamy na zapytanie', format: 'PDF' },
   ],
 
   pages: {
     specs: {
       title: 'Dane techniczne HydraCut HPO600 i HPO1200',
       description:
-        'Pełna specyfikacja pił obwodowych HydraCut: zakres cięcia 203 do 1206 mm, ciśnienie 138 bar, przepływ 20 do 26 l/min, tarcze 200 i 230 mm.',
+        'Pełna specyfikacja pił obwodowych HydraCut: zakres cięcia 203 do 1200 mm, ciśnienie 138 bar, przepływ 20 do 26 l/min, tarcza 200 mm.',
       h1: 'Dane techniczne\nHydraCut HPO',
-      lead: 'Parametry obu modeli według karty katalogowej producenta.',
+      lead: 'Parametry obu modeli. Dane HPO1200 pochodzą z instrukcji obsługi producenta, dane HPO600 z karty katalogowej.',
       blocks: [
         {
           h2: 'Cięcie',
           rows: [
             { k: 'Zakres cięcia, HPO600', v: '203–603 mm' },
-            { k: 'Zakres cięcia, HPO1200', v: '355–1206 mm' },
-            { k: 'Średnica tarczy, HPO600', v: '200 mm' },
-            { k: 'Średnica tarczy, HPO1200', v: '230 mm' },
+            { k: 'Zakres cięcia, HPO1200', v: '600–1200 mm' },
+            { k: 'Średnica tarczy', v: '200 mm' },
+            { k: 'Model tarczy', v: 'US SAWS Tiger Tooth APB08125' },
             { k: 'Mocowanie tarczy, HPO600', v: '22,2 mm' },
             { k: 'Mocowanie tarczy, HPO1200', v: '22,2 / 25,4 mm' },
-            { k: 'Obroty maksymalne tarczy', v: '2000 1/min' },
+            { k: 'Maksymalna średnica tarczy', v: '300 mm' },
+            { k: 'Prędkość obrotowa tarczy', v: '2000 1/min' },
             { k: 'Cięte materiały', v: 'żeliwo, stal, PVC, PE' },
           ],
         },
         {
           h2: 'Zasilanie hydrauliczne',
           rows: [
-            { k: 'Przepływ oleju', v: '20–26 l/min' },
-            { k: 'Ciśnienie robocze', v: '138 bar' },
-            { k: 'Zalecane parametry źródła', v: '20–30 l/min, około 140 bar' },
-            { k: 'Rodzaj źródła', v: 'trzyliniowe' },
+            { k: 'Zalecany przepływ oleju', v: '26 l/min' },
+            { k: 'Ciśnienie robocze piły', v: '138 bar' },
+            { k: 'Wymagania źródła', v: '23–26 l/min, 140–160 bar' },
+            { k: 'Zawór nadmiarowy', v: '155–165 bar' },
+            { k: 'Ciśnienie powrotne', v: 'do 17 bar' },
+            { k: 'Rodzaj źródła', v: 'trzyliniowe, z linią przecieku' },
+            { k: 'Filtracja układu', v: 'min. 25 µm' },
+            { k: 'Lepkość oleju', v: '20–70 cSt' },
+            { k: 'Temperatura oleju', v: 'od 10 do 60 °C' },
+            { k: 'Przewody', v: '16 mm do 15 m, 20 mm do 30 m' },
           ],
         },
         {
@@ -466,9 +514,14 @@ export const site = {
           rows: [
             { k: 'Wolne miejsce wokół rury', v: '35 cm' },
             { k: 'Praca przy zalaniu wodą', v: 'możliwa' },
+            { k: 'Chłodzenie tarczy przy stali', v: 'zraszanie obowiązkowe' },
             { k: 'Osłona tarczy', v: 'regulowana, na całym obwodzie' },
-            { k: 'Moc akustyczna LWA', v: '93,4 ±1,5 dBA' },
-            { k: 'Moc akustyczna LPA', v: '98,5 ±2,3 dBA' },
+            { k: 'Obsada', v: 'dwie osoby' },
+            /* Skróty w dokumentach producenta są zamienione miejscami,
+               etykiety idą za opisem: 93,4 to stanowisko, 98,5 to maszyna. */
+            { k: 'Ciśnienie akustyczne na stanowisku', v: '93,4 ±1,5 dBA' },
+            { k: 'Moc akustyczna urządzenia', v: '98,5 ±2,3 dBA' },
+            { k: 'Drgania na uchwycie', v: '4,9 ±0,98 m/s²' },
           ],
         },
         {
@@ -480,6 +533,7 @@ export const site = {
           ],
         },
       ],
+      note: 'Dane za instrukcją obsługi HPO1200 i kartą katalogową HPO600 / HPO1200. Producent zastrzega prawo do zmian konstrukcyjnych. Dane nie stanowią oferty w rozumieniu Kodeksu cywilnego.',
     },
     uses: {
       title: 'Zastosowania piły obwodowej do rur',
@@ -502,7 +556,7 @@ export const site = {
         },
         {
           title: 'Kanalizacja i kolektory',
-          body: 'Model HPO1200 schodzi do 1206 mm, więc obejmuje rury kolektorowe. Wystarczy 35 cm wolnego miejsca wokół rury, co ma znaczenie w komorach i ciasnych wykopach.',
+          body: 'Model HPO1200 schodzi do 1200 mm, więc obejmuje rury kolektorowe. Wystarczy 35 cm wolnego miejsca wokół rury, co ma znaczenie w komorach i ciasnych wykopach.',
         },
         {
           title: 'Rozbiórki i demontaże',
@@ -525,9 +579,12 @@ export const site = {
         items: [
           'Sprawdź, czy wokół rury jest 35 cm wolnego miejsca na całym obwodzie.',
           'Ustaw regulowaną osłonę tarczy pod średnicę ciętej rury.',
-          'Podłącz zasilanie trzyliniowe: 20 do 30 l/min, około 140 bar.',
-          'Prowadź posuw równomiernie. Dociskanie tarczy nie przyspiesza cięcia.',
-          'Przy cięciu żeliwa i stali licz się z poziomem LWA 93,4 dBA. Ochronniki obowiązkowo.',
+          'Podłącz zasilanie trzyliniowe: 23 do 26 l/min, 140 do 160 bar, z linią przecieku.',
+          'Przy rurach stalowych podłącz zraszanie. Bez wody iskry skracają żywotność pasa prowadzącego.',
+          'Prowadź posuw równomiernie. Dociskanie tarczy nie przyspiesza cięcia, tylko ją zakleszcza.',
+          'Tnąc rurę w czynnym rurociągu, wbijaj kliny rozporowe co 60 stopni, żeby szczelina nie zacisnęła tarczy.',
+          'Drugi operator zostaje przy agregacie przez cały czas cięcia.',
+          'Pod obciążeniem hałas przekracza 100 dBA. Ochronniki słuchu bez wyjątków.',
         ],
       },
     },
@@ -543,7 +600,7 @@ export const site = {
       description:
         'Tabela porównawcza pił obwodowych HydraCut HPO600 i HPO1200: zakres cięcia, tarcza, masa, parametry hydrauliki i hałas.',
       h1: 'HPO600 czy HPO1200?',
-      lead: 'Oba modele dzielą hydraulikę, obroty i osłonę. Różnią się zakresem średnic i tarczą, więc wybór zależy od tego, jakie rury tniesz.',
+      lead: 'Oba modele dzielą tarczę, hydraulikę, obroty i osłonę. Różnią się wyłącznie zakresem średnic, więc wybór zależy od tego, jakie rury tniesz.',
     },
     contact: {
       title: 'Kontakt i zapytanie ofertowe',

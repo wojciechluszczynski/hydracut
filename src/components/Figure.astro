@@ -1,0 +1,108 @@
+---
+/**
+ * Zdjęcie ujęte w obejmę: dwa zaczepy w akcencie marki obejmują kadr z góry
+ * i z dołu, tak jak łańcuch obejmuje rurę. Pod spodem tabliczka opisowa.
+ *
+ * ZASADA: zdjęcie renderuje się we WŁASNYCH proporcjach. Wcześniej wszystkie
+ * szły przez sztywną wysokość i object-fit: cover, przez co ujęcia traciły
+ * od 36 do 50 procent kadru i ucinało ludziom głowy.
+ * Kadrowania nie dodajemy z powrotem bez powodu.
+ */
+interface Props {
+  src: string;
+  alt: string;
+  /** Realne wymiary pliku. Bez nich przeglądarka rezerwuje złe miejsce. */
+  w: number;
+  h: number;
+  /** Litera lub numer klatki w tabliczce. */
+  id?: string;
+  caption?: string;
+  /** Pierwsze zdjęcie na stronie jest LCP i nie może być leniwe. */
+  priority?: boolean;
+  class?: string;
+}
+const { src, alt, w, h, id, caption, priority = false, class: cls } = Astro.props;
+
+// Gdy podpis mowi dokladnie to samo co alt, czytnik ekranu oglasza obraz
+// dwa razy. Wtedy opis niesie figcaption, a alt zostaje pusty.
+const sameAsCaption = !!caption && caption.trim() === alt.trim();
+
+// Ujęcia bliższe kwadratu rosną w pionie, więc dostają węższą kolumnę.
+const tall = w / h < 1.5;
+---
+
+<figure class:list={['fig', { 'fig--tall': tall }, cls]}>
+  <div class="fig__frame">
+    <img
+      src={src}
+      srcset={`${src.replace('.webp', '-800.webp')} 800w, ${src} 1600w`}
+      sizes="(max-width: 900px) 100vw, 1100px"
+      alt={sameAsCaption ? '' : alt}
+      width={w}
+      height={h}
+      loading={priority ? 'eager' : 'lazy'}
+      fetchpriority={priority ? 'high' : 'auto'}
+      decoding="async"
+    />
+  </div>
+
+  {
+    (id || caption) && (
+      <figcaption class="fig__cap mono">
+        {id && <span class="fig__id">{id}</span>}
+        {caption && <span class="fig__txt">{caption}</span>}
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .fig { margin: 0; }
+  .fig--tall { max-width: 780px; }
+
+  /* Obejma: zaczep u góry i u dołu, w akcencie, tak jak łańcuch na rurze. */
+  .fig__frame {
+    position: relative;
+    padding-block: 10px;
+  }
+  .fig__frame::before,
+  .fig__frame::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    height: 10px;
+    border-inline: 1px solid var(--accent-text);
+    pointer-events: none;
+  }
+  .fig__frame::before { top: 0; border-top: 1px solid var(--accent-text); }
+  .fig__frame::after { bottom: 0; border-bottom: 1px solid var(--accent-text); }
+
+  .fig__frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--rule);
+    filter: saturate(0.88) contrast(1.04);
+  }
+
+  .fig__cap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.1rem;
+    margin-top: 0.85rem;
+    padding-top: 0.7rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  .fig__id {
+    color: var(--accent-text);
+    white-space: nowrap;
+    border: 1px solid var(--accent-text);
+    padding: 0.1rem 0.4rem;
+  }
+  .fig__txt { max-width: 68ch; }
+</style>

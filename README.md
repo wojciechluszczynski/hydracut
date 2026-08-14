@@ -47,7 +47,13 @@ Wartość zaczynająca się od `?` w `src/data/site.ts` jest **niepotwierdzona**
 Renderuje się z kropkowanym podkreśleniem i podpowiedzią „do potwierdzenia".
 Po weryfikacji usuwasz `?` z początku wartości i przebudowujesz stronę.
 
+Znacznik służy do danych, których nie znamy. **Nie do polityki firmy** — zdanie
+„cenę podajemy w odpowiedzi na zapytanie" jest decyzją, a nie luką, i idzie bez
+znacznika. Opinii klienta nie wymyślamy: dopóki nie ma prawdziwej, stoi tam
+zdanie z dokumentacji producenta z uczciwym podpisem.
+
 ## Dokumentacja
 
+- [System wizualny](docs/system-wizualny.md) — **czytaj przed zmianą układu**
 - [Wdrożenie na Hostingerze](docs/wdrozenie-hostinger.md)
 - [Edycja treści](docs/edycja-tresci.md)

@@ -12,10 +12,22 @@ const email = plain(site.contact.email);
   <div class="shell">
     <div class="ftr__top">
       <div>
-        <p class="wordmark">
-          <span class="wordmark__mark" aria-hidden="true"></span>{site.meta.brand}
+        <p class="wordmark" role="img" aria-label={site.meta.brand}>
+          <span class="wordmark__logo" aria-hidden="true"></span>
         </p>
         <p class="ftr__claim">Obwodowa piła hydrauliczna do cięcia rur w wykopie.</p>
+
+        <a href="https://fijalo.pl/" class="ftr__maker" rel="noopener">
+          <span class="label">Producent</span>
+          <img
+            src="/logo/hydracut-fijalo.png"
+            alt="Fijalo-Poland"
+            width="221"
+            height="42"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
       </div>
 
       <nav class="ftr__nav" aria-label="Nawigacja w stopce">
@@ -62,17 +74,31 @@ const email = plain(site.contact.email);
     padding-bottom: 3rem;
   }
 
-  .wordmark {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: var(--font-display);
-    font-weight: 800;
-    font-stretch: 118%;
-    font-size: 1.125rem;
-    text-transform: uppercase;
+  /* Ten sam znak co w nagłówku, opis wariantów barwnych tam. */
+  .wordmark { display: inline-flex; align-items: center; }
+  .wordmark__logo {
+    width: 102px;
+    height: 25px;
+    background: url('/logo/hydracut-wordmark-light.svg') left center / contain no-repeat;
   }
-  .wordmark__mark { width: 10px; height: 10px; background: var(--color-amber); }
+  :root[data-theme='light'] .wordmark__logo {
+    background-image: url('/logo/hydracut-wordmark-dark.svg');
+  }
+
+  /* Lockup FIJALO-POLAND zostaje rastrem: ciemny kafel z wyciętym białym
+     napisem, trasowanie alfy dałoby jednolity prostokąt. Działa na obu tłach. */
+  .ftr__maker {
+    display: inline-grid;
+    gap: 0.6rem;
+    justify-items: start;
+    margin-top: 2rem;
+  }
+  .ftr__maker img {
+    width: 143px;
+    height: auto;
+    transition: opacity 160ms ease;
+  }
+  .ftr__maker:hover img { opacity: 0.75; }
 
   .ftr__claim {
     color: var(--muted);

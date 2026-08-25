@@ -1,0 +1,98 @@
+---
+/**
+ * Cookie consent, shown only when an editor has actually configured a tag.
+ *
+ * With no tags the sites set no cookies at all, so asking would be theatre.
+ * Built from 1px rules and monospace labels like the rest of the system: no
+ * rounded cards, no shadows, no overlay dimming the page.
+ */
+import { site } from '../data/site';
+
+const t = site.tracking;
+const needed = Boolean(t.gtmId || t.ga4Id || t.googleAdsId || t.metaPixelId);
+---
+
+{needed && (
+  <div class="consent" id="consent" hidden>
+    <div class="consent__inner">
+      <p class="consent__text">
+        Używamy statystyk i narzędzi reklamowych, żeby wiedzieć, które treści są przydatne.
+        Bez zgody nie ładujemy żadnych skryptów zewnętrznych.
+        <a href="/polityka-prywatnosci/">Polityka prywatności</a>
+      </p>
+      <div class="consent__actions">
+        <button type="button" class="consent__btn mono" data-consent="denied">Tylko niezbędne</button>
+        <button type="button" class="consent__btn consent__btn--yes mono" data-consent="granted">Zgadzam się</button>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    (() => {
+      const el = document.getElementById('consent');
+      if (!el) return;
+      if (!localStorage.getItem('hy-consent')) el.hidden = false;
+
+      el.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-consent]');
+        if (!button) return;
+        const choice = button.dataset.consent;
+        localStorage.setItem('hy-consent', choice);
+        el.hidden = true;
+        if (choice === 'granted' && window.__grantConsent) window.__grantConsent();
+      });
+    })();
+  </script>
+
+  <style>
+    .consent {
+      position: fixed;
+      inset-inline: 0;
+      bottom: 0;
+      z-index: 70;
+      border-top: 1px solid var(--rule);
+      background: var(--bg);
+    }
+    .consent__inner {
+      display: grid;
+      gap: 1rem;
+      align-items: center;
+      max-width: 72rem;
+      margin-inline: auto;
+      padding: 1rem clamp(1rem, 4vw, 2rem);
+    }
+    .consent__text {
+      font-size: 0.875rem;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+    .consent__text a {
+      color: var(--fg);
+      border-bottom: 1px solid var(--rule);
+    }
+    .consent__text a:hover { color: var(--accent-text); }
+    .consent__actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .consent__btn {
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      background: transparent;
+      color: var(--fg);
+      cursor: pointer;
+      padding: 0.6rem 1.1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .consent__btn:hover { border-color: var(--accent-text); color: var(--accent-text); }
+    .consent__btn--yes {
+      background: var(--color-amber);
+      border-color: var(--color-amber);
+      color: var(--color-ink);
+      font-weight: 500;
+    }
+    .consent__btn--yes:hover { color: var(--color-ink); }
+    @media (min-width: 780px) {
+      .consent__inner { grid-template-columns: 1fr auto; }
+    }
+  </style>
+)}

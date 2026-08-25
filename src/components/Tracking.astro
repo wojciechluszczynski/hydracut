@@ -1,0 +1,84 @@
+---
+/**
+ * Analytics and advertising tags, driven by the fields editors fill in Sanity.
+ *
+ * Nothing third-party loads before the visitor accepts. Verification meta tags
+ * are the exception: they set no cookies and are just proof of ownership.
+ * Consent Mode defaults are denied, so even a late-loading Google tag starts
+ * from "no" rather than from "yes".
+ */
+import { site } from '../data/site';
+
+const t = site.tracking;
+const hasConsented = Boolean(t.gtmId || t.ga4Id || t.googleAdsId || t.metaPixelId);
+---
+
+{t.googleSiteVerification && (
+  <meta name="google-site-verification" content={t.googleSiteVerification} />
+)}
+
+{hasConsented && (
+  <script is:inline define:vars={{ t }}>
+    // Consent Mode v2: everything denied until the visitor says otherwise.
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500,
+    });
+
+    window.__tags = t;
+
+    window.__loadTags = function () {
+      if (window.__tagsLoaded) return;
+      window.__tagsLoaded = true;
+      const add = (src) => {
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = src;
+        document.head.appendChild(s);
+      };
+
+      if (t.gtmId) {
+        add('https://www.googletagmanager.com/gtm.js?id=' + t.gtmId);
+      }
+      if (t.ga4Id || t.googleAdsId) {
+        add('https://www.googletagmanager.com/gtag/js?id=' + (t.ga4Id || t.googleAdsId));
+        gtag('js', new Date());
+        if (t.ga4Id) gtag('config', t.ga4Id);
+        if (t.googleAdsId) gtag('config', t.googleAdsId);
+      }
+      if (t.metaPixelId) {
+        /* eslint-disable */
+        !function(f,b,e,v,n,t2,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t2=b.createElement(e);t2.async=!0;
+        t2.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t2,s)}
+        (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        window.fbq('init', t.metaPixelId);
+        window.fbq('track', 'PageView');
+        /* eslint-enable */
+      }
+    };
+
+    window.__grantConsent = function () {
+      gtag('consent', 'update', {
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+        analytics_storage: 'granted',
+      });
+      window.__loadTags();
+    };
+
+    if (localStorage.getItem('hy-consent') === 'granted') window.__grantConsent();
+  </script>
+)}
+
+{t.customHeadSnippet && <Fragment set:html={t.customHeadSnippet} />}

@@ -10,7 +10,7 @@
  */
 
 $TO      = 'biuro@fijalo.pl';        // odbiorca zapytań
-$FROM    = 'formularz@hydracut.pl'; // skrzynka do założenia w hPanelu, musi być na tej domenie
+$FROM    = 'kontakt@hydracut.pl';   // realna skrzynka na tej domenie, wymagana przez SPF
 $SUBJECT = 'HydraCut: zapytanie ze strony';
 $THANKS  = '/kontakt/dziekujemy/';
 

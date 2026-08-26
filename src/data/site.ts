@@ -30,7 +30,10 @@ const QUERY = `{
   "theme": *[_id == "theme"][0],
   "downloads": *[_type == "download"] | order(order asc) {
     title, availability, "url": file.asset->url
-  }
+  },
+  "media": *[_id == "mediaSlots"][0],
+  "assets": *[_type == "sanity.imageAsset"]{_id, url, metadata{dimensions}},
+  "pages": *[_type == "pageContent"]{key, h1, lead, title, description}
 }`
 
 const fetchContent = async () => {
@@ -49,6 +52,23 @@ const keep = <T>(incoming: T | undefined | null, fallback: T): T =>
   incoming === undefined || incoming === null || (Array.isArray(incoming) && incoming.length === 0)
     ? fallback
     : incoming
+
+const assetsById = new Map<string, any>((cms?.assets ?? []).map((a: any) => [a._id, a]))
+
+/** Sanity serves images from its own CDN; ask for a sensible size and format. */
+const img = (slot: any, fallback: {src: string; alt: string; w?: number; h?: number}) => {
+  const asset = assetsById.get(slot?.asset?._ref)
+  if (!asset?.url) return fallback
+  const d = asset.metadata?.dimensions
+  return {
+    src: `${asset.url}?w=1600&fm=webp&q=78`,
+    alt: slot.alt || fallback.alt,
+    w: d?.width ?? fallback.w,
+    h: d?.height ?? fallback.h,
+  }
+}
+
+const pageBy = (key: string) => (cms?.pages ?? []).find((p: any) => p.key === key)
 
 const s = cms?.settings
 const h = cms?.home
@@ -125,6 +145,13 @@ export const site = {
 
   people: {
     ...staticSite.people,
+    eyebrow: keep(h?.sectionHeadings?.peopleEyebrow, staticSite.people.eyebrow),
+    h2: keep(h?.sectionHeadings?.peopleHeading, staticSite.people.h2),
+    body: keep(h?.peopleBody, staticSite.people.body),
+    facts: keep(
+      h?.peopleFacts?.map((f: any) => ({k: f.label, v: f.value})),
+      staticSite.people.facts,
+    ),
     quote: h?.quote?.text
       ? {text: h.quote.text, author: h.quote.author, role: h.quote.role}
       : staticSite.people.quote,
@@ -165,6 +192,39 @@ export const site = {
     })),
     staticSite.downloads,
   ),
+
+  form: {
+    ...staticSite.form,
+    eyebrow: keep(s?.formEyebrow, staticSite.form.eyebrow),
+    h2: keep(s?.formHeading, staticSite.form.h2),
+    intro: keep(s?.formIntro, staticSite.form.intro),
+    fields: {...staticSite.form.fields, ...(s?.formLabels ?? {})},
+    scopeOptions: keep(s?.formScopeOptions, staticSite.form.scopeOptions),
+    consent: keep(s?.formConsent, staticSite.form.consent),
+  },
+
+  photos: Object.fromEntries(
+    Object.entries(staticSite.photos).map(([name, fallback]: [string, any]) => [
+      name,
+      {...fallback, ...img(cms?.media?.[name], fallback)},
+    ]),
+  ) as typeof staticSite.photos,
+
+  media: Object.fromEntries(
+    Object.entries(staticSite.media).map(([name, fallback]: [string, any]) =>
+      'video' in fallback ? [name, fallback] : [name, img(cms?.media?.[name], fallback)],
+    ),
+  ) as typeof staticSite.media,
+
+  pages: Object.fromEntries(
+    Object.entries(staticSite.pages).map(([key, fallback]: [string, any]) => {
+      const p = pageBy(key)
+      return [
+        key,
+        p ? {...fallback, h1: keep(p.h1, fallback.h1), lead: keep(p.lead, fallback.lead), title: keep(p.title, fallback.title), description: keep(p.description, fallback.description)} : fallback,
+      ]
+    }),
+  ) as typeof staticSite.pages,
 
   /** Editor-managed analytics identifiers. Empty strings mean "do not render". */
   tracking: {

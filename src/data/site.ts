@@ -33,7 +33,8 @@ const QUERY = `{
   },
   "media": *[_id == "mediaSlots"][0],
   "assets": *[_type == "sanity.imageAsset"]{_id, url, metadata{dimensions}},
-  "pages": *[_type == "pageContent"]{key, h1, lead, title, description}
+  "pages": *[_type == "pageContent"]{key, h1, lead, title, description},
+  "models": *[_id == "modelComparison"][0]
 }`
 
 const fetchContent = async () => {
@@ -192,6 +193,28 @@ export const site = {
     })),
     staticSite.downloads,
   ),
+
+  // Only HydraCut ships a two-model comparison; HornetCut has no such section.
+  ...((staticSite as any).models
+    ? {
+        models: {
+          ...(staticSite as any).models,
+          eyebrow: keep(cms?.models?.eyebrow, (staticSite as any).models.eyebrow),
+          h2: keep(cms?.models?.heading, (staticSite as any).models.h2),
+          lead: keep(cms?.models?.lead, (staticSite as any).models.lead),
+          items: keep(
+            cms?.models?.items?.map((m: any) => ({
+              name: m.name, range: m.range, blade: m.blade, weight: m.weight, note: m.note,
+            })),
+            (staticSite as any).models.items,
+          ),
+          rows: keep(
+            cms?.models?.rows?.map((r: any) => ({k: r.label, a: r.a, b: r.b})),
+            (staticSite as any).models.rows,
+          ),
+        },
+      }
+    : {}),
 
   form: {
     ...staticSite.form,

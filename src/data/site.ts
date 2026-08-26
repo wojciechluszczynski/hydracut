@@ -34,7 +34,10 @@ const QUERY = `{
   "media": *[_id == "mediaSlots"][0],
   "assets": *[_type == "sanity.imageAsset"]{_id, url, metadata{dimensions}},
   "pages": *[_type == "pageContent"]{key, h1, lead, title, description},
-  "models": *[_id == "modelComparison"][0]
+  "models": *[_id == "modelComparison"][0],
+  "articles": *[_type == "article" && defined(slug.current)] | order(published desc){
+    title, "slug": slug.current, lead, seoTitle, seoDescription, published, readMin, body
+  }
 }`
 
 const fetchContent = async () => {
@@ -158,6 +161,31 @@ export const site = {
       : staticSite.people.quote,
   },
 
+  uses: {
+    ...staticSite.uses,
+    eyebrow: keep(h?.sectionHeadings?.usesEyebrow, staticSite.uses.eyebrow),
+    h2: keep(h?.sectionHeadings?.usesHeading, staticSite.uses.h2),
+    items: keep(
+      h?.uses?.map((u: any, i: number) => ({
+        title: u.title,
+        body: u.body,
+        icon: u.icon ?? staticSite.uses.items[i]?.icon,
+      })),
+      staticSite.uses.items,
+    ),
+  },
+
+  maker: {
+    ...staticSite.maker,
+    eyebrow: keep(h?.sectionHeadings?.makerEyebrow, staticSite.maker.eyebrow),
+    h2: keep(h?.sectionHeadings?.makerHeading, staticSite.maker.h2),
+    body: keep(h?.makerBody, staticSite.maker.body),
+    facts: keep(
+      h?.makerFacts?.map((f: any) => ({k: f.label, v: f.value})),
+      staticSite.maker.facts,
+    ),
+  },
+
   equipment: {
     ...staticSite.equipment,
     items: keep(
@@ -248,6 +276,18 @@ export const site = {
       ]
     }),
   ) as typeof staticSite.pages,
+
+  /** Guide articles. Empty until an editor writes one, which is a valid state. */
+  articles: (cms?.articles ?? []).map((a: any) => ({
+    title: a.title,
+    h1: a.title,
+    slug: a.slug,
+    lead: a.lead ?? '',
+    description: a.seoDescription ?? a.lead ?? '',
+    published: a.published ?? '',
+    readMin: a.readMin ?? 5,
+    body: a.body ?? [],
+  })),
 
   /** Editor-managed analytics identifiers. Empty strings mean "do not render". */
   tracking: {

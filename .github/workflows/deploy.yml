@@ -48,3 +48,16 @@ jobs:
           git push -f -q "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" live
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tell the server to pull the new build
+        # Hostinger nie zaciaga galezi live sam, a wdrozenie przez FTP nie dociera
+        # do katalogu strony. Pukamy wiec do odbiornika, ktory pobiera paczke
+        # prosto z GitHuba. Repo jest publiczne, wiec serwer nie trzyma tokenu.
+        run: |
+          kod=$(curl -sS -o /tmp/odp.json -w '%{http_code}' -X POST \
+            -H "X-Wdrozenie-Klucz: $KLUCZ" "$URL")
+          cat /tmp/odp.json; echo
+          [ "$kod" = "200" ] || { echo "Odbiornik zwrocil $kod"; exit 1; }
+        env:
+          KLUCZ: ${{ secrets.WDROZENIE_KLUCZ }}
+          URL: ${{ secrets.WDROZENIE_URL }}

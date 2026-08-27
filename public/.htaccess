@@ -25,6 +25,13 @@ DirectoryIndex index.html index.php
   RewriteRule ^(.*)$ /$1/ [R=301,L]
 </IfModule>
 
+# Odbiornik wdrozen: klucz i pliki robocze nie sa do czytania z zewnatrz.
+# Sam _wdrozenie.php zostaje dostepny, bo to on przyjmuje sygnal z CI.
+<FilesMatch "^(_wdrozenie-klucz\.php|\.wdrozenie.*)$">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 ^/\.wdrozenie
+
 ErrorDocument 404 /404.html
 
 <IfModule mod_headers.c>

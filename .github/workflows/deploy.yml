@@ -10,6 +10,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  # Publikacja w Sanity woła to przez repository_dispatch, bo sama treść żyje
+  # w CMS-ie, a strona jest statyczna i musi się przebudować, żeby ją pokazać.
+  repository_dispatch:
+    types: [sanity-publish]
 
 permissions:
   contents: write

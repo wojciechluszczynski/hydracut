@@ -20,7 +20,7 @@ header('Cache-Control: no-store');
 
 const REPO      = 'wojciechluszczynski/hydracut';
 const GALAZ     = 'live';
-const CHRONIONE = ['_wdrozenie.php', '_wdrozenie-klucz.php', '.wdrozenie-tmp', '.wdrozenie.lock', '.wdrozenie-proby.json'];
+const CHRONIONE = ['_wdrozenie.php', '_wdrozenie-klucz.php', '.wdrozenie-tmp', '.wdrozenie.lock', '.wdrozenie-proby.json', '.wdrozenie-stan.json'];
 const PROBY_LIMIT = 10;      // nieudanych prob na adres
 const PROBY_OKNO  = 3600;    // w tylu sekundach
 const MIN_PLIKOW = 40;
@@ -61,11 +61,20 @@ function spis(string $baza, string $pod = ''): array {
     return $out;
 }
 
+// Wywolanie z crona na serwerze. Kto ma dostep do crona, ma i tak dostep do
+// plikow, wiec nie ma czego dodatkowo pilnowac. Ta droga omija blokade ruchu
+// przychodzacego, przez ktora wywolanie z GitHuba potrafi sie nie dodzwonic.
+$zCrona = PHP_SAPI === 'cli';
+$wymuszone = $zCrona
+    ? in_array('--wymus', $argv ?? [], true)
+    : isset($_GET['wymus']);
+
 // ---- autoryzacja ----
-if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
+if (!$zCrona && ($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     koniec(405, 'error', 'Nieobslugiwana metoda.');
 }
 $plikKlucza = $root . '/_wdrozenie-klucz.php';
+if ($zCrona) { goto poAutoryzacji; }
 if (!is_readable($plikKlucza)) {
     koniec(500, 'error', 'Brak pliku z kluczem.');
 }
@@ -100,6 +109,29 @@ if ($dobry) {
         koniec(429, 'error', 'Za duzo nieudanych prob z tego adresu.');
     }
     koniec(403, 'error', 'Brak uprawnien.');
+}
+
+poAutoryzacji:
+
+// ---- czy jest w ogole co wdrazac ----
+// Pytamy GitHuba o sha galezi live. Jesli to samo, co ostatnio wgralismy,
+// konczymy bez pobierania paczki. Dzieki temu cron moze chodzic czesto.
+$plikStanu = $root . '/.wdrozenie-stan.json';
+$stan = is_readable($plikStanu) ? (json_decode((string) file_get_contents($plikStanu), true) ?: []) : [];
+$sha = null;
+$chSha = curl_init(sprintf('https://api.github.com/repos/%s/commits/%s', REPO, GALAZ));
+curl_setopt_array($chSha, [
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_TIMEOUT        => 20,
+    CURLOPT_USERAGENT      => 'wdrozenie',
+    CURLOPT_HTTPHEADER     => ['Accept: application/vnd.github.sha'],
+]);
+$odpSha = curl_exec($chSha);
+if ((int) curl_getinfo($chSha, CURLINFO_HTTP_CODE) === 200 && is_string($odpSha)) {
+    $sha = trim($odpSha);
+}
+if ($sha !== null && !$wymuszone && ($stan['sha'] ?? null) === $sha) {
+    koniec(200, 'ok', 'Bez zmian, strona jest aktualna.', ['sha' => substr($sha, 0, 7)]);
 }
 
 // ---- blokada, zeby dwa wdrozenia nie weszly sobie w droge ----
@@ -185,6 +217,9 @@ foreach ($doUsuniecia as $wzgl) {
 }
 
 skasuj($stage);
+if ($sha !== null) {
+    @file_put_contents($plikStanu, json_encode(['sha' => $sha, 'kiedy' => date('c')]), LOCK_EX);
+}
 flock($lock, LOCK_UN);
 fclose($lock);
 

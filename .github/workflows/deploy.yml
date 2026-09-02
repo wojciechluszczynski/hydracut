@@ -49,18 +49,22 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Tell the server to pull the new build
-        # Hostinger nie zaciaga galezi live sam, a wdrozenie przez FTP nie dociera
-        # do katalogu strony. Pukamy wiec do odbiornika, ktory pobiera paczke
-        # prosto z GitHuba. Repo jest publiczne, wiec serwer nie trzyma tokenu.
+      - name: Nudge the server (best effort)
+        # Serwer i tak sprawdza galaz live cyklicznie cronem, wiec to tylko
+        # skrot, zeby zmiana weszla od razu. Polaczenie z runnera do hostingu
+        # bywa zrywane, a to nie jest powod, zeby caly przebieg swiecil na
+        # czerwono. Odmowa od samego odbiornika juz tak.
         run: |
-          # Shared hosting potrafi nie odebrac polaczenia, wiec ponawiamy.
           kod=$(curl -sS -o /tmp/odp.json -w '%{http_code}' -X POST \
-            --connect-timeout 30 --max-time 600 \
-            --retry 8 --retry-delay 30 --retry-all-errors \
-            -H "X-Wdrozenie-Klucz: $KLUCZ" "$URL")
+            --connect-timeout 20 --max-time 300 \
+            --retry 3 --retry-delay 15 --retry-all-errors \
+            -H "X-Wdrozenie-Klucz: $KLUCZ" "$URL") || kod="brak-polaczenia"
+          if [ "$kod" = "brak-polaczenia" ]; then
+            echo "Nie udalo sie dodzwonic do serwera. Cron dociagnie zmiane."
+            exit 0
+          fi
           cat /tmp/odp.json; echo
-          [ "$kod" = "200" ] || { echo "Odbiornik zwrocil $kod"; exit 1; }
+          [ "$kod" = "200" ] || { echo "Odbiornik odmowil: $kod"; exit 1; }
         env:
           KLUCZ: ${{ secrets.WDROZENIE_KLUCZ }}
           URL: ${{ secrets.WDROZENIE_URL }}

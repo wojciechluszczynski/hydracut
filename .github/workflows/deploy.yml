@@ -56,8 +56,8 @@ jobs:
         run: |
           # Shared hosting potrafi nie odebrac polaczenia, wiec ponawiamy.
           kod=$(curl -sS -o /tmp/odp.json -w '%{http_code}' -X POST \
-            --connect-timeout 20 --max-time 300 \
-            --retry 5 --retry-delay 10 --retry-all-errors \
+            --connect-timeout 30 --max-time 600 \
+            --retry 8 --retry-delay 30 --retry-all-errors \
             -H "X-Wdrozenie-Klucz: $KLUCZ" "$URL")
           cat /tmp/odp.json; echo
           [ "$kod" = "200" ] || { echo "Odbiornik zwrocil $kod"; exit 1; }

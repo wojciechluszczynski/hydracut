@@ -1,0 +1,32 @@
+name: Catch up the live site
+
+# Siatka bezpieczenstwa. Polaczenie z runnera do Hostingera potrafi sie zerwac
+# i wtedy publikacja tresci w Sanity konczy sie zbudowana paczka, ktora nigdy
+# nie trafia na serwer. Redaktor tego nie zauwazy, bo nie oglada Actions.
+#
+# Ten przebieg puka do odbiornika co kilka godzin. Odbiornik pobiera aktualna
+# galaz live, wiec jesli strona jest juz swieza, po prostu wgrywa to samo.
+
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask the server to pull the current live branch
+        run: |
+          kod=$(curl -sS -o /tmp/odp.json -w '%{http_code}' -X POST \
+            --connect-timeout 30 --max-time 600 \
+            --retry 8 --retry-delay 30 --retry-all-errors \
+            -H "X-Wdrozenie-Klucz: $KLUCZ" "$URL")
+          cat /tmp/odp.json; echo
+          [ "$kod" = "200" ] || { echo "Odbiornik zwrocil $kod"; exit 1; }
+        env:
+          KLUCZ: ${{ secrets.WDROZENIE_KLUCZ }}
+          URL: ${{ secrets.WDROZENIE_URL }}

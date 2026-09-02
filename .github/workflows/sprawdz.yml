@@ -1,0 +1,38 @@
+name: Check pull requests
+
+# Buduje zmiany z pull requestow, zeby autor od razu wiedzial, czy strona sie
+# sklada. Celowo nic nie wdraza i nie dotyka sekretow: PR z forka i tak ich nie
+# dostanie, a wdrozeniem zajmuje sie deploy.yml dopiero po merge do main.
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Sanity check on the output
+        run: |
+          test -f dist/index.html || { echo "Brak dist/index.html"; exit 1; }
+          test -f dist/.htaccess  || { echo "Brak dist/.htaccess"; exit 1; }
+          ile=$(find dist -type f | wc -l)
+          echo "Plikow w dist: $ile"
+          [ "$ile" -ge 40 ] || { echo "Za malo plikow, odbiornik odrzucilby taka paczke"; exit 1; }

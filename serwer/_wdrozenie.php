@@ -20,7 +20,9 @@ header('Cache-Control: no-store');
 
 const REPO      = 'wojciechluszczynski/hydracut';
 const GALAZ     = 'live';
-const CHRONIONE = ['_wdrozenie.php', '_wdrozenie-klucz.php', '.wdrozenie-tmp', '.wdrozenie.lock'];
+const CHRONIONE = ['_wdrozenie.php', '_wdrozenie-klucz.php', '.wdrozenie-tmp', '.wdrozenie.lock', '.wdrozenie-proby.json'];
+const PROBY_LIMIT = 10;      // nieudanych prob na adres
+const PROBY_OKNO  = 3600;    // w tylu sekundach
 const MIN_PLIKOW = 40;
 
 $root = __DIR__;
@@ -69,7 +71,34 @@ if (!is_readable($plikKlucza)) {
 }
 $klucz = (string) (require $plikKlucza);
 $podany = $_SERVER['HTTP_X_WDROZENIE_KLUCZ'] ?? '';
-if ($klucz === '' || !is_string($podany) || !hash_equals($klucz, $podany)) {
+
+// Zgadywanie klucza jest nierealne, ale nie ma powodu pozwalac na dowolna
+// liczbe prob. Liczymy nieudane strzaly z adresu i po przekroczeniu limitu
+// odmawiamy, zanim w ogole porownamy klucz.
+$plikProb = $root . '/.wdrozenie-proby.json';
+$adres = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+$teraz = time();
+$proby = is_readable($plikProb) ? (json_decode((string) file_get_contents($plikProb), true) ?: []) : [];
+foreach ($proby as $kto => $czasy) {
+    $proby[$kto] = array_values(array_filter($czasy, fn($t) => $t > $teraz - PROBY_OKNO));
+    if (!$proby[$kto]) unset($proby[$kto]);
+}
+$mojKlucz = hash('sha256', $adres);
+$dobry = $klucz !== '' && is_string($podany) && hash_equals($klucz, $podany);
+
+// Poprawny klucz przechodzi zawsze. Licznik nie moze zablokowac wdrozenia
+// tylko dlatego, ze ktos inny zza tego samego adresu strzelal na oslep.
+if ($dobry) {
+    if (isset($proby[$mojKlucz])) {
+        unset($proby[$mojKlucz]);
+        @file_put_contents($plikProb, json_encode($proby), LOCK_EX);
+    }
+} else {
+    $proby[$mojKlucz][] = $teraz;
+    @file_put_contents($plikProb, json_encode($proby), LOCK_EX);
+    if (count($proby[$mojKlucz]) > PROBY_LIMIT) {
+        koniec(429, 'error', 'Za duzo nieudanych prob z tego adresu.');
+    }
     koniec(403, 'error', 'Brak uprawnien.');
 }
 

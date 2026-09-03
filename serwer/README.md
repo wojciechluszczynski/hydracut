@@ -31,3 +31,29 @@ dzięki czemu jedzie razem z każdym buildem.
 
 Skrypt odrzuca paczkę i **nie rusza strony**, jeśli brakuje w niej `index.html`,
 `.htaccess` albo ma mniej niż 40 plików. Równoległe wdrożenia blokuje `flock`.
+
+## Cron u Hostingera nie działa, nie próbuj ponownie
+
+Skrypt umie chodzić z crona: uruchomiony z linii poleceń pomija klucz, pyta
+GitHuba o sha gałęzi `live` i kończy bez pobierania paczki, gdy nic się nie
+zmieniło. Ma to sens tylko wtedy, gdy cron faktycznie startuje.
+
+**Na obecnym planie nie startuje.** Sprawdzone 2026-09-02 testem kontrolowanym:
+w `.wdrozenie-stan.json` wpisany fałszywy sha, więc każdy przebieg musiałby
+przebudować stronę. Przez cztery godziny, osiem slotów `0,30 * * * *`, plik
+został nietknięty. Zadanie widniało na liście z poprawnym poleceniem. Panel
+przyjmuje wpis i go nie wykonuje.
+
+Wpisy zostały usunięte, bo zadanie, które nie działa, jest gorsze niż jego brak:
+tworzy złudzenie zabezpieczenia.
+
+**I tak nie jest potrzebny.** Wdrożenie z CI dochodzi, nawet gdy `curl` zgłasza
+timeout. Zmierzone: gałąź `live` o 15:03:56, plik na serwerze o 15:04:00, przy
+kroku, który raportował brak połączenia. Ginie odpowiedź, nie żądanie.
+
+Ręczne uruchomienie zostaje dostępne, jeśli kiedyś będzie potrzebne:
+
+```bash
+php /home/<uzytkownik>/public_html/_wdrozenie.php            # wdroz gdy sha sie zmienil
+php /home/<uzytkownik>/public_html/_wdrozenie.php --wymus    # wdroz mimo wszystko
+```

@@ -41,7 +41,7 @@ export const site = {
     // NIP i REGON potwierdzone stopką karty katalogowej HPO.
     // Adres za fijalo.pl, zgodnie z ustaleniem. Karta HPO podaje Biskupnicę,
     // czyli najpewniej zakład, a nie adres do korespondencji.
-    company: 'Fijalo-Poland Cyprian Fijało',
+    company: 'FIJALO-POLAND Cyprian Fijało',
     brandLine: 'Producent maszyn dla budownictwa podziemnego',
     phone: '+48 534 979 628',
     phoneHref: '+48534979628',
@@ -215,7 +215,7 @@ export const site = {
     quote: {
       text: 'Piłę stworzono jako bezpieczną alternatywę przy cięciach trudnych i niebezpiecznych ze względu na położenie rury.',
       author: 'Instrukcja obsługi HPO1200',
-      role: 'Fijalo-Poland',
+      role: 'FIJALO-POLAND',
     },
     facts: [
       { k: 'Masa piły', v: '13 kg (HPO600), 14 kg (HPO1200)' },
@@ -293,7 +293,7 @@ export const site = {
 
   faq: {
     eyebrow: 'FAQ',
-    h2: 'Najczęściej pytane',
+    h2: 'FAQ',
     items: [
       {
         q: 'Jakie rury tnie HydraCut?',
@@ -361,7 +361,7 @@ export const site = {
   maker: {
     eyebrow: 'Producent',
     h2: 'Kto za tym stoi?',
-    body: 'Fijalo-Poland, polski producent maszyn dla budownictwa podziemnego. Ta sama firma stoi za bezpłuczkową maszyną przeciskową ALUSTEER, pokazywaną na TRAKO i ENERGETAB. Ten sam serwis i ten sam numer telefonu, pod który dzwonisz po tarcze i łańcuchy.',
+    body: 'FIJALO-POLAND, polski producent maszyn dla budownictwa podziemnego. Ta sama firma stoi za bezpłuczkową maszyną przeciskową ALUSTEER, pokazywaną na TRAKO i ENERGETAB. Ten sam serwis i ten sam numer telefonu, pod który dzwonisz po tarcze i łańcuchy.',
     facts: [
       { k: 'Siedziba', v: 'Gdańsk, Kochanowskiego 130' },
       { k: 'Druga marka', v: 'ALUSTEER, przeciski sterowane' },
@@ -390,7 +390,7 @@ export const site = {
     },
     scopeOptions: ['do 600 mm', '600–1200 mm', 'różne średnice', 'jeszcze nie wiem'],
     consent:
-      'Zgadzam się na kontakt w sprawie zapytania. Dane przetwarza Fijalo-Poland Cyprian Fijało wyłącznie w tym celu.',
+      'Zgadzam się na kontakt w sprawie zapytania. Dane przetwarza FIJALO-POLAND Cyprian Fijało wyłącznie w tym celu.',
     submit: 'Wyślij zapytanie',
     success: 'Zapytanie wysłane. Odezwiemy się w ciągu jednego dnia roboczego.',
     error: 'Nie udało się wysłać. Zadzwoń pod +48 534 979 628 albo napisz na biuro@fijalo.pl.',

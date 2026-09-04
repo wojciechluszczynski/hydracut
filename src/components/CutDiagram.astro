@@ -248,5 +248,53 @@ const DIM_Y = 566;
   if (range) {
     draw(Number(range.value));
     range.addEventListener('input', () => draw(Number(range.value)));
+
+    // Sam suwak bywa niezauwazony: ludzie nie domyslaja sie, ze rysunek reaguje.
+    // Przy pierwszym wejsciu w kadr przejezdza wiec raz sam, od najmniejszej
+    // srednicy do wyjsciowej, i wraca do bezruchu. Dotkniecie suwaka przerywa
+    // pokaz natychmiast, zeby nie walczyc z uzytkownikiem o kontrole.
+    const start = Number(range.value);
+    const min = Number(range.min);
+    let pokazPoszedl = false;
+    let klatka = 0;
+
+    const przerwij = () => {
+      pokazPoszedl = true;
+      if (klatka) cancelAnimationFrame(klatka);
+    };
+    range.addEventListener('pointerdown', przerwij, { once: true });
+    range.addEventListener('keydown', przerwij, { once: true });
+
+    function pokaz() {
+      if (pokazPoszedl) return;
+      pokazPoszedl = true;
+      const czas = 1600;
+      const t0 = performance.now();
+      const krok = (teraz: number) => {
+        const p = Math.min((teraz - t0) / czas, 1);
+        // zwolnienie na koncu, zeby ruch nie wygladal mechanicznie
+        const e = 1 - Math.pow(1 - p, 3);
+        const dia = Math.round(min + (start - min) * e);
+        range.value = String(dia);
+        draw(dia);
+        if (p < 1) klatka = requestAnimationFrame(krok);
+      };
+      range.value = String(min);
+      draw(min);
+      klatka = requestAnimationFrame(krok);
+    }
+
+    const ruch = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!ruch.matches && 'IntersectionObserver' in window) {
+      const obs = new IntersectionObserver((wpisy) => {
+        for (const w of wpisy) {
+          if (w.isIntersecting) {
+            obs.disconnect();
+            pokaz();
+          }
+        }
+      }, { threshold: 0.45 });
+      obs.observe(range.closest('.dgm') ?? range);
+    }
   }
 </script>

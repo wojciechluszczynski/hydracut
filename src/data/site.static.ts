@@ -448,6 +448,7 @@ export const site = {
      własnych proporcjach — wcześniej wszystkie szły przez sztywną
      wysokość i cover, przez co ujęcia 4:3 traciły ponad połowę kadru. */
   media: {
+    hero: { src: '/foto/h-mount.webp', alt: 'Piła obwodowa HydraCut zamocowana łańcuchem na rurze w wykopie', w: 900, h: 506 },
     pain: { src: '/foto/h-crew.webp', alt: 'Ekipa w wykopie przy rurach magistralnych', w: 1200, h: 675 },
     dusk: { src: '/foto/h-cutting.webp', alt: 'Operator prowadzi piłę po obwodzie rury', w: 900, h: 506 },
     footer: { src: '/foto/h-trench.webp', alt: 'Głęboki wykop z rurami i ekipą', w: 1600, h: 900 },

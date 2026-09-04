@@ -83,7 +83,9 @@ const schema = [
       </div>
 
       <div class="hero__dgm">
-        <CutDiagram />
+        {/* Klient chce widziec maszyne od razu, zanim zacznie czytac. Rysunek
+            techniczny przeniesiony do sekcji 04, gdzie tlumaczymy samo ciecie. */}
+        <Figure {...site.media.hero} caption={site.media.hero.alt} id="01" priority />
       </div>
     </div>
   </section>
@@ -174,6 +176,10 @@ const schema = [
           ))
         }
       </ol>
+
+      <div class="how__dgm">
+        <CutDiagram />
+      </div>
 
       <div class="how__video">
         <VideoSlot

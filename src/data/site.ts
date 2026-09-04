@@ -52,6 +52,18 @@ const fetchContent = async () => {
 
 const cms = await fetchContent()
 
+/**
+ * Redaktor wkleja to, co ma pod reka: caly adres z paska albo sam identyfikator.
+ * Obie postacie sa poprawne, wiec wyciagamy identyfikator zamiast wymagac jednej.
+ */
+const idYouTube = (wartosc?: string | null): string => {
+  const v = (wartosc ?? '').trim()
+  if (!v) return ''
+  if (/^[\w-]{11}$/.test(v)) return v
+  const m = v.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/)
+  return m ? m[1] : ''
+}
+
 const keep = <T>(incoming: T | undefined | null, fallback: T): T =>
   incoming === undefined || incoming === null || (Array.isArray(incoming) && incoming.length === 0)
     ? fallback
@@ -144,7 +156,7 @@ export const site = {
       h?.steps?.map((x: any) => ({title: x.title, body: x.body})),
       staticSite.how.steps,
     ),
-    video: {...staticSite.how.video, youtubeId: h?.videoYoutubeId || staticSite.how.video.youtubeId},
+    video: {...staticSite.how.video, youtubeId: idYouTube(h?.videoYoutubeId) || staticSite.how.video.youtubeId},
   },
 
   people: {

@@ -1,5 +1,5 @@
 ---
-import { localizeHref , ui } from '../lib/i18n';
+import { localizeHref , ui , tx } from '../lib/i18n';
 import Base from '../layouts/Base.astro';
 import Plane from '../components/Plane.astro';
 import CutDiagram from '../components/CutDiagram.astro';
@@ -197,8 +197,8 @@ const schema = [
   <TextureBand
     video={site.media.loop.video}
     poster={site.media.loop.poster}
-    quote="Dzięki hydraulicznemu źródłu zasilania piła może być używana w mokrych warunkach bez uszkodzenia."
-    source="Instrukcja obsługi HPO1200, FIJALO-POLAND"
+    quote={tx("Dzięki hydraulicznemu źródłu zasilania piła może być używana w mokrych warunkach bez uszkodzenia.")}
+    source={tx("Instrukcja obsługi HPO1200, FIJALO-POLAND")}
   />
 
   {/* ------------------------------------------------ 05 PEOPLE */}

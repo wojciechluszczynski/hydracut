@@ -1,5 +1,5 @@
 ---
-import { localizeHref } from '../lib/i18n';
+import { localizeHref , tx } from '../lib/i18n';
 /** Internal linking block: every page points onward to two or three siblings. */
 interface Props {
   items: { label: string; href: string; note: string }[];
@@ -15,8 +15,8 @@ const { items } = Astro.props;
       items.map((item) => (
         <li>
           <a href={localizeHref(item.href)}>
-            <span class="next__t">{item.label}</span>
-            <span class="next__n">{item.note}</span>
+            <span class="next__t">{tx(item.label)}</span>
+            <span class="next__n">{tx(item.note)}</span>
             <span class="next__a mono" aria-hidden="true">
               &#8594;
             </span>

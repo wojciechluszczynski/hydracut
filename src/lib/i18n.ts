@@ -85,3 +85,16 @@ export const localizeHref = (href: string, lang: Locale = LANG): string => {
 
 /** Which route the current page is, so hreflang can point at its siblings. */
 export const routeKeyOf = (path: string): RouteKey | null => KEY_BY_PL[path] ?? null
+
+import staticStrings from './static-i18n.json'
+
+/**
+ * Copy written inline in a page — the label and note on a "next" link, a
+ * caption passed as a prop — never reaches the content adapter, so components
+ * that receive such strings translate them here against the same map.
+ */
+export const tx = (value: string, lang: Locale = LANG): string => {
+  if (lang === 'pl' || !value) return value
+  const hit = (staticStrings as Record<string, Record<string, string>>)[value]
+  return hit?.[lang] ?? value
+}

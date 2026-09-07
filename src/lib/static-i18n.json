@@ -286,5 +286,77 @@
  "Piła": {
   "en": "Saw",
   "de": "Säge"
+ },
+ "Dzięki hydraulicznemu źródłu zasilania piła może być używana w mokrych warunkach bez uszkodzenia.": {
+  "en": "Because the power source is hydraulic, the saw can be used in wet conditions without damage.",
+  "de": "Da die Energiequelle hydraulisch ist, kann die Säge ohne Schaden unter nassen Bedingungen eingesetzt werden."
+ },
+ "Instrukcja obsługi HPO1200, FIJALO-POLAND": {
+  "en": "HPO1200 operating manual, FIJALO-POLAND",
+  "de": "Betriebsanleitung HPO1200, FIJALO-POLAND"
+ },
+ "Cztery kroki od założenia łańcucha do zejścia się linii cięcia.": {
+  "en": "Four steps from laying the chain to the cut meeting itself.",
+  "de": "Vier Schritte vom Anlegen der Kette bis zum Zusammentreffen der Schnittlinie."
+ },
+ "Wymiana odcinków, wcinki, awarie wodociągowe, kolektory, rozbiórki.": {
+  "en": "Section replacement, tie-ins, water main failures, collectors, demolition.",
+  "de": "Abschnittstausch, Einbindungen, Wasserrohrbrüche, Sammler, Rückbau."
+ },
+ "Karta produktu, DTR i deklaracja zgodności w PDF.": {
+  "en": "Data sheet, technical documentation and declaration of conformity as PDF.",
+  "de": "Datenblatt, technische Dokumentation und Konformitätserklärung als PDF."
+ },
+ "przez okres do uzupełnienia": {
+  "en": "for a period to be confirmed",
+  "de": "für einen noch festzulegenden Zeitraum"
+ },
+ "Jeżeli uruchomimy Google Analytics, uzupełnimy tę sekcję o informację o zgodzie.": {
+  "en": "If we switch on Google Analytics, we will add information about consent to this section.",
+  "de": "Wenn wir Google Analytics aktivieren, ergänzen wir diesen Abschnitt um Angaben zur Einwilligung."
+ },
+ "Cztery kroki pracy i zasady bezpieczeństwa.": {
+  "en": "Four working steps and the safety rules.",
+  "de": "Vier Arbeitsschritte und die Sicherheitsregeln."
+ },
+ "Zapytanie o cenę, termin i dobór tarczy.": {
+  "en": "An enquiry about price, lead time and the right blade.",
+  "de": "Anfrage zu Preis, Termin und passender Trennscheibe."
+ },
+ "Pełna specyfikacja obu modeli": {
+  "en": "The full specification of both models",
+  "de": "Die vollständige Spezifikation beider Modelle"
+ },
+ "Gdzie piła pracuje": {
+  "en": "Where the saw works",
+  "de": "Wo die Säge arbeitet"
+ },
+ "Bezpieczeństwo": {
+  "en": "Safety",
+  "de": "Sicherheit"
+ },
+ "Pełna specyfikacja maszyny w konfiguracji standardowej.": {
+  "en": "The full specification of the machine in its standard configuration.",
+  "de": "Die vollständige Spezifikation der Maschine in Standardkonfiguration."
+ },
+ "Gdzie ta metoda cięcia daje najwięcej oszczędności.": {
+  "en": "Where this cutting method saves the most.",
+  "de": "Wo diese Schnittmethode am meisten spart."
+ },
+ "Głębokość, średnica cięcia, silnik, masa i wyposażenie standardowe.": {
+  "en": "Depth, cutting diameter, engine, weight and standard equipment.",
+  "de": "Tiefe, Schnittdurchmesser, Motor, Gewicht und Standardausstattung."
+ },
+ "Przebieg cięcia po obwodzie krok po kroku.": {
+  "en": "The circumferential cut step by step.",
+  "de": "Der Umfangsschnitt Schritt für Schritt."
+ },
+ "Odpowiedzi na pytania o tarcze, transport, obsługę i cenę.": {
+  "en": "Answers about blades, transport, operation and price.",
+  "de": "Antworten zu Trennscheiben, Transport, Bedienung und Preis."
+ },
+ "Najczęstsze pytania o pracę maszyny.": {
+  "en": "The most common questions about how the machine works.",
+  "de": "Die häufigsten Fragen zum Betrieb der Maschine."
  }
 }

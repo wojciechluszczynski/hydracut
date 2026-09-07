@@ -1,5 +1,5 @@
 ---
-import { localizeHref , ui } from '../lib/i18n';
+import { localizeHref , ui , tx } from '../lib/i18n';
 import { site } from '../data/site';
 import LangSwitch from './LangSwitch.astro';
 import { plain } from '../lib/val';
@@ -23,7 +23,7 @@ const phoneHref = plain(site.contact.phoneHref);
             href={item.href}
             class:list={['hdr__link', { 'is-active': item.href !== '/' && path.startsWith(item.href) }]}
           >
-            {item.label}
+            {tx(item.label)}
           </a>
         ))
       }
@@ -44,7 +44,7 @@ const phoneHref = plain(site.contact.phoneHref);
 
   <div class="hdr__panel" id="menu-mobilne" hidden>
     <nav class="shell" aria-label="Nawigacja mobilna">
-      {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      {site.nav.map((item) => <a href={item.href}>{tx(item.label)}</a>)}
       <a href={`tel:${phoneHref}`} class="mono hdr__panel-phone">{phone}</a>
     </nav>
   </div>

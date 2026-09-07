@@ -1,5 +1,5 @@
 ---
-import { localizeHref , ui } from '../lib/i18n';
+import { localizeHref , ui , tx } from '../lib/i18n';
 import { site } from '../data/site';
 import { plain } from '../lib/val';
 import Val from './Val.astro';
@@ -33,7 +33,7 @@ const email = plain(site.contact.email);
 
       <nav class="ftr__nav" aria-label="Nawigacja w stopce">
         <p class="label">Strona</p>
-        {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+        {site.nav.map((item) => <a href={item.href}>{tx(item.label)}</a>)}
         <a href={localizeHref("/do-pobrania/")}>Do pobrania</a>
       </nav>
 

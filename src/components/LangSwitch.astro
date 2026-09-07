@@ -1,0 +1,72 @@
+---
+/**
+ * Language switcher.
+ *
+ * Points at the same page in the other languages rather than dumping everyone
+ * on the home page, which is the usual way these get built and the reason
+ * people stop using them. The current language stays in the list, marked, so
+ * the control reads as a state and not as a link to somewhere else.
+ */
+import { LANG, LOCALES, BCP47, LANG_NAME, localizeHref } from '../lib/i18n';
+
+const here = Astro.url.pathname;
+const options = LOCALES.map((lang) => ({
+  lang,
+  name: LANG_NAME[lang],
+  short: lang.toUpperCase(),
+  href: localizeHref(here, lang),
+  current: lang === LANG,
+}));
+---
+
+<div class="lang" role="group" aria-label={LANG_NAME[LANG]}>
+  {
+    options.map((o) => (
+      <a
+        href={o.href}
+        class:list={['lang__opt', { 'is-current': o.current }]}
+        hreflang={BCP47[o.lang]}
+        lang={o.lang}
+        aria-current={o.current ? 'true' : undefined}
+        title={o.name}
+      >
+        {o.short}
+      </a>
+    ))
+  }
+</div>
+
+<style>
+  .lang {
+    display: inline-flex;
+    align-items: stretch;
+    border: 1px solid var(--line, #2a2e33);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .lang__opt {
+    font: 600 0.72rem/1 var(--mono, ui-monospace, monospace);
+    letter-spacing: 0.06em;
+    padding: 0.42rem 0.5rem;
+    color: var(--muted, #98a1a8);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    transition: color 0.15s, background-color 0.15s;
+  }
+  .lang__opt + .lang__opt {
+    border-left: 1px solid var(--line, #2a2e33);
+  }
+  .lang__opt:hover {
+    color: var(--fg, #f2f4f5);
+    background: color-mix(in srgb, currentColor 10%, transparent);
+  }
+  .lang__opt.is-current {
+    color: var(--bg, #0b0c0e);
+    background: var(--accent, #e0641a);
+  }
+  .lang__opt:focus-visible {
+    outline: 2px solid var(--accent, #e0641a);
+    outline-offset: -2px;
+  }
+</style>

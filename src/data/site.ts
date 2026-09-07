@@ -10,6 +10,17 @@
  */
 import {createClient} from '@sanity/client'
 import {site as staticSite} from './site.static'
+import {LANG, localizeHref} from '../lib/i18n'
+
+/**
+ * Translations live as sibling documents with a language suffix, so adding a
+ * language never touches the schema: `homePage` is Polish, `homePage__en` is
+ * English. Every read coalesces down to the Polish document, which means a
+ * half-translated site still builds and shows Polish where a translation is
+ * missing rather than an empty page.
+ */
+const sfx = LANG === 'pl' ? '' : `__${LANG}`
+const tr = (id: string) => (sfx ? `coalesce(*[_id == "${id}${sfx}"][0], *[_id == "${id}"][0])` : `*[_id == "${id}"][0]`)
 
 const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID ?? 'xcq6c04g'
 const dataset = import.meta.env.PUBLIC_SANITY_DATASET ?? 'hydracut'
@@ -23,19 +34,20 @@ const val = (c: Confirmable, fallback: string): string => {
 }
 
 const QUERY = `{
-  "settings": *[_id == "siteSettings"][0],
-  "home": *[_id == "homePage"][0],
-  "specs": *[_id == "productSpecs"][0],
+  "settings": ${tr('siteSettings')},
+  "home": ${tr('homePage')},
+  "specs": ${tr('productSpecs')},
   "tracking": *[_id == "tracking"][0],
   "theme": *[_id == "theme"][0],
-  "downloads": *[_type == "download"] | order(order asc) {
+  "downloads": *[_type == "download" && coalesce(language, "pl") == "${LANG}"] | order(order asc) {
     title, availability, "url": file.asset->url
   },
   "media": *[_id == "mediaSlots"][0],
+  "mediaAlt": ${sfx ? `*[_id == "mediaSlots${sfx}"][0]` : 'null'},
   "assets": *[_type == "sanity.imageAsset"]{_id, url, metadata{dimensions}},
-  "pages": *[_type == "pageContent"]{key, h1, lead, title, description},
-  "models": *[_id == "modelComparison"][0],
-  "articles": *[_type == "article" && defined(slug.current)] | order(published desc){
+  "pages": *[_type == "pageContent" && coalesce(language, "pl") == "${LANG}"]{key, h1, lead, title, description},
+  "models": ${tr('modelComparison')},
+  "articles": *[_type == "article" && defined(slug.current) && coalesce(language, "pl") == "${LANG}"] | order(published desc){
     title, "slug": slug.current, lead, seoTitle, seoDescription, published, readMin, body
   }
 }`
@@ -72,13 +84,13 @@ const keep = <T>(incoming: T | undefined | null, fallback: T): T =>
 const assetsById = new Map<string, any>((cms?.assets ?? []).map((a: any) => [a._id, a]))
 
 /** Sanity serves images from its own CDN; ask for a sensible size and format. */
-const img = (slot: any, fallback: {src: string; alt: string; w?: number; h?: number}) => {
+const img = (slot: any, fallback: {src: string; alt: string; w?: number; h?: number}, key?: string) => {
   const asset = assetsById.get(slot?.asset?._ref)
   if (!asset?.url) return fallback
   const d = asset.metadata?.dimensions
   return {
     src: `${asset.url}?w=1600&fm=webp&q=78`,
-    alt: slot.alt || fallback.alt,
+    alt: (key ? cms?.mediaAlt?.[key]?.alt : undefined) || slot.alt || fallback.alt,
     w: d?.width ?? fallback.w,
     h: d?.height ?? fallback.h,
   }
@@ -90,7 +102,24 @@ const s = cms?.settings
 const h = cms?.home
 const sp = cms?.specs
 
-export const site = {
+/**
+ * Internal links live inside the content (nav, CTAs, footer) as Polish paths.
+ * The finished object is walked once and every internal href is mapped through
+ * the route table, so a field that holds a link never has to be found by hand.
+ */
+const localizeDeep = <T>(node: T): T => {
+  if (Array.isArray(node)) return node.map(localizeDeep) as unknown as T
+  if (node && typeof node === 'object') {
+    const out: Record<string, unknown> = {}
+    for (const [k, v] of Object.entries(node as Record<string, unknown>)) {
+      out[k] = k === 'href' && typeof v === 'string' ? localizeHref(v) : localizeDeep(v)
+    }
+    return out as T
+  }
+  return node
+}
+
+const assembled = {
   ...staticSite,
 
   meta: {
@@ -269,13 +298,13 @@ export const site = {
   photos: Object.fromEntries(
     Object.entries(staticSite.photos).map(([name, fallback]: [string, any]) => [
       name,
-      {...fallback, ...img(cms?.media?.[name], fallback)},
+      {...fallback, ...img(cms?.media?.[name], fallback, name)},
     ]),
   ) as typeof staticSite.photos,
 
   media: Object.fromEntries(
     Object.entries(staticSite.media).map(([name, fallback]: [string, any]) =>
-      'video' in fallback ? [name, fallback] : [name, img(cms?.media?.[name], fallback)],
+      'video' in fallback ? [name, fallback] : [name, img(cms?.media?.[name], fallback, name)],
     ),
   ) as typeof staticSite.media,
 
@@ -317,5 +346,7 @@ export const site = {
     defaultMode: cms?.theme?.defaultMode ?? 'system',
   },
 }
+
+export const site = localizeDeep(assembled)
 
 export type Site = typeof staticSite

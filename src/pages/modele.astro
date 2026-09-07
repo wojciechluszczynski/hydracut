@@ -1,4 +1,5 @@
 ---
+import { localizeHref , ui } from '../lib/i18n';
 import Base from '../layouts/Base.astro';
 import Plane from '../components/Plane.astro';
 import PageHero from '../components/PageHero.astro';
@@ -68,7 +69,7 @@ const schema = m.items.map((item) => ({
 
       <div class="tableWrap">
         <table class="cmp">
-          <caption class="sr-only">Porównanie parametrów HydraCut HPO600 i HPO1200</caption>
+          <caption class="sr-only">{ui("modelsParams")}</caption>
           <thead>
             <tr>
               <th scope="col">Parametr</th>
@@ -100,11 +101,11 @@ const schema = m.items.map((item) => ({
       <div class="pick">
 
       <div class="pick__text">
-        <h2 class="display-l">Jak wybrać?</h2>
+        <h2 class="display-l">{ui("howChoose")}</h2>
         <ol class="pick__list">
           <li>
             <span class="mono pick__idx">01</span>
-            <p>Sprawdź największą średnicę rury, jaką realnie tniesz. To ona wyznacza model.</p>
+            <p>{ui("chooseHint")}</p>
           </li>
           <li>
             <span class="mono pick__idx">02</span>
@@ -133,9 +134,9 @@ const schema = m.items.map((item) => ({
 
   <section class="band band--tight">
     <div class="cut cta">
-      <h2 class="display-l">Nie wiesz, który model?</h2>
-      <p class="lead muted">Napisz, jakie rury tniesz. Dobierzemy model i podamy cenę.</p>
-      <a href="/kontakt/" class="btn btn--solid">Zapytaj o dobór</a>
+      <h2 class="display-l">{ui("whichModel")}</h2>
+      <p class="lead muted">{ui("whichHint")}</p>
+      <a href={localizeHref("/kontakt/")} class="btn btn--solid">{ui("askFit")}</a>
     </div>
 
     <div class="cut">

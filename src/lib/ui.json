@@ -1,0 +1,267 @@
+{
+  "privacy": {
+    "pl": "Polityka prywatności",
+    "en": "Privacy policy",
+    "de": "Datenschutzerklärung"
+  },
+  "cookiesOnly": {
+    "pl": "Tylko niezbędne",
+    "en": "Essential only",
+    "de": "Nur notwendige"
+  },
+  "cookiesOk": {
+    "pl": "Zgadzam się",
+    "en": "I agree",
+    "de": "Ich stimme zu"
+  },
+  "dgmManhole": {
+    "pl": "WŁAZ &#216; 500&#8211;900",
+    "en": "MANHOLE &#216; 500&#8211;900",
+    "de": "SCHACHT &#216; 500&#8211;900"
+  },
+  "dgmCircular": {
+    "pl": "CIĘCIE PO OBWODZIE",
+    "en": "CIRCULAR CUT",
+    "de": "RINGSCHNITT"
+  },
+  "dgmDepth100": {
+    "pl": "GŁĘB. DO 100 mm",
+    "en": "DEPTH TO 100 mm",
+    "de": "TIEFE BIS 100 mm"
+  },
+  "dgmTopView": {
+    "pl": "RZUT Z GÓRY",
+    "en": "TOP VIEW",
+    "de": "DRAUFSICHT"
+  },
+  "dgmRadius": {
+    "pl": "Promień cięcia",
+    "en": "Cutting radius",
+    "de": "Schnittradius"
+  },
+  "tagline": {
+    "pl": "Wycinarka okręgów wokół studzienek kanalizacyjnych.",
+    "en": "Circular cutter for sewer manholes.",
+    "de": "Kreisschneider für Kanalschächte."
+  },
+  "rights": {
+    "pl": ". Wszystkie prawa zastrzeżone.",
+    "en": ". All rights reserved.",
+    "de": ". Alle Rechte vorbehalten."
+  },
+  "quote": {
+    "pl": "Zapytaj o cenę",
+    "en": "Request a quote",
+    "de": "Preis anfragen"
+  },
+  "navMain": {
+    "pl": "Nawigacja główna",
+    "en": "Main navigation",
+    "de": "Hauptnavigation"
+  },
+  "honeypot": {
+    "pl": "Nie wypełniaj tego pola",
+    "en": "Do not fill in this field",
+    "de": "Dieses Feld nicht ausfüllen"
+  },
+  "home": {
+    "pl": "Strona główna",
+    "en": "Home",
+    "de": "Startseite"
+  },
+  "secCutDepth": {
+    "pl": "GŁĘBOKOŚĆ CIĘCIA",
+    "en": "CUTTING DEPTH",
+    "de": "SCHNITTTIEFE"
+  },
+  "secWearing": {
+    "pl": "WARSTWA ŚCIERALNA",
+    "en": "WEARING COURSE",
+    "de": "DECKSCHICHT"
+  },
+  "secBinder": {
+    "pl": "WARSTWA WIĄŻĄCA",
+    "en": "BINDER COURSE",
+    "de": "BINDERSCHICHT"
+  },
+  "secManhole": {
+    "pl": "WŁAZ",
+    "en": "MANHOLE",
+    "de": "SCHACHT"
+  },
+  "secRelief": {
+    "pl": "PIERŚCIEŃ ODCIĄŻAJĄCY",
+    "en": "LOAD-RELIEF RING",
+    "de": "ENTLASTUNGSRING"
+  },
+  "secCutRing": {
+    "pl": "WYCIĘTY PIERŚCIEŃ NAWIERZCHNI",
+    "en": "CUT PAVEMENT RING",
+    "de": "AUSGESCHNITTENER FAHRBAHNRING"
+  },
+  "themeToggle": {
+    "pl": "Przełącz tryb jasny i ciemny",
+    "en": "Toggle light and dark mode",
+    "de": "Hellen und dunklen Modus umschalten"
+  },
+  "unconfirmed": {
+    "pl": "Dana niepotwierdzona, do uzupełnienia",
+    "en": "Unconfirmed value, to be completed",
+    "de": "Unbestätigter Wert, wird ergänzt"
+  },
+  "videoSoon": {
+    "pl": "Film promocyjny &middot; wkrótce",
+    "en": "Promotional video &middot; coming soon",
+    "de": "Imagefilm &middot; in Kürze"
+  },
+  "skip": {
+    "pl": "Przejdź do treści",
+    "en": "Skip to content",
+    "de": "Zum Inhalt springen"
+  },
+  "call": {
+    "pl": "Zadzwoń",
+    "en": "Call",
+    "de": "Anrufen"
+  },
+  "openPdf": {
+    "pl": "Otwórz PDF",
+    "en": "Open PDF",
+    "de": "PDF öffnen"
+  },
+  "missingDoc": {
+    "pl": "Potrzebujesz dokumentu, którego tu nie ma?",
+    "en": "Need a document that is not here?",
+    "de": "Fehlt ein Dokument?"
+  },
+  "topView": {
+    "pl": "Rzut z góry",
+    "en": "Top view",
+    "de": "Draufsicht"
+  },
+  "fullDesc": {
+    "pl": "Rozwinięte opisy",
+    "en": "Full descriptions",
+    "de": "Ausführliche Beschreibungen"
+  },
+  "fullSpec": {
+    "pl": "Pełna specyfikacja",
+    "en": "Full specification",
+    "de": "Vollständige Spezifikation"
+  },
+  "sitePhotos": {
+    "pl": "Zdjęcia z budowy, przewiń w bok",
+    "en": "Site photos, scroll sideways",
+    "de": "Baustellenfotos, seitlich scrollen"
+  },
+  "safety": {
+    "pl": "Bezpieczeństwo",
+    "en": "Safety",
+    "de": "Sicherheit"
+  },
+  "backHome": {
+    "pl": "Wróć na stronę główną",
+    "en": "Back to home",
+    "de": "Zurück zur Startseite"
+  },
+  "howLongKeep": {
+    "pl": "Jak długo je trzymamy",
+    "en": "How long we keep them",
+    "de": "Wie lange wir sie speichern"
+  },
+  "policyValid": {
+    "pl": "Aktualna wersja obowiązuje od dnia publikacji na tej stronie.",
+    "en": "The current version applies from the day it is published on this page.",
+    "de": "Die aktuelle Fassung gilt ab dem Tag ihrer Veröffentlichung auf dieser Seite."
+  },
+  "missingQ": {
+    "pl": "Pytanie, którego tu nie ma?",
+    "en": "A question that is not here?",
+    "de": "Eine Frage, die hier fehlt?"
+  },
+  "writeOrCall": {
+    "pl": "Napisz albo zadzwoń. Odpowiadamy w ciągu jednego dnia roboczego.",
+    "en": "Write or call. We reply within one working day.",
+    "de": "Schreiben oder anrufen. Wir antworten innerhalb eines Werktags."
+  },
+  "guideTitle": {
+    "pl": "Poradnik: studzienki, włazy, nawierzchnia",
+    "en": "Guide: manholes, covers, pavement",
+    "de": "Ratgeber: Schächte, Abdeckungen, Fahrbahn"
+  },
+  "selection": {
+    "pl": "Dobór",
+    "en": "Selection",
+    "de": "Auswahl"
+  },
+  "yourSurface": {
+    "pl": "Twoja nawierzchnia, nasz dobór",
+    "en": "Your pavement, our selection",
+    "de": "Ihre Fahrbahn, unsere Auswahl"
+  },
+  "pipeSection": {
+    "pl": "PRZEKRÓJ RURY",
+    "en": "PIPE CROSS-SECTION",
+    "de": "ROHRQUERSCHNITT"
+  },
+  "pipeDia": {
+    "pl": "Średnica rury",
+    "en": "Pipe diameter",
+    "de": "Rohrdurchmesser"
+  },
+  "bothModels": {
+    "pl": "Obejmują ją oba modele",
+    "en": "Covered by both models",
+    "de": "Von beiden Modellen abgedeckt"
+  },
+  "pipeDiaAria": {
+    "pl": "Średnica ciętej rury w milimetrach",
+    "en": "Diameter of the cut pipe in millimetres",
+    "de": "Durchmesser des geschnittenen Rohrs in Millimetern"
+  },
+  "taglineHd": {
+    "pl": "Obwodowa piła hydrauliczna do cięcia rur w wykopie.",
+    "en": "Hydraulic circumferential saw for cutting pipes in the trench.",
+    "de": "Hydraulische Umfangssäge zum Schneiden von Rohren im Graben."
+  },
+  "formHint": {
+    "pl": "Materiał rury, średnica, warunki w wykopie, termin.",
+    "en": "Pipe material, diameter, trench conditions, timing.",
+    "de": "Rohrmaterial, Durchmesser, Grabenbedingungen, Termin."
+  },
+  "modelsCmp": {
+    "pl": "Porównanie modeli HydraCut HPO600 i HPO1200",
+    "en": "Comparison of the HydraCut HPO600 and HPO1200",
+    "de": "Vergleich der Modelle HydraCut HPO600 und HPO1200"
+  },
+  "modelsParams": {
+    "pl": "Porównanie parametrów HydraCut HPO600 i HPO1200",
+    "en": "Specifications of the HydraCut HPO600 and HPO1200 compared",
+    "de": "Parametervergleich HydraCut HPO600 und HPO1200"
+  },
+  "howChoose": {
+    "pl": "Jak wybrać?",
+    "en": "How to choose?",
+    "de": "Wie wählen?"
+  },
+  "chooseHint": {
+    "pl": "Sprawdź największą średnicę rury, jaką realnie tniesz. To ona wyznacza model.",
+    "en": "Check the largest pipe diameter you actually cut. That is what decides the model.",
+    "de": "Prüfen Sie den größten Rohrdurchmesser, den Sie tatsächlich schneiden. Er bestimmt das Modell."
+  },
+  "whichModel": {
+    "pl": "Nie wiesz, który model?",
+    "en": "Not sure which model?",
+    "de": "Unsicher, welches Modell?"
+  },
+  "whichHint": {
+    "pl": "Napisz, jakie rury tniesz. Dobierzemy model i podamy cenę.",
+    "en": "Tell us what pipes you cut. We will match the model and quote a price.",
+    "de": "Sagen Sie uns, welche Rohre Sie schneiden. Wir wählen das Modell und nennen den Preis."
+  },
+  "askFit": {
+    "pl": "Zapytaj o dobór",
+    "en": "Ask for a recommendation",
+    "de": "Beratung anfragen"
+  }
+}

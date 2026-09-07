@@ -1,5 +1,7 @@
 ---
+import { localizeHref , ui } from '../lib/i18n';
 import { site } from '../data/site';
+import LangSwitch from './LangSwitch.astro';
 import { plain } from '../lib/val';
 import ThemeToggle from './ThemeToggle.astro';
 
@@ -10,11 +12,11 @@ const phoneHref = plain(site.contact.phoneHref);
 
 <header class="hdr">
   <div class="shell hdr__inner">
-    <a href="/" class="wordmark" aria-label={`${site.meta.brand}, strona główna`}>
+    <a href={localizeHref("/")} class="wordmark" aria-label={`${site.meta.brand}, strona główna`}>
       <span class="wordmark__logo" aria-hidden="true"></span>
     </a>
 
-    <nav class="hdr__nav" aria-label="Nawigacja główna">
+    <nav class="hdr__nav" aria-label={ui("navMain")}>
       {
         site.nav.map((item) => (
           <a
@@ -30,7 +32,8 @@ const phoneHref = plain(site.contact.phoneHref);
     <div class="hdr__aside">
       <a href={`tel:${phoneHref}`} class="hdr__phone mono">{phone}</a>
       <ThemeToggle />
-      <a href="/kontakt/" class="btn btn--solid hdr__cta">Zapytaj o cenę</a>
+      <LangSwitch />
+      <a href={localizeHref("/kontakt/")} class="btn btn--solid hdr__cta">{ui("quote")}</a>
       <button class="hdr__burger" type="button" aria-expanded="false" aria-controls="menu-mobilne">
         <span class="sr-only">Menu</span>
         <span aria-hidden="true"></span>

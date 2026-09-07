@@ -1,4 +1,5 @@
 ---
+import { localizeHref , ui } from '../lib/i18n';
 import Base from '../layouts/Base.astro';
 import Plane from '../components/Plane.astro';
 import CutDiagram from '../components/CutDiagram.astro';
@@ -235,7 +236,7 @@ const schema = [
         </div>
       </div>
 
-      <div class="shots" role="group" aria-label="Zdjęcia z budowy, przewiń w bok">
+      <div class="shots" role="group" aria-label={ui("sitePhotos")}>
         <PhotoSlot {...site.photos.work} />
         <PhotoSlot {...site.photos.handover} />
         <PhotoSlot {...site.photos.site} />
@@ -283,7 +284,7 @@ const schema = [
 
       <div class="md__tableWrap">
         <table class="md__table">
-          <caption class="sr-only">Porównanie modeli HydraCut HPO600 i HPO1200</caption>
+          <caption class="sr-only">{ui("modelsCmp")}</caption>
           <thead>
             <tr>
               <th scope="col">Parametr</th>
@@ -315,7 +316,7 @@ const schema = [
       <Plane mark="F" label={site.uses.eyebrow} />
       <div class="uses__head">
         <h2 class="display-l">{site.uses.h2}</h2>
-        <a href="/zastosowania/" class="link-amber">Rozwinięte opisy</a>
+        <a href={localizeHref("/zastosowania/")} class="link-amber">{ui("fullDesc")}</a>
       </div>
 
       <div class="uses__layout">
@@ -369,7 +370,7 @@ const schema = [
             Dane katalogowe maszyny w konfiguracji standardowej. Pozycje z podkreśleniem czekają na
             potwierdzenie w dokumentacji technicznej.
           </p>
-          <a href="/dane-techniczne/" class="link-amber">Pełna specyfikacja</a>
+          <a href={localizeHref("/dane-techniczne/")} class="link-amber">{ui("fullSpec")}</a>
         </div>
         <div class="specs__table">
           <SpecTable caption={site.specs.caption} rows={site.specs.rows} />
@@ -419,7 +420,7 @@ const schema = [
       <div class="faq__layout">
         <div>
           <h2 class="display-l">{site.faq.h2}</h2>
-          <a href="/faq/" class="link-amber faq__more">Wszystkie pytania</a>
+          <a href={localizeHref("/faq/")} class="link-amber faq__more">Wszystkie pytania</a>
         </div>
         <Faq items={homeFaq} />
       </div>

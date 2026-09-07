@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import Tracking from '../components/Tracking.astro';
 import ConsentBanner from '../components/ConsentBanner.astro';
 import { site } from '../data/site';
+import { LANG, LOCALES, BCP47, OG_LOCALE, localizeHref, ui } from '../lib/i18n';
 import { plain } from '../lib/val';
 // Hashed URLs of the two font files the first paint actually needs.
 import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
@@ -31,7 +32,12 @@ const {
   noindex = false,
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, site.meta.url).href;
+const localPath = localizeHref(Astro.url.pathname);
+const canonical = new URL(localPath, site.meta.url).href;
+const hreflang = LOCALES.map((lang) => ({
+  lang,
+  href: new URL(localizeHref(Astro.url.pathname, lang), site.meta.url).href,
+}));
 const fullTitle = title === site.meta.title ? title : `${title} | ${site.meta.brand}`;
 
 const organization = {
@@ -54,7 +60,7 @@ const website = {
   '@id': `${site.meta.url}/#witryna`,
   url: site.meta.url,
   name: site.meta.brand,
-  inLanguage: 'pl-PL',
+  inLanguage: BCP47[LANG],
   publisher: { '@id': `${site.meta.url}/#organizacja` },
 };
 
@@ -67,7 +73,7 @@ const breadcrumbs =
             '@type': 'ListItem',
             position: i + 1,
             name: c.label,
-            item: new URL(c.href, site.meta.url).href,
+            item: new URL(localizeHref(c.href), site.meta.url).href,
           })),
         },
       ]
@@ -80,13 +86,15 @@ const graph = {
 ---
 
 <!doctype html>
-<html lang="pl">
+<html lang={LANG}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {hreflang.map((a) => <link rel="alternate" hreflang={BCP47[a.lang]} href={a.href} />)}
+    <link rel="alternate" hreflang="x-default" href={hreflang[0].href} />
     <meta
       name="robots"
       content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1'}
@@ -110,7 +118,8 @@ const graph = {
     </script>
 
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:locale" content={OG_LOCALE[LANG]} />
+    {LOCALES.filter((l) => l !== LANG).map((l) => <meta property="og:locale:alternate" content={OG_LOCALE[l]} />)}
     <meta property="og:site_name" content={site.meta.brand} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
@@ -126,7 +135,7 @@ const graph = {
         geometryczny wycofany razem z resztą systemu. */}
     <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="sitemap" href="/sitemap.xml" />
 
     <script type="application/ld+json" is:inline set:html={JSON.stringify(graph)} />
     <slot name="head" />
@@ -134,7 +143,7 @@ const graph = {
   </head>
 
   <body>
-    <a href="#tresc" class="skip">Przejdź do treści</a>
+    <a href="#tresc" class="skip">{ui("skip")}</a>
     <Header />
     <main id="tresc">
       <slot />
@@ -142,8 +151,8 @@ const graph = {
     <Footer />
 
     <div class="sticky-cta">
-      <a href={`tel:${plain(site.contact.phoneHref)}`} class="sticky-cta__phone mono">Zadzwoń</a>
-      <a href="/kontakt/" class="sticky-cta__ask mono">Zapytaj o cenę</a>
+      <a href={`tel:${plain(site.contact.phoneHref)}`} class="sticky-cta__phone mono">{ui("call")}</a>
+      <a href={localizeHref("/kontakt/")} class="sticky-cta__ask mono">{ui("quote")}</a>
     </div>
 
     <style is:global>

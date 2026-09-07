@@ -1,4 +1,5 @@
 ---
+import { ui } from '../lib/i18n';
 import { splitTbd } from '../lib/val';
 
 interface Props {
@@ -12,7 +13,7 @@ const { text: value, tbd } = splitTbd(text);
 
 {
   tbd ? (
-    <span class:list={['tbd', cls]} title="Dana niepotwierdzona, do uzupełnienia">
+    <span class:list={['tbd', cls]} title={ui("unconfirmed")}>
       {value}
     </span>
   ) : (

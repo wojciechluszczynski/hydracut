@@ -1,4 +1,5 @@
 ---
+import { localizeHref , ui } from '../lib/i18n';
 import { site } from '../data/site';
 import { plain } from '../lib/val';
 import Val from './Val.astro';
@@ -15,7 +16,7 @@ const email = plain(site.contact.email);
         <p class="wordmark" role="img" aria-label={site.meta.brand}>
           <span class="wordmark__logo" aria-hidden="true"></span>
         </p>
-        <p class="ftr__claim">Obwodowa piła hydrauliczna do cięcia rur w wykopie.</p>
+        <p class="ftr__claim">{ui("taglineHd")}</p>
 
         <a href="https://fijalo.pl/" class="ftr__maker" rel="noopener">
           <span class="label">Producent</span>
@@ -33,7 +34,7 @@ const email = plain(site.contact.email);
       <nav class="ftr__nav" aria-label="Nawigacja w stopce">
         <p class="label">Strona</p>
         {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
-        <a href="/do-pobrania/">Do pobrania</a>
+        <a href={localizeHref("/do-pobrania/")}>Do pobrania</a>
       </nav>
 
       <div class="ftr__contact">
@@ -54,8 +55,8 @@ const email = plain(site.contact.email);
     </div>
 
     <div class="ftr__bottom">
-      <p class="mono">© {year} <Val text={site.contact.company} />. Wszystkie prawa zastrzeżone.</p>
-      <a href="/polityka-prywatnosci/" class="mono">Polityka prywatności</a>
+      <p class="mono">© {year} <Val text={site.contact.company} />{ui("rights")}</p>
+      <a href={localizeHref("/polityka-prywatnosci/")} class="mono">{ui("privacy")}</a>
     </div>
   </div>
 </footer>

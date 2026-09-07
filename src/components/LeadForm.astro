@@ -1,4 +1,5 @@
 ---
+import { ui } from '../lib/i18n';
 import { site } from '../data/site';
 import { plain } from '../lib/val';
 
@@ -37,7 +38,7 @@ const f = site.form;
 
   <label class="fld">
     <span class="label">{f.fields.message}</span>
-    <textarea name="wiadomosc" rows="4" placeholder="Materiał rury, średnica, warunki w wykopie, termin."></textarea>
+    <textarea name="wiadomosc" rows="4" placeholder={ui("formHint")}></textarea>
   </label>
 
   <label class="consent">
@@ -47,7 +48,7 @@ const f = site.form;
 
   {/* honeypot + time trap, both invisible to people */}
   <div class="trap" aria-hidden="true">
-    <label>Nie wypełniaj tego pola<input type="text" name="firma_www" tabindex="-1" autocomplete="off" /></label>
+    <label>{ui("honeypot")}<input type="text" name="firma_www" tabindex="-1" autocomplete="off" /></label>
   </div>
   <input type="hidden" name="t" id="lead-t" value="0" />
 

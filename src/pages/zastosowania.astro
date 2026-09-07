@@ -9,7 +9,10 @@ import { site } from '../data/site';
 
 const p = site.pages.uses;
 const crumbs = [{ label: 'Zastosowania', href: '/zastosowania/' }];
-const photos = [site.photos.hero, site.photos.edge, site.photos.ring];
+// Nie ring: w CMS-ie 'ring' i 'yard' wskazuja ten sam plik, a 'yard' stoi juz
+// w naglowku tej podstrony. Handover pokazuje zakladanie lancucha, co pasuje
+// do sekcji o sytuacjach na budowie.
+const photos = [site.photos.hero, site.photos.edge, site.photos.handover];
 ---
 
 <Base title={p.title} description={p.description} crumbs={crumbs}>

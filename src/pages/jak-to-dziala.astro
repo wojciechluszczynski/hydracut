@@ -67,7 +67,10 @@ const schema = [
       <div>
         <Plane mark="B" label={tx("Bezpieczeństwo")} />
         <h2 class="display-l">{p.safety.h2}</h2>
-        <PhotoSlot {...site.photos.edge} class="safety__photo" />
+        {/* Nie edge: w CMS-ie 'edge' i 'machine' wskazuja ten sam plik, a
+            'machine' stoi juz w naglowku tej podstrony. Operator w kasku
+            pasuje zreszta do sekcji o bezpieczenstwie lepiej niz krawedz. */}
+        <PhotoSlot {...site.photos.work} class="safety__photo" />
       </div>
       <ul class="safety__list">
         {

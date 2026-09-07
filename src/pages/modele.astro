@@ -109,20 +109,18 @@ const schema = m.items.map((item) => ({
           </li>
           <li>
             <span class="mono pick__idx">02</span>
-            <p>Do 603 mm wystarczy HPO600. Powyżej potrzebny jest HPO1200, który schodzi do 1200 mm.</p>
+            <p>{ui("modelPick")}</p>
           </li>
           <li>
             <span class="mono pick__idx">03</span>
             <p>
-              Zakresy zachodzą na siebie tylko między 600 a 603 mm. Poza tym przedziałem średnica
-              wskazuje jeden model. Tarcza jest ta sama w obu.
+              {ui("modelOverlap")}
             </p>
           </li>
           <li>
             <span class="mono pick__idx">04</span>
             <p>
-              Sprawdź agregat. Potrzeba 23 do 26 l/min przy 140 do 160 bar i źródła trzyliniowego,
-              czyli osobnego przyłącza pod linię przecieku.
+              {ui("modelPack")}
             </p>
           </li>
         </ol>

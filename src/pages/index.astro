@@ -78,8 +78,8 @@ const schema = [
         </h1>
         <p class="lead muted hero__lead">{site.hero.lead}</p>
         <div class="hero__cta">
-          <a href={site.hero.ctaPrimary.href} class="btn btn--solid">{site.hero.ctaPrimary.label}</a>
-          <a href={site.hero.ctaSecondary.href} class="link-amber">{site.hero.ctaSecondary.label}</a>
+          <a href={site.hero.ctaPrimary.href} class="btn btn--solid">{ui("quote")}</a>
+          <a href={site.hero.ctaSecondary.href} class="link-amber">{ui("ctaSpecs")}</a>
         </div>
       </div>
 
@@ -136,7 +136,7 @@ const schema = [
       <figure class="why__shot reveal">
         <PhotoSlot {...site.photos.edge} />
         <figcaption class="mono why__cap">
-          Łańcuch prowadzący założony na rurze. To on trzyma tarczę w jednej płaszczyźnie.
+          {ui("chainCaption")}
         </figcaption>
       </figure>
 
@@ -367,8 +367,7 @@ const schema = [
         <div class="specs__left">
           <h2 class="display-l">{site.specs.h2}</h2>
           <p class="muted specs__note">
-            Dane katalogowe maszyny w konfiguracji standardowej. Pozycje z podkreśleniem czekają na
-            potwierdzenie w dokumentacji technicznej.
+            {ui("specsNote")}
           </p>
           <a href={localizeHref("/dane-techniczne/")} class="link-amber">{ui("fullSpec")}</a>
         </div>

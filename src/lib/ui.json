@@ -263,5 +263,90 @@
     "pl": "Zapytaj o dobór",
     "en": "Ask for a recommendation",
     "de": "Beratung anfragen"
+  },
+  "consentBody": {
+    "pl": "Używamy statystyk i narzędzi reklamowych, żeby wiedzieć, które treści są przydatne. Bez zgody nie ładujemy żadnych skryptów zewnętrznych.",
+    "en": "We use analytics and advertising tools to see which content is useful. Without consent we load no external scripts.",
+    "de": "Wir nutzen Statistik- und Werbewerkzeuge, um zu sehen, welche Inhalte nützlich sind. Ohne Einwilligung laden wir keine externen Skripte."
+  },
+  "specsCta": {
+    "pl": "Potrzebujesz karty produktu w PDF albo doboru tarczy pod konkretną nawierzchnię?",
+    "en": "Need the data sheet as a PDF, or the right blade for a particular material?",
+    "de": "Brauchen Sie das Datenblatt als PDF oder die passende Trennscheibe für ein bestimmtes Material?"
+  },
+  "faqCta": {
+    "pl": "Zadzwoń albo wyślij zapytanie. Odpowiadamy w ciągu jednego dnia roboczego.",
+    "en": "Call or send an enquiry. We reply within one working day.",
+    "de": "Rufen Sie an oder schicken Sie eine Anfrage. Wir antworten innerhalb eines Werktags."
+  },
+  "chainCaption": {
+    "pl": "Łańcuch prowadzący założony na rurze. To on trzyma tarczę w jednej płaszczyźnie.",
+    "en": "The guide chain laid on the pipe. It is what holds the blade in one plane.",
+    "de": "Die Führungskette am Rohr. Sie hält die Trennscheibe in einer Ebene."
+  },
+  "specsNote": {
+    "pl": "Dane katalogowe maszyny w konfiguracji standardowej. Pozycje z podkreśleniem czekają na potwierdzenie w dokumentacji technicznej.",
+    "en": "Catalogue data for the machine in its standard configuration. Underlined entries await confirmation in the technical documentation.",
+    "de": "Katalogdaten der Maschine in Standardkonfiguration. Unterstrichene Angaben stehen noch unter Vorbehalt der technischen Dokumentation."
+  },
+  "modelPick": {
+    "pl": "Do 603 mm wystarczy HPO600. Powyżej potrzebny jest HPO1200, który schodzi do 1200 mm.",
+    "en": "Up to 603 mm the HPO600 is enough. Above that you need the HPO1200, which goes to 1200 mm.",
+    "de": "Bis 603 mm genügt die HPO600. Darüber brauchen Sie die HPO1200, die bis 1200 mm reicht."
+  },
+  "modelOverlap": {
+    "pl": "Zakresy zachodzą na siebie tylko między 600 a 603 mm. Poza tym przedziałem średnica wskazuje jeden model. Tarcza jest ta sama w obu.",
+    "en": "The ranges overlap only between 600 and 603 mm. Outside that band the diameter points to one model. The blade is the same in both.",
+    "de": "Die Bereiche überschneiden sich nur zwischen 600 und 603 mm. Außerhalb davon weist der Durchmesser auf ein Modell. Die Trennscheibe ist bei beiden gleich."
+  },
+  "modelPack": {
+    "pl": "Sprawdź agregat. Potrzeba 23 do 26 l/min przy 140 do 160 bar i źródła trzyliniowego, czyli osobnego przyłącza pod linię przecieku.",
+    "en": "Check the power pack. You need 23 to 26 l/min at 140 to 160 bar and a three-line source, that is a separate connection for the leakage line.",
+    "de": "Prüfen Sie das Aggregat. Nötig sind 23 bis 26 l/min bei 140 bis 160 bar und eine Dreileiterquelle, also ein eigener Anschluss für die Leckleitung."
+  },
+  "usesCta": {
+    "pl": "Napisz, w czym tniesz i na jakich średnicach pracujesz. Odpowiemy ceną i doborem tarczy.",
+    "en": "Tell us what you cut and what diameters you work with. You get a price and the right blade.",
+    "de": "Schreiben Sie uns, worin Sie schneiden und mit welchen Durchmessern. Sie bekommen Preis und passende Trennscheibe."
+  },
+  "privData": {
+    "pl": "Wyłącznie te, które sam podajesz w formularzu: imię i nazwisko, nazwę firmy, numer telefonu, adres e-mail, wybrany zakres średnic rur i treść wiadomości. Zapisujemy też adres IP oraz datę wysłania, żeby ograniczyć spam.",
+    "en": "Only what you enter in the form yourself: name, company, phone number, e-mail address, the pipe diameter range you select and the message. We also record the IP address and the time of sending, to limit spam.",
+    "de": "Ausschließlich das, was Sie selbst im Formular angeben: Vor- und Nachname, Firma, Telefonnummer, E-Mail-Adresse, den gewählten Rohrdurchmesserbereich und den Nachrichtentext. Zusätzlich speichern wir IP-Adresse und Sendezeitpunkt, um Spam zu begrenzen."
+  },
+  "privWhy": {
+    "pl": "Żeby odpowiedzieć na zapytanie i przedstawić ofertę. Podstawą prawną jest art. 6 ust. 1 lit. b RODO (działania przed zawarciem umowy) oraz art. 6 ust. 1 lit. f RODO (prawnie uzasadniony interes w postaci obsługi korespondencji i ochrony przed nadużyciami).",
+    "en": "To answer the enquiry and make an offer. The legal basis is Article 6(1)(b) GDPR (steps prior to entering into a contract) and Article 6(1)(f) GDPR (legitimate interest in handling correspondence and preventing abuse).",
+    "de": "Um die Anfrage zu beantworten und ein Angebot zu machen. Rechtsgrundlage sind Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) und Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bearbeitung von Korrespondenz und am Schutz vor Missbrauch)."
+  },
+  "privKeep1": {
+    "pl": "Korespondencję handlową przechowujemy przez okres niezbędny do obsługi zapytania, a następnie",
+    "en": "We keep commercial correspondence for as long as handling the enquiry requires, and then for",
+    "de": "Geschäftskorrespondenz bewahren wir so lange auf, wie die Bearbeitung der Anfrage es erfordert, danach für"
+  },
+  "privKeep2": {
+    "pl": "na potrzeby ewentualnych roszczeń. Dane z formularza nie trafiają do systemu marketing automation ani na listę mailingową.",
+    "en": "for the purposes of any claims. Form data does not go into a marketing automation system or onto a mailing list.",
+    "de": "für etwaige Ansprüche. Formulardaten gelangen weder in ein Marketing-Automation-System noch auf eine Verteilerliste."
+  },
+  "privShare": {
+    "pl": "Dostawcy hostingu, na którym działa serwis i skrzynka pocztowa. Nie sprzedajemy danych i nie przekazujemy ich poza Europejski Obszar Gospodarczy.",
+    "en": "The hosting providers running the site and the mailbox. We do not sell data and do not transfer it outside the European Economic Area.",
+    "de": "Die Hosting-Anbieter, auf denen die Website und das Postfach laufen. Wir verkaufen keine Daten und übermitteln sie nicht außerhalb des Europäischen Wirtschaftsraums."
+  },
+  "privRights": {
+    "pl": "Masz prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia oraz wniesienia sprzeciwu. Możesz też złożyć skargę do Prezesa Urzędu Ochrony Danych Osobowych. Żeby skorzystać z tych praw, napisz na adres podany wyżej.",
+    "en": "You have the right to access your data, to rectify, erase, restrict processing, port it and to object. You may also lodge a complaint with the Polish data protection authority (Prezes Urzędu Ochrony Danych Osobowych). To exercise these rights, write to the address above.",
+    "de": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Sie können sich außerdem bei der polnischen Datenschutzbehörde (Prezes Urzędu Ochrony Danych Osobowych) beschweren. Zur Ausübung dieser Rechte schreiben Sie an die oben genannte Adresse."
+  },
+  "privCookies": {
+    "pl": "Serwis nie używa plików cookie do śledzenia i nie osadza skryptów reklamowych. Film promocyjny ładuje się dopiero po kliknięciu w podgląd, więc do tego momentu przeglądarka nie łączy się z serwerami YouTube.",
+    "en": "The site uses no tracking cookies and embeds no advertising scripts. The promotional video loads only after you click the preview, so until then the browser does not connect to YouTube servers.",
+    "de": "Die Website verwendet keine Tracking-Cookies und bindet keine Werbeskripte ein. Das Imagevideo lädt erst nach Klick auf die Vorschau, bis dahin verbindet sich der Browser nicht mit YouTube-Servern."
+  },
+  "ctaSpecs": {
+    "pl": "Dane techniczne",
+    "en": "Specifications",
+    "de": "Technische Daten"
   }
 }

@@ -17,8 +17,7 @@ const needed = Boolean(t.gtmId || t.ga4Id || t.googleAdsId || t.metaPixelId);
   <div class="consent" id="consent" hidden>
     <div class="consent__inner">
       <p class="consent__text">
-        Używamy statystyk i narzędzi reklamowych, żeby wiedzieć, które treści są przydatne.
-        Bez zgody nie ładujemy żadnych skryptów zewnętrznych.
+        {ui("consentBody")}
         <a href={localizeHref("/polityka-prywatnosci/")}>{ui("privacy")}</a>
       </p>
       <div class="consent__actions">

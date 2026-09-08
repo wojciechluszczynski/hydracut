@@ -20,7 +20,7 @@ header('Cache-Control: no-store');
 
 const REPO      = 'wojciechluszczynski/hydracut';
 const GALAZ     = 'live';
-const CHRONIONE = ['_wdrozenie.php', '_wdrozenie-klucz.php', '.wdrozenie-tmp', '.wdrozenie.lock', '.wdrozenie-proby.json', '.wdrozenie-stan.json'];
+const CHRONIONE = ['_wdrozenie.php', '_wdrozenie-klucz.php', '_wdrozenie-github.php', '.wdrozenie-tmp', '.wdrozenie.lock', '.wdrozenie-proby.json', '.wdrozenie-stan.json'];
 const PROBY_LIMIT = 10;      // nieudanych prob na adres
 const PROBY_OKNO  = 3600;    // w tylu sekundach
 const MIN_PLIKOW = 40;
@@ -74,6 +74,16 @@ if (!$zCrona && ($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     koniec(405, 'error', 'Nieobslugiwana metoda.');
 }
 $plikKlucza = $root . '/_wdrozenie-klucz.php';
+
+// Repozytorium jest prywatne, wiec GitHub nie odda ani sha, ani paczki bez
+// tokenu. Token trzymamy w osobnym pliku obok klucza endpointu: to dwa rozne
+// sekrety o dwoch rolach i nie ma powodu ich mieszac. Gdy pliku nie ma,
+// odbiornik dziala jak dotad, czyli anonimowo, co wystarcza dla repo
+// publicznego.
+$plikTokenu = $root . '/_wdrozenie-github.php';
+$tokenGH = is_readable($plikTokenu) ? trim((string) (require $plikTokenu)) : '';
+$naglowkiGH = ['User-Agent: wdrozenie'];
+if ($tokenGH !== '') { $naglowkiGH[] = 'Authorization: Bearer ' . $tokenGH; }
 if ($zCrona) { goto poAutoryzacji; }
 if (!is_readable($plikKlucza)) {
     koniec(500, 'error', 'Brak pliku z kluczem.');
@@ -124,7 +134,7 @@ curl_setopt_array($chSha, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_TIMEOUT        => 20,
     CURLOPT_USERAGENT      => 'wdrozenie',
-    CURLOPT_HTTPHEADER     => ['Accept: application/vnd.github.sha'],
+    CURLOPT_HTTPHEADER     => array_merge($naglowkiGH, ['Accept: application/vnd.github.sha']),
 ]);
 $odpSha = curl_exec($chSha);
 if ((int) curl_getinfo($chSha, CURLINFO_HTTP_CODE) === 200 && is_string($odpSha)) {
@@ -141,7 +151,12 @@ if (!$lock || !flock($lock, LOCK_EX | LOCK_NB)) {
 }
 
 // ---- pobranie paczki ----
-$url = sprintf('https://codeload.github.com/%s/zip/refs/heads/%s', REPO, GALAZ);
+// codeload nie przyjmuje naglowka Authorization, wiec przy prywatnym repo
+// paczke bierzemy z api.github.com/zipball, ktore token akceptuje i przekierowuje
+// na podpisany adres.
+$url = $tokenGH !== ''
+    ? sprintf('https://api.github.com/repos/%s/zipball/%s', REPO, GALAZ)
+    : sprintf('https://codeload.github.com/%s/zip/refs/heads/%s', REPO, GALAZ);
 $tmpZip = $root . '/.wdrozenie-paczka.zip';
 $ch = curl_init($url);
 $fh = fopen($tmpZip, 'w');
@@ -150,6 +165,7 @@ curl_setopt_array($ch, [
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_TIMEOUT        => 120,
     CURLOPT_FAILONERROR    => true,
+    CURLOPT_HTTPHEADER     => $naglowkiGH,
 ]);
 $ok  = curl_exec($ch);
 $kod = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);

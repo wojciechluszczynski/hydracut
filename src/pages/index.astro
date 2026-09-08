@@ -1,4 +1,5 @@
 ---
+import { localizeHref , ui , tx } from '../lib/i18n';
 import Base from '../layouts/Base.astro';
 import Plane from '../components/Plane.astro';
 import CutDiagram from '../components/CutDiagram.astro';
@@ -77,8 +78,8 @@ const schema = [
         </h1>
         <p class="lead muted hero__lead">{site.hero.lead}</p>
         <div class="hero__cta">
-          <a href={site.hero.ctaPrimary.href} class="btn btn--solid">{site.hero.ctaPrimary.label}</a>
-          <a href={site.hero.ctaSecondary.href} class="link-amber">{site.hero.ctaSecondary.label}</a>
+          <a href={site.hero.ctaPrimary.href} class="btn btn--solid">{ui("quote")}</a>
+          <a href={site.hero.ctaSecondary.href} class="link-amber">{ui("ctaSpecs")}</a>
         </div>
       </div>
 
@@ -135,7 +136,7 @@ const schema = [
       <figure class="why__shot reveal">
         <PhotoSlot {...site.photos.edge} />
         <figcaption class="mono why__cap">
-          Łańcuch prowadzący założony na rurze. To on trzyma tarczę w jednej płaszczyźnie.
+          {ui("chainCaption")}
         </figcaption>
       </figure>
 
@@ -196,8 +197,8 @@ const schema = [
   <TextureBand
     video={site.media.loop.video}
     poster={site.media.loop.poster}
-    quote="Dzięki hydraulicznemu źródłu zasilania piła może być używana w mokrych warunkach bez uszkodzenia."
-    source="Instrukcja obsługi HPO1200, FIJALO-POLAND"
+    quote={tx("Dzięki hydraulicznemu źródłu zasilania piła może być używana w mokrych warunkach bez uszkodzenia.")}
+    source={tx("Instrukcja obsługi HPO1200, FIJALO-POLAND")}
   />
 
   {/* ------------------------------------------------ 05 PEOPLE */}
@@ -235,7 +236,7 @@ const schema = [
         </div>
       </div>
 
-      <div class="shots" role="group" aria-label="Zdjęcia z budowy, przewiń w bok">
+      <div class="shots" role="group" aria-label={ui("sitePhotos")}>
         <PhotoSlot {...site.photos.work} />
         <PhotoSlot {...site.photos.handover} />
         <PhotoSlot {...site.photos.site} />
@@ -283,7 +284,7 @@ const schema = [
 
       <div class="md__tableWrap">
         <table class="md__table">
-          <caption class="sr-only">Porównanie modeli HydraCut HPO600 i HPO1200</caption>
+          <caption class="sr-only">{ui("modelsCmp")}</caption>
           <thead>
             <tr>
               <th scope="col">Parametr</th>
@@ -315,7 +316,7 @@ const schema = [
       <Plane mark="F" label={site.uses.eyebrow} />
       <div class="uses__head">
         <h2 class="display-l">{site.uses.h2}</h2>
-        <a href="/zastosowania/" class="link-amber">Rozwinięte opisy</a>
+        <a href={localizeHref("/zastosowania/")} class="link-amber">{ui("fullDesc")}</a>
       </div>
 
       <div class="uses__layout">
@@ -330,7 +331,9 @@ const schema = [
             ))
           }
         </div>
-        <PhotoSlot {...site.photos.hero} class="uses__photo" />
+        {/* Nie hero: ten sam plik stoi juz w naglowku strony, a powtorzone
+            zdjecie w sekcji nizej czyta sie jak brak zdjecia. */}
+        <PhotoSlot {...site.photos.ring} class="uses__photo" />
       </div>
     </div>
   </section>
@@ -366,10 +369,9 @@ const schema = [
         <div class="specs__left">
           <h2 class="display-l">{site.specs.h2}</h2>
           <p class="muted specs__note">
-            Dane katalogowe maszyny w konfiguracji standardowej. Pozycje z podkreśleniem czekają na
-            potwierdzenie w dokumentacji technicznej.
+            {ui("specsNote")}
           </p>
-          <a href="/dane-techniczne/" class="link-amber">Pełna specyfikacja</a>
+          <a href={localizeHref("/dane-techniczne/")} class="link-amber">{ui("fullSpec")}</a>
         </div>
         <div class="specs__table">
           <SpecTable caption={site.specs.caption} rows={site.specs.rows} />
@@ -419,7 +421,7 @@ const schema = [
       <div class="faq__layout">
         <div>
           <h2 class="display-l">{site.faq.h2}</h2>
-          <a href="/faq/" class="link-amber faq__more">Wszystkie pytania</a>
+          <a href={localizeHref("/faq/")} class="link-amber faq__more">Wszystkie pytania</a>
         </div>
         <Faq items={homeFaq} />
       </div>

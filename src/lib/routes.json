@@ -1,0 +1,52 @@
+{
+  "home": {
+    "pl": "/",
+    "en": "/",
+    "de": "/"
+  },
+  "specs": {
+    "pl": "/dane-techniczne/",
+    "en": "/specifications/",
+    "de": "/technische-daten/"
+  },
+  "models": {
+    "pl": "/modele/",
+    "en": "/models/",
+    "de": "/modelle/"
+  },
+  "how": {
+    "pl": "/jak-to-dziala/",
+    "en": "/how-it-works/",
+    "de": "/funktionsweise/"
+  },
+  "uses": {
+    "pl": "/zastosowania/",
+    "en": "/applications/",
+    "de": "/anwendungen/"
+  },
+  "faq": {
+    "pl": "/faq/",
+    "en": "/faq/",
+    "de": "/faq/"
+  },
+  "files": {
+    "pl": "/do-pobrania/",
+    "en": "/downloads/",
+    "de": "/downloads/"
+  },
+  "contact": {
+    "pl": "/kontakt/",
+    "en": "/contact/",
+    "de": "/kontakt/"
+  },
+  "thanks": {
+    "pl": "/kontakt/dziekujemy/",
+    "en": "/contact/thank-you/",
+    "de": "/kontakt/danke/"
+  },
+  "privacy": {
+    "pl": "/polityka-prywatnosci/",
+    "en": "/privacy-policy/",
+    "de": "/datenschutz/"
+  }
+}

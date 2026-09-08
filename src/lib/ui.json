@@ -1,0 +1,352 @@
+{
+  "privacy": {
+    "pl": "Polityka prywatności",
+    "en": "Privacy policy",
+    "de": "Datenschutzerklärung"
+  },
+  "cookiesOnly": {
+    "pl": "Tylko niezbędne",
+    "en": "Essential only",
+    "de": "Nur notwendige"
+  },
+  "cookiesOk": {
+    "pl": "Zgadzam się",
+    "en": "I agree",
+    "de": "Ich stimme zu"
+  },
+  "dgmManhole": {
+    "pl": "WŁAZ &#216; 500&#8211;900",
+    "en": "MANHOLE &#216; 500&#8211;900",
+    "de": "SCHACHT &#216; 500&#8211;900"
+  },
+  "dgmCircular": {
+    "pl": "CIĘCIE PO OBWODZIE",
+    "en": "CIRCULAR CUT",
+    "de": "RINGSCHNITT"
+  },
+  "dgmDepth100": {
+    "pl": "GŁĘB. DO 100 mm",
+    "en": "DEPTH TO 100 mm",
+    "de": "TIEFE BIS 100 mm"
+  },
+  "dgmTopView": {
+    "pl": "RZUT Z GÓRY",
+    "en": "TOP VIEW",
+    "de": "DRAUFSICHT"
+  },
+  "dgmRadius": {
+    "pl": "Promień cięcia",
+    "en": "Cutting radius",
+    "de": "Schnittradius"
+  },
+  "tagline": {
+    "pl": "Wycinarka okręgów wokół studzienek kanalizacyjnych.",
+    "en": "Circular cutter for sewer manholes.",
+    "de": "Kreisschneider für Kanalschächte."
+  },
+  "rights": {
+    "pl": ". Wszystkie prawa zastrzeżone.",
+    "en": ". All rights reserved.",
+    "de": ". Alle Rechte vorbehalten."
+  },
+  "quote": {
+    "pl": "Zapytaj o cenę",
+    "en": "Request a quote",
+    "de": "Preis anfragen"
+  },
+  "navMain": {
+    "pl": "Nawigacja główna",
+    "en": "Main navigation",
+    "de": "Hauptnavigation"
+  },
+  "honeypot": {
+    "pl": "Nie wypełniaj tego pola",
+    "en": "Do not fill in this field",
+    "de": "Dieses Feld nicht ausfüllen"
+  },
+  "home": {
+    "pl": "Strona główna",
+    "en": "Home",
+    "de": "Startseite"
+  },
+  "secCutDepth": {
+    "pl": "GŁĘBOKOŚĆ CIĘCIA",
+    "en": "CUTTING DEPTH",
+    "de": "SCHNITTTIEFE"
+  },
+  "secWearing": {
+    "pl": "WARSTWA ŚCIERALNA",
+    "en": "WEARING COURSE",
+    "de": "DECKSCHICHT"
+  },
+  "secBinder": {
+    "pl": "WARSTWA WIĄŻĄCA",
+    "en": "BINDER COURSE",
+    "de": "BINDERSCHICHT"
+  },
+  "secManhole": {
+    "pl": "WŁAZ",
+    "en": "MANHOLE",
+    "de": "SCHACHT"
+  },
+  "secRelief": {
+    "pl": "PIERŚCIEŃ ODCIĄŻAJĄCY",
+    "en": "LOAD-RELIEF RING",
+    "de": "ENTLASTUNGSRING"
+  },
+  "secCutRing": {
+    "pl": "WYCIĘTY PIERŚCIEŃ NAWIERZCHNI",
+    "en": "CUT PAVEMENT RING",
+    "de": "AUSGESCHNITTENER FAHRBAHNRING"
+  },
+  "themeToggle": {
+    "pl": "Przełącz tryb jasny i ciemny",
+    "en": "Toggle light and dark mode",
+    "de": "Hellen und dunklen Modus umschalten"
+  },
+  "unconfirmed": {
+    "pl": "Dana niepotwierdzona, do uzupełnienia",
+    "en": "Unconfirmed value, to be completed",
+    "de": "Unbestätigter Wert, wird ergänzt"
+  },
+  "videoSoon": {
+    "pl": "Film promocyjny &middot; wkrótce",
+    "en": "Promotional video &middot; coming soon",
+    "de": "Imagefilm &middot; in Kürze"
+  },
+  "skip": {
+    "pl": "Przejdź do treści",
+    "en": "Skip to content",
+    "de": "Zum Inhalt springen"
+  },
+  "call": {
+    "pl": "Zadzwoń",
+    "en": "Call",
+    "de": "Anrufen"
+  },
+  "openPdf": {
+    "pl": "Otwórz PDF",
+    "en": "Open PDF",
+    "de": "PDF öffnen"
+  },
+  "missingDoc": {
+    "pl": "Potrzebujesz dokumentu, którego tu nie ma?",
+    "en": "Need a document that is not here?",
+    "de": "Fehlt ein Dokument?"
+  },
+  "topView": {
+    "pl": "Rzut z góry",
+    "en": "Top view",
+    "de": "Draufsicht"
+  },
+  "fullDesc": {
+    "pl": "Rozwinięte opisy",
+    "en": "Full descriptions",
+    "de": "Ausführliche Beschreibungen"
+  },
+  "fullSpec": {
+    "pl": "Pełna specyfikacja",
+    "en": "Full specification",
+    "de": "Vollständige Spezifikation"
+  },
+  "sitePhotos": {
+    "pl": "Zdjęcia z budowy, przewiń w bok",
+    "en": "Site photos, scroll sideways",
+    "de": "Baustellenfotos, seitlich scrollen"
+  },
+  "safety": {
+    "pl": "Bezpieczeństwo",
+    "en": "Safety",
+    "de": "Sicherheit"
+  },
+  "backHome": {
+    "pl": "Wróć na stronę główną",
+    "en": "Back to home",
+    "de": "Zurück zur Startseite"
+  },
+  "howLongKeep": {
+    "pl": "Jak długo je trzymamy",
+    "en": "How long we keep them",
+    "de": "Wie lange wir sie speichern"
+  },
+  "policyValid": {
+    "pl": "Aktualna wersja obowiązuje od dnia publikacji na tej stronie.",
+    "en": "The current version applies from the day it is published on this page.",
+    "de": "Die aktuelle Fassung gilt ab dem Tag ihrer Veröffentlichung auf dieser Seite."
+  },
+  "missingQ": {
+    "pl": "Pytanie, którego tu nie ma?",
+    "en": "A question that is not here?",
+    "de": "Eine Frage, die hier fehlt?"
+  },
+  "writeOrCall": {
+    "pl": "Napisz albo zadzwoń. Odpowiadamy w ciągu jednego dnia roboczego.",
+    "en": "Write or call. We reply within one working day.",
+    "de": "Schreiben oder anrufen. Wir antworten innerhalb eines Werktags."
+  },
+  "guideTitle": {
+    "pl": "Poradnik: studzienki, włazy, nawierzchnia",
+    "en": "Guide: manholes, covers, pavement",
+    "de": "Ratgeber: Schächte, Abdeckungen, Fahrbahn"
+  },
+  "selection": {
+    "pl": "Dobór",
+    "en": "Selection",
+    "de": "Auswahl"
+  },
+  "yourSurface": {
+    "pl": "Twoja nawierzchnia, nasz dobór",
+    "en": "Your pavement, our selection",
+    "de": "Ihre Fahrbahn, unsere Auswahl"
+  },
+  "pipeSection": {
+    "pl": "PRZEKRÓJ RURY",
+    "en": "PIPE CROSS-SECTION",
+    "de": "ROHRQUERSCHNITT"
+  },
+  "pipeDia": {
+    "pl": "Średnica rury",
+    "en": "Pipe diameter",
+    "de": "Rohrdurchmesser"
+  },
+  "bothModels": {
+    "pl": "Obejmują ją oba modele",
+    "en": "Covered by both models",
+    "de": "Von beiden Modellen abgedeckt"
+  },
+  "pipeDiaAria": {
+    "pl": "Średnica ciętej rury w milimetrach",
+    "en": "Diameter of the cut pipe in millimetres",
+    "de": "Durchmesser des geschnittenen Rohrs in Millimetern"
+  },
+  "taglineHd": {
+    "pl": "Obwodowa piła hydrauliczna do cięcia rur w wykopie.",
+    "en": "Hydraulic circumferential saw for cutting pipes in the trench.",
+    "de": "Hydraulische Umfangssäge zum Schneiden von Rohren im Graben."
+  },
+  "formHint": {
+    "pl": "Materiał rury, średnica, warunki w wykopie, termin.",
+    "en": "Pipe material, diameter, trench conditions, timing.",
+    "de": "Rohrmaterial, Durchmesser, Grabenbedingungen, Termin."
+  },
+  "modelsCmp": {
+    "pl": "Porównanie modeli HydraCut HPO600 i HPO1200",
+    "en": "Comparison of the HydraCut HPO600 and HPO1200",
+    "de": "Vergleich der Modelle HydraCut HPO600 und HPO1200"
+  },
+  "modelsParams": {
+    "pl": "Porównanie parametrów HydraCut HPO600 i HPO1200",
+    "en": "Specifications of the HydraCut HPO600 and HPO1200 compared",
+    "de": "Parametervergleich HydraCut HPO600 und HPO1200"
+  },
+  "howChoose": {
+    "pl": "Jak wybrać?",
+    "en": "How to choose?",
+    "de": "Wie wählen?"
+  },
+  "chooseHint": {
+    "pl": "Sprawdź największą średnicę rury, jaką realnie tniesz. To ona wyznacza model.",
+    "en": "Check the largest pipe diameter you actually cut. That is what decides the model.",
+    "de": "Prüfen Sie den größten Rohrdurchmesser, den Sie tatsächlich schneiden. Er bestimmt das Modell."
+  },
+  "whichModel": {
+    "pl": "Nie wiesz, który model?",
+    "en": "Not sure which model?",
+    "de": "Unsicher, welches Modell?"
+  },
+  "whichHint": {
+    "pl": "Napisz, jakie rury tniesz. Dobierzemy model i podamy cenę.",
+    "en": "Tell us what pipes you cut. We will match the model and quote a price.",
+    "de": "Sagen Sie uns, welche Rohre Sie schneiden. Wir wählen das Modell und nennen den Preis."
+  },
+  "askFit": {
+    "pl": "Zapytaj o dobór",
+    "en": "Ask for a recommendation",
+    "de": "Beratung anfragen"
+  },
+  "consentBody": {
+    "pl": "Używamy statystyk i narzędzi reklamowych, żeby wiedzieć, które treści są przydatne. Bez zgody nie ładujemy żadnych skryptów zewnętrznych.",
+    "en": "We use analytics and advertising tools to see which content is useful. Without consent we load no external scripts.",
+    "de": "Wir nutzen Statistik- und Werbewerkzeuge, um zu sehen, welche Inhalte nützlich sind. Ohne Einwilligung laden wir keine externen Skripte."
+  },
+  "specsCta": {
+    "pl": "Potrzebujesz karty produktu w PDF albo doboru tarczy pod konkretną nawierzchnię?",
+    "en": "Need the data sheet as a PDF, or the right blade for a particular material?",
+    "de": "Brauchen Sie das Datenblatt als PDF oder die passende Trennscheibe für ein bestimmtes Material?"
+  },
+  "faqCta": {
+    "pl": "Zadzwoń albo wyślij zapytanie. Odpowiadamy w ciągu jednego dnia roboczego.",
+    "en": "Call or send an enquiry. We reply within one working day.",
+    "de": "Rufen Sie an oder schicken Sie eine Anfrage. Wir antworten innerhalb eines Werktags."
+  },
+  "chainCaption": {
+    "pl": "Łańcuch prowadzący założony na rurze. To on trzyma tarczę w jednej płaszczyźnie.",
+    "en": "The guide chain laid on the pipe. It is what holds the blade in one plane.",
+    "de": "Die Führungskette am Rohr. Sie hält die Trennscheibe in einer Ebene."
+  },
+  "specsNote": {
+    "pl": "Dane katalogowe maszyny w konfiguracji standardowej. Pozycje z podkreśleniem czekają na potwierdzenie w dokumentacji technicznej.",
+    "en": "Catalogue data for the machine in its standard configuration. Underlined entries await confirmation in the technical documentation.",
+    "de": "Katalogdaten der Maschine in Standardkonfiguration. Unterstrichene Angaben stehen noch unter Vorbehalt der technischen Dokumentation."
+  },
+  "modelPick": {
+    "pl": "Do 603 mm wystarczy HPO600. Powyżej potrzebny jest HPO1200, który schodzi do 1200 mm.",
+    "en": "Up to 603 mm the HPO600 is enough. Above that you need the HPO1200, which goes to 1200 mm.",
+    "de": "Bis 603 mm genügt die HPO600. Darüber brauchen Sie die HPO1200, die bis 1200 mm reicht."
+  },
+  "modelOverlap": {
+    "pl": "Zakresy zachodzą na siebie tylko między 600 a 603 mm. Poza tym przedziałem średnica wskazuje jeden model. Tarcza jest ta sama w obu.",
+    "en": "The ranges overlap only between 600 and 603 mm. Outside that band the diameter points to one model. The blade is the same in both.",
+    "de": "Die Bereiche überschneiden sich nur zwischen 600 und 603 mm. Außerhalb davon weist der Durchmesser auf ein Modell. Die Trennscheibe ist bei beiden gleich."
+  },
+  "modelPack": {
+    "pl": "Sprawdź agregat. Potrzeba 23 do 26 l/min przy 140 do 160 bar i źródła trzyliniowego, czyli osobnego przyłącza pod linię przecieku.",
+    "en": "Check the power pack. You need 23 to 26 l/min at 140 to 160 bar and a three-line source, that is a separate connection for the leakage line.",
+    "de": "Prüfen Sie das Aggregat. Nötig sind 23 bis 26 l/min bei 140 bis 160 bar und eine Dreileiterquelle, also ein eigener Anschluss für die Leckleitung."
+  },
+  "usesCta": {
+    "pl": "Napisz, w czym tniesz i na jakich średnicach pracujesz. Odpowiemy ceną i doborem tarczy.",
+    "en": "Tell us what you cut and what diameters you work with. You get a price and the right blade.",
+    "de": "Schreiben Sie uns, worin Sie schneiden und mit welchen Durchmessern. Sie bekommen Preis und passende Trennscheibe."
+  },
+  "privData": {
+    "pl": "Wyłącznie te, które sam podajesz w formularzu: imię i nazwisko, nazwę firmy, numer telefonu, adres e-mail, wybrany zakres średnic rur i treść wiadomości. Zapisujemy też adres IP oraz datę wysłania, żeby ograniczyć spam.",
+    "en": "Only what you enter in the form yourself: name, company, phone number, e-mail address, the pipe diameter range you select and the message. We also record the IP address and the time of sending, to limit spam.",
+    "de": "Ausschließlich das, was Sie selbst im Formular angeben: Vor- und Nachname, Firma, Telefonnummer, E-Mail-Adresse, den gewählten Rohrdurchmesserbereich und den Nachrichtentext. Zusätzlich speichern wir IP-Adresse und Sendezeitpunkt, um Spam zu begrenzen."
+  },
+  "privWhy": {
+    "pl": "Żeby odpowiedzieć na zapytanie i przedstawić ofertę. Podstawą prawną jest art. 6 ust. 1 lit. b RODO (działania przed zawarciem umowy) oraz art. 6 ust. 1 lit. f RODO (prawnie uzasadniony interes w postaci obsługi korespondencji i ochrony przed nadużyciami).",
+    "en": "To answer the enquiry and make an offer. The legal basis is Article 6(1)(b) GDPR (steps prior to entering into a contract) and Article 6(1)(f) GDPR (legitimate interest in handling correspondence and preventing abuse).",
+    "de": "Um die Anfrage zu beantworten und ein Angebot zu machen. Rechtsgrundlage sind Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) und Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bearbeitung von Korrespondenz und am Schutz vor Missbrauch)."
+  },
+  "privKeep1": {
+    "pl": "Korespondencję handlową przechowujemy przez okres niezbędny do obsługi zapytania, a następnie",
+    "en": "We keep commercial correspondence for as long as handling the enquiry requires, and then for",
+    "de": "Geschäftskorrespondenz bewahren wir so lange auf, wie die Bearbeitung der Anfrage es erfordert, danach für"
+  },
+  "privKeep2": {
+    "pl": "na potrzeby ewentualnych roszczeń. Dane z formularza nie trafiają do systemu marketing automation ani na listę mailingową.",
+    "en": "for the purposes of any claims. Form data does not go into a marketing automation system or onto a mailing list.",
+    "de": "für etwaige Ansprüche. Formulardaten gelangen weder in ein Marketing-Automation-System noch auf eine Verteilerliste."
+  },
+  "privShare": {
+    "pl": "Dostawcy hostingu, na którym działa serwis i skrzynka pocztowa. Nie sprzedajemy danych i nie przekazujemy ich poza Europejski Obszar Gospodarczy.",
+    "en": "The hosting providers running the site and the mailbox. We do not sell data and do not transfer it outside the European Economic Area.",
+    "de": "Die Hosting-Anbieter, auf denen die Website und das Postfach laufen. Wir verkaufen keine Daten und übermitteln sie nicht außerhalb des Europäischen Wirtschaftsraums."
+  },
+  "privRights": {
+    "pl": "Masz prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia oraz wniesienia sprzeciwu. Możesz też złożyć skargę do Prezesa Urzędu Ochrony Danych Osobowych. Żeby skorzystać z tych praw, napisz na adres podany wyżej.",
+    "en": "You have the right to access your data, to rectify, erase, restrict processing, port it and to object. You may also lodge a complaint with the Polish data protection authority (Prezes Urzędu Ochrony Danych Osobowych). To exercise these rights, write to the address above.",
+    "de": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Sie können sich außerdem bei der polnischen Datenschutzbehörde (Prezes Urzędu Ochrony Danych Osobowych) beschweren. Zur Ausübung dieser Rechte schreiben Sie an die oben genannte Adresse."
+  },
+  "privCookies": {
+    "pl": "Serwis nie używa plików cookie do śledzenia i nie osadza skryptów reklamowych. Film promocyjny ładuje się dopiero po kliknięciu w podgląd, więc do tego momentu przeglądarka nie łączy się z serwerami YouTube.",
+    "en": "The site uses no tracking cookies and embeds no advertising scripts. The promotional video loads only after you click the preview, so until then the browser does not connect to YouTube servers.",
+    "de": "Die Website verwendet keine Tracking-Cookies und bindet keine Werbeskripte ein. Das Imagevideo lädt erst nach Klick auf die Vorschau, bis dahin verbindet sich der Browser nicht mit YouTube-Servern."
+  },
+  "ctaSpecs": {
+    "pl": "Dane techniczne",
+    "en": "Specifications",
+    "de": "Technische Daten"
+  }
+}

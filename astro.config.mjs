@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // Static build. Output lands in dist/ and is uploaded to Hostinger public_html.
@@ -14,12 +13,8 @@ export default defineConfig({
   // wszystkie czcionki zwracały 404. Sprawdzone na Hornecie.
   build: { format: 'directory', inlineStylesheets: 'always', assets: 'assets' },
   compressHTML: true,
-  integrations: [
-    sitemap({
-      changefreq: 'monthly',
-      lastmod: new Date('2026-08-09'),
-      filter: (page) => !page.includes('/polityka-prywatnosci'),
-    }),
-  ],
+  // Sitemap is written by scripts/build-i18n.mjs instead: it is the only step
+  // that sees all three language trees at once and can pair them with hreflang.
+  integrations: [],
   vite: { plugins: [tailwindcss()] },
 });

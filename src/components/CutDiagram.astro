@@ -1,4 +1,5 @@
 ---
+import { ui } from '../lib/i18n';
 /**
  * Element sygnaturowy: przekrój rury z założonym łańcuchem prowadzącym,
  * piłą na obwodzie i pierścieniem 35 cm wolnego miejsca dookoła.
@@ -83,18 +84,18 @@ const DIM_Y = 566;
       <path d="M470 478 H670 M470 502 H670 M470 526 H670" />
       <text x="480" y="471" class="dgm__t dgm__t--s">HYDRACUT HPO</text>
       <text id="dgmPlateModel" x="480" y="495" class="dgm__t dgm__t--s">MODEL: HPO1200</text>
-      <text x="480" y="519" class="dgm__t dgm__t--s">CIĘCIE PO OBWODZIE</text>
-      <text x="480" y="543" class="dgm__t dgm__t--s">PRZEKRÓJ RURY</text>
+      <text x="480" y="519" class="dgm__t dgm__t--s">{ui("dgmCircular")}</text>
+      <text x="480" y="543" class="dgm__t dgm__t--s">{ui("pipeSection")}</text>
     </g>
   </svg>
 
   <label class="dgm__ctl">
-    <span class="label dgm__ctlLabel">Średnica rury</span>
-    <input id="dgmRange" type="range" min="203" max="1200" step="1" value="800" aria-label="Średnica ciętej rury w milimetrach" />
+    <span class="label dgm__ctlLabel">{ui("pipeDia")}</span>
+    <input id="dgmRange" type="range" min="203" max="1200" step="1" value="800" aria-label={ui("pipeDiaAria")} />
     <output id="dgmOut" class="mono dgm__out">800 mm</output>
   </label>
 
-  <p id="dgmModel" class="mono dgm__model">Obejmują ją oba modele</p>
+  <p id="dgmModel" class="mono dgm__model">{ui("bothModels")}</p>
 </figure>
 
 <style>

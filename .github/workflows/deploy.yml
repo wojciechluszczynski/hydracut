@@ -34,7 +34,9 @@ jobs:
           cache: npm
 
       - run: npm ci
-      - run: npm run build
+      # Builds Polish, English and German and merges the three trees into one
+      # dist/, with the translated directory names the pages already link to.
+      - run: npm run build:i18n
 
       - name: Force-push dist/ to the live branch
         run: |

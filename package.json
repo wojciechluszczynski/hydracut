@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "build:i18n": "SITE_URL=https://hydracut.pl node scripts/build-i18n.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

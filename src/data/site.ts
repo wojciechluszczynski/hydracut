@@ -10,6 +10,40 @@
  */
 import {createClient} from '@sanity/client'
 import {site as staticSite} from './site.static'
+import {LANG, localizeHref} from '../lib/i18n'
+import staticStrings from '../lib/static-i18n.json'
+
+/**
+ * The static fallback is written in Polish and holds copy the CMS never
+ * modelled. Exact strings are swapped through a map, so a phrase missing from
+ * the map stays Polish and is visibly untranslated rather than silently wrong.
+ */
+const translateStatic = <T>(node: T): T => {
+  if (LANG === 'pl') return node
+  if (typeof node === 'string') {
+    const hit = (staticStrings as Record<string, Record<string, string>>)[node]
+    return (hit?.[LANG] ?? node) as unknown as T
+  }
+  if (Array.isArray(node)) return node.map(translateStatic) as unknown as T
+  if (node && typeof node === 'object') {
+    const out: Record<string, unknown> = {}
+    for (const [k, v] of Object.entries(node as Record<string, unknown>)) {
+      out[k] = k === 'href' || k === 'src' || k === 'url' ? v : translateStatic(v)
+    }
+    return out as T
+  }
+  return node
+}
+
+/**
+ * Translations live as sibling documents with a language suffix, so adding a
+ * language never touches the schema: `homePage` is Polish, `homePage__en` is
+ * English. Every read coalesces down to the Polish document, which means a
+ * half-translated site still builds and shows Polish where a translation is
+ * missing rather than an empty page.
+ */
+const sfx = LANG === 'pl' ? '' : `__${LANG}`
+const tr = (id: string) => (sfx ? `coalesce(*[_id == "${id}${sfx}"][0], *[_id == "${id}"][0])` : `*[_id == "${id}"][0]`)
 
 const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID ?? 'xcq6c04g'
 const dataset = import.meta.env.PUBLIC_SANITY_DATASET ?? 'hydracut'
@@ -23,19 +57,20 @@ const val = (c: Confirmable, fallback: string): string => {
 }
 
 const QUERY = `{
-  "settings": *[_id == "siteSettings"][0],
-  "home": *[_id == "homePage"][0],
-  "specs": *[_id == "productSpecs"][0],
+  "settings": ${tr('siteSettings')},
+  "home": ${tr('homePage')},
+  "specs": ${tr('productSpecs')},
   "tracking": *[_id == "tracking"][0],
   "theme": *[_id == "theme"][0],
-  "downloads": *[_type == "download"] | order(order asc) {
+  "downloads": *[_type == "download" && coalesce(language, "pl") == "${LANG}"] | order(order asc) {
     title, availability, "url": file.asset->url
   },
   "media": *[_id == "mediaSlots"][0],
+  "mediaAlt": ${sfx ? `*[_id == "mediaSlots${sfx}"][0]` : 'null'},
   "assets": *[_type == "sanity.imageAsset"]{_id, url, metadata{dimensions}},
-  "pages": *[_type == "pageContent"]{key, h1, lead, title, description},
-  "models": *[_id == "modelComparison"][0],
-  "articles": *[_type == "article" && defined(slug.current)] | order(published desc){
+  "pages": *[_type == "pageContent" && coalesce(language, "pl") == "${LANG}"]{key, h1, lead, title, description},
+  "models": ${tr('modelComparison')},
+  "articles": *[_type == "article" && defined(slug.current) && coalesce(language, "pl") == "${LANG}"] | order(published desc){
     title, "slug": slug.current, lead, seoTitle, seoDescription, published, readMin, body
   }
 }`
@@ -72,13 +107,13 @@ const keep = <T>(incoming: T | undefined | null, fallback: T): T =>
 const assetsById = new Map<string, any>((cms?.assets ?? []).map((a: any) => [a._id, a]))
 
 /** Sanity serves images from its own CDN; ask for a sensible size and format. */
-const img = (slot: any, fallback: {src: string; alt: string; w?: number; h?: number}) => {
+const img = (slot: any, fallback: {src: string; alt: string; w?: number; h?: number}, key?: string) => {
   const asset = assetsById.get(slot?.asset?._ref)
   if (!asset?.url) return fallback
   const d = asset.metadata?.dimensions
   return {
     src: `${asset.url}?w=1600&fm=webp&q=78`,
-    alt: slot.alt || fallback.alt,
+    alt: (key ? cms?.mediaAlt?.[key]?.alt : undefined) || slot.alt || fallback.alt,
     w: d?.width ?? fallback.w,
     h: d?.height ?? fallback.h,
   }
@@ -90,138 +125,167 @@ const s = cms?.settings
 const h = cms?.home
 const sp = cms?.specs
 
-export const site = {
-  ...staticSite,
+/**
+ * Internal links live inside the content (nav, CTAs, footer) as Polish paths.
+ * The finished object is walked once and every internal href is mapped through
+ * the route table, so a field that holds a link never has to be found by hand.
+ */
+const localizeDeep = <T>(node: T): T => {
+  if (Array.isArray(node)) return node.map(localizeDeep) as unknown as T
+  if (node && typeof node === 'object') {
+    const out: Record<string, unknown> = {}
+    for (const [k, v] of Object.entries(node as Record<string, unknown>)) {
+      out[k] = k === 'href' && typeof v === 'string' ? localizeHref(v) : localizeDeep(v)
+    }
+    return out as T
+  }
+  return node
+}
+
+const translated = translateStatic(staticSite)
+
+const assembled = {
+  ...translated,
 
   meta: {
-    ...staticSite.meta,
-    brand: keep(s?.brand, staticSite.meta.brand),
-    model: keep(s?.model, staticSite.meta.model),
-    url: keep(s?.url, staticSite.meta.url),
-    title: keep(s?.title, staticSite.meta.title),
-    description: keep(s?.description, staticSite.meta.description),
-    maker: keep(s?.maker, staticSite.meta.maker),
+    ...translated.meta,
+    brand: keep(s?.brand, translated.meta.brand),
+    model: keep(s?.model, translated.meta.model),
+    url: keep(s?.url, translated.meta.url),
+    title: keep(s?.title, translated.meta.title),
+    description: keep(s?.description, translated.meta.description),
+    maker: keep(s?.maker, translated.meta.maker),
   },
 
   contact: {
-    ...staticSite.contact,
-    company: keep(s?.company, staticSite.contact.company),
-    brandLine: keep(s?.brandLine, staticSite.contact.brandLine),
-    phone: keep(s?.phone, staticSite.contact.phone),
-    email: keep(s?.email, staticSite.contact.email),
-    street: keep(s?.street, staticSite.contact.street),
-    city: keep(s?.city, staticSite.contact.city),
-    nip: val(s?.nip, staticSite.contact.nip),
-    regon: val(s?.regon, staticSite.contact.regon),
-    hours: keep(s?.hours, staticSite.contact.hours),
-    reply: keep(s?.reply, staticSite.contact.reply),
+    ...translated.contact,
+    company: keep(s?.company, translated.contact.company),
+    brandLine: keep(s?.brandLine, translated.contact.brandLine),
+    phone: keep(s?.phone, translated.contact.phone),
+    email: keep(s?.email, translated.contact.email),
+    street: keep(s?.street, translated.contact.street),
+    city: keep(s?.city, translated.contact.city),
+    nip: val(s?.nip, translated.contact.nip),
+    regon: val(s?.regon, translated.contact.regon),
+    hours: keep(s?.hours, translated.contact.hours),
+    reply: keep(s?.reply, translated.contact.reply),
   },
 
   nav: keep(
     s?.nav?.map((n: any) => ({label: n.label, href: n.href})),
-    staticSite.nav,
+    translated.nav,
   ),
 
   hero: {
-    ...staticSite.hero,
-    eyebrow: keep(h?.heroEyebrow, staticSite.hero.eyebrow),
-    h1: keep(h?.heroHeading, staticSite.hero.h1),
-    lead: keep(h?.heroLead, staticSite.hero.lead),
+    ...translated.hero,
+    eyebrow: keep(h?.heroEyebrow, translated.hero.eyebrow),
+    h1: keep(h?.heroHeading, translated.hero.h1),
+    lead: keep(h?.heroLead, translated.hero.lead),
   },
 
   stats: keep(
     h?.stats?.map((x: any) => ({value: x.value, unit: x.unit, label: x.label})),
-    staticSite.stats,
+    translated.stats,
   ),
 
   pains: {
-    ...staticSite.pains,
+    ...translated.pains,
+    eyebrow: keep(h?.sectionHeadings?.painsEyebrow, translated.pains.eyebrow),
+    h2: keep(h?.sectionHeadings?.painsHeading, translated.pains.h2),
     rows: keep(
       h?.pains?.map((x: any) => ({pain: x.pain, gain: x.gain})),
-      staticSite.pains.rows,
+      translated.pains.rows,
     ),
   },
 
   why: {
-    ...staticSite.why,
+    ...translated.why,
+    eyebrow: keep(h?.sectionHeadings?.whyEyebrow, translated.why.eyebrow),
+    h2: keep(h?.sectionHeadings?.whyHeading, translated.why.h2),
     rows: keep(
       h?.methods?.map((x: any) => ({method: x.method, marks: x.marks ?? [], highlight: Boolean(x.highlight)})),
-      staticSite.why.rows,
+      translated.why.rows,
     ),
   },
 
   how: {
-    ...staticSite.how,
+    ...translated.how,
+    eyebrow: keep(h?.sectionHeadings?.howEyebrow, translated.how.eyebrow),
+    h2: keep(h?.sectionHeadings?.howHeading, translated.how.h2),
     steps: keep(
       h?.steps?.map((x: any) => ({title: x.title, body: x.body})),
-      staticSite.how.steps,
+      translated.how.steps,
     ),
-    video: {...staticSite.how.video, youtubeId: idYouTube(h?.videoYoutubeId) || staticSite.how.video.youtubeId},
+    video: {...translated.how.video, youtubeId: idYouTube(h?.videoYoutubeId) || translated.how.video.youtubeId},
   },
 
   people: {
-    ...staticSite.people,
-    eyebrow: keep(h?.sectionHeadings?.peopleEyebrow, staticSite.people.eyebrow),
-    h2: keep(h?.sectionHeadings?.peopleHeading, staticSite.people.h2),
-    body: keep(h?.peopleBody, staticSite.people.body),
+    ...translated.people,
+    eyebrow: keep(h?.sectionHeadings?.peopleEyebrow, translated.people.eyebrow),
+    h2: keep(h?.sectionHeadings?.peopleHeading, translated.people.h2),
+    body: keep(h?.peopleBody, translated.people.body),
     facts: keep(
       h?.peopleFacts?.map((f: any) => ({k: f.label, v: f.value})),
-      staticSite.people.facts,
+      translated.people.facts,
     ),
     quote: h?.quote?.text
       ? {text: h.quote.text, author: h.quote.author, role: h.quote.role}
-      : staticSite.people.quote,
+      : translated.people.quote,
   },
 
   uses: {
-    ...staticSite.uses,
-    eyebrow: keep(h?.sectionHeadings?.usesEyebrow, staticSite.uses.eyebrow),
-    h2: keep(h?.sectionHeadings?.usesHeading, staticSite.uses.h2),
+    ...translated.uses,
+    eyebrow: keep(h?.sectionHeadings?.usesEyebrow, translated.uses.eyebrow),
+    h2: keep(h?.sectionHeadings?.usesHeading, translated.uses.h2),
     items: keep(
       h?.uses?.map((u: any, i: number) => ({
         title: u.title,
         body: u.body,
-        icon: u.icon ?? staticSite.uses.items[i]?.icon,
+        icon: u.icon ?? translated.uses.items[i]?.icon,
       })),
-      staticSite.uses.items,
+      translated.uses.items,
     ),
   },
 
   maker: {
-    ...staticSite.maker,
-    eyebrow: keep(h?.sectionHeadings?.makerEyebrow, staticSite.maker.eyebrow),
-    h2: keep(h?.sectionHeadings?.makerHeading, staticSite.maker.h2),
-    body: keep(h?.makerBody, staticSite.maker.body),
+    ...translated.maker,
+    eyebrow: keep(h?.sectionHeadings?.makerEyebrow, translated.maker.eyebrow),
+    h2: keep(h?.sectionHeadings?.makerHeading, translated.maker.h2),
+    body: keep(h?.makerBody, translated.maker.body),
     facts: keep(
       h?.makerFacts?.map((f: any) => ({k: f.label, v: f.value})),
-      staticSite.maker.facts,
+      translated.maker.facts,
     ),
   },
 
   equipment: {
-    ...staticSite.equipment,
+    ...translated.equipment,
+    eyebrow: keep(h?.sectionHeadings?.equipmentEyebrow, translated.equipment.eyebrow),
+    h2: keep(h?.sectionHeadings?.equipmentHeading, translated.equipment.h2),
     items: keep(
       h?.equipment?.map((x: any) => ({title: x.title, body: x.body})),
-      staticSite.equipment.items,
+      translated.equipment.items,
     ),
   },
 
   specs: {
-    ...staticSite.specs,
-    eyebrow: keep(sp?.eyebrow, staticSite.specs.eyebrow),
-    h2: keep(sp?.heading, staticSite.specs.h2),
-    caption: keep(sp?.caption, staticSite.specs.caption),
+    ...translated.specs,
+    eyebrow: keep(sp?.eyebrow, translated.specs.eyebrow),
+    h2: keep(sp?.heading, translated.specs.h2),
+    caption: keep(sp?.caption, translated.specs.caption),
     rows: keep(
       sp?.rows?.map((r: any) => ({k: r.label, v: val(r.value, '')})),
-      staticSite.specs.rows,
+      translated.specs.rows,
     ),
   },
 
   faq: {
-    ...staticSite.faq,
+    ...translated.faq,
+    eyebrow: keep(h?.sectionHeadings?.faqEyebrow, translated.faq.eyebrow),
+    h2: keep(h?.sectionHeadings?.faqHeading, translated.faq.h2),
     items: keep(
       h?.faq?.map((f: any) => ({q: f.question, a: f.answer})),
-      staticSite.faq.items,
+      translated.faq.items,
     ),
   },
 
@@ -231,7 +295,7 @@ export const site = {
       file: d.availability === 'file' && d.url ? d.url : 'na zapytanie',
       format: 'PDF',
     })),
-    staticSite.downloads,
+    translated.downloads,
   ),
 
   // Only HydraCut ships a two-model comparison; HornetCut has no such section.
@@ -257,37 +321,37 @@ export const site = {
     : {}),
 
   form: {
-    ...staticSite.form,
-    eyebrow: keep(s?.formEyebrow, staticSite.form.eyebrow),
-    h2: keep(s?.formHeading, staticSite.form.h2),
-    intro: keep(s?.formIntro, staticSite.form.intro),
-    fields: {...staticSite.form.fields, ...(s?.formLabels ?? {})},
-    scopeOptions: keep(s?.formScopeOptions, staticSite.form.scopeOptions),
-    consent: keep(s?.formConsent, staticSite.form.consent),
+    ...translated.form,
+    eyebrow: keep(s?.formEyebrow, translated.form.eyebrow),
+    h2: keep(s?.formHeading, translated.form.h2),
+    intro: keep(s?.formIntro, translated.form.intro),
+    fields: {...translated.form.fields, ...(s?.formLabels ?? {})},
+    scopeOptions: keep(s?.formScopeOptions, translated.form.scopeOptions),
+    consent: keep(s?.formConsent, translated.form.consent),
   },
 
   photos: Object.fromEntries(
-    Object.entries(staticSite.photos).map(([name, fallback]: [string, any]) => [
+    Object.entries(translated.photos).map(([name, fallback]: [string, any]) => [
       name,
-      {...fallback, ...img(cms?.media?.[name], fallback)},
+      {...fallback, ...img(cms?.media?.[name], fallback, name)},
     ]),
-  ) as typeof staticSite.photos,
+  ) as typeof translated.photos,
 
   media: Object.fromEntries(
-    Object.entries(staticSite.media).map(([name, fallback]: [string, any]) =>
-      'video' in fallback ? [name, fallback] : [name, img(cms?.media?.[name], fallback)],
+    Object.entries(translated.media).map(([name, fallback]: [string, any]) =>
+      'video' in fallback ? [name, fallback] : [name, img(cms?.media?.[name], fallback, name)],
     ),
-  ) as typeof staticSite.media,
+  ) as typeof translated.media,
 
   pages: Object.fromEntries(
-    Object.entries(staticSite.pages).map(([key, fallback]: [string, any]) => {
+    Object.entries(translated.pages).map(([key, fallback]: [string, any]) => {
       const p = pageBy(key)
       return [
         key,
         p ? {...fallback, h1: keep(p.h1, fallback.h1), lead: keep(p.lead, fallback.lead), title: keep(p.title, fallback.title), description: keep(p.description, fallback.description)} : fallback,
       ]
     }),
-  ) as typeof staticSite.pages,
+  ) as typeof translated.pages,
 
   /** Guide articles. Empty until an editor writes one, which is a valid state. */
   articles: (cms?.articles ?? []).map((a: any) => ({
@@ -317,5 +381,7 @@ export const site = {
     defaultMode: cms?.theme?.defaultMode ?? 'system',
   },
 }
+
+export const site = localizeDeep(assembled)
 
 export type Site = typeof staticSite

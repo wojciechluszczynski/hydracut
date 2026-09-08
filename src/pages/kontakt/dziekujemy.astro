@@ -1,4 +1,5 @@
 ---
+import { localizeHref , ui } from '../../lib/i18n';
 import Base from '../../layouts/Base.astro';
 import { site } from '../../data/site';
 import { plain } from '../../lib/val';
@@ -17,7 +18,7 @@ const p = site.pages.thanks;
         <a href={`tel:${plain(site.contact.phoneHref)}`} class="btn btn--solid">
           <Val text={site.contact.phone} />
         </a>
-        <a href="/" class="link-amber">Wróć na stronę główną</a>
+        <a href={localizeHref("/")} class="link-amber">{ui("backHome")}</a>
       </div>
     </div>
   </section>

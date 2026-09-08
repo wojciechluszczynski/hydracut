@@ -1,0 +1,362 @@
+{
+ "Palnik nadaje się tylko do metalu i zostawia strefę wpływu ciepła, a w wykopie z gazem albo resztkami medium bywa wykluczony. Szlifierka kątowa tnie wszystko, ale wymaga obejścia rury dookoła i utrzymania płaszczyzny ręką.": {
+  "en": "A torch works on metal only and leaves a heat-affected zone, and in a trench with gas or residual medium it is often ruled out. An angle grinder cuts anything, but you have to walk round the pipe and hold the plane by hand.",
+  "de": "Ein Brenner eignet sich nur für Metall und hinterlässt eine Wärmeeinflusszone, im Graben mit Gas oder Restmedium scheidet er oft aus. Der Winkelschleifer trennt alles, verlangt aber, um das Rohr herumzugehen und die Ebene von Hand zu halten."
+ },
+ "Dane za instrukcją obsługi HPO1200 i kartą katalogową HPO600 / HPO1200. Producent zastrzega prawo do zmian konstrukcyjnych. Dane nie stanowią oferty w rozumieniu Kodeksu cywilnego.": {
+  "en": "Data from the HPO1200 operating manual and the HPO600 / HPO1200 data sheet. The manufacturer reserves the right to make design changes. This data does not constitute an offer within the meaning of the Polish Civil Code.",
+  "de": "Angaben nach Betriebsanleitung HPO1200 und Datenblatt HPO600 / HPO1200. Der Hersteller behält sich Konstruktionsänderungen vor. Die Angaben stellen kein Angebot im Sinne des polnischen Zivilgesetzbuchs dar."
+ },
+ "Piła obwodowa rozwiązuje jedno i drugie: mocuje się na rurze, prowadzi tarczę po łańcuchu i wraca dokładnie w punkt startu. Operator nie utrzymuje linii, tylko posuw.": {
+  "en": "The circumferential saw solves both: it clamps onto the pipe, guides the blade along a chain and comes back exactly to the starting point. The operator does not hold the line, only the feed.",
+  "de": "Die Umfangssäge löst beides: Sie wird am Rohr aufgespannt, führt die Scheibe entlang einer Kette und kehrt exakt zum Ausgangspunkt zurück. Der Bediener hält nicht die Linie, sondern nur den Vorschub."
+ },
+ "Uszkodzony fragment wycina się dwoma cięciami po obwodzie i wyjmuje. Reszta rurociągu zostaje nietknięta, a wykop nie musi być dłuższy niż wymieniany odcinek.": {
+  "en": "The damaged length is cut out with two circumferential cuts and lifted away. The rest of the pipeline is untouched, and the trench need be no longer than the section being replaced.",
+  "de": "Das beschädigte Stück wird mit zwei Umfangsschnitten herausgetrennt und entnommen. Die übrige Leitung bleibt unberührt, und der Graben muss nicht länger sein als der ausgetauschte Abschnitt."
+ },
+ "Model HPO1200 schodzi do 1200 mm, więc obejmuje rury kolektorowe. Wystarczy 35 cm wolnego miejsca wokół rury, co ma znaczenie w komorach i ciasnych wykopach.": {
+  "en": "The HPO1200 reaches 1200 mm, so it covers collector pipes. Thirty-five centimetres of clearance around the pipe is enough, which matters in chambers and tight trenches.",
+  "de": "Die HPO1200 reicht bis 1200 mm und deckt damit Sammlerrohre ab. Fünfunddreißig Zentimeter Freiraum um das Rohr genügen, was in Schächten und engen Gräben zählt."
+ },
+ "HPO600 kończy się na 603 mm, HPO1200 zaczyna od 600 mm. Poza tym trzymilimetrowym zakładem średnica rury wskazuje jeden model, więc wybór rzadko bywa sporny.": {
+  "en": "The HPO600 stops at 603 mm, the HPO1200 starts at 600 mm. Outside that three-millimetre overlap the pipe diameter points to one model, so the choice is rarely in doubt.",
+  "de": "Die HPO600 endet bei 603 mm, die HPO1200 beginnt bei 600 mm. Außerhalb dieser drei Millimeter Überschneidung weist der Rohrdurchmesser auf ein Modell, die Wahl ist also selten strittig."
+ },
+ "Przy awarii woda zwykle nie przestaje lecieć, dopóki odcinek nie zostanie odcięty. Napęd hydrauliczny pracuje także wtedy, gdy piła jest zalewana.": {
+  "en": "On a failure the water usually keeps running until the section is shut off. The hydraulic drive works even while the saw is flooded.",
+  "de": "Bei einer Störung läuft das Wasser meist weiter, bis der Abschnitt abgesperrt ist. Der Hydraulikantrieb arbeitet auch dann, wenn die Säge überflutet wird."
+ },
+ "Bo rura leży w ziemi, wykop jest ciasny, a woda z niej nie przestaje lecieć. Narzędzie musi sobie z tym poradzić na miejscu, a nie w warsztacie.": {
+  "en": "Because the pipe lies in the ground, the trench is tight, and the water does not stop running. The tool has to cope with that on site, not in a workshop.",
+  "de": "Weil das Rohr in der Erde liegt, der Graben eng ist und das Wasser nicht aufhört zu laufen. Das Werkzeug muss damit vor Ort zurechtkommen, nicht in der Werkstatt."
+ },
+ "Otwarcie czynnej magistrali pod nowe przyłącze albo armaturę. Cięcie po obwodzie daje równą, prostopadłą krawędź pod kołnierz albo złączkę.": {
+  "en": "Opening a live main for a new connection or fitting. A circumferential cut gives an even, square edge for a flange or a coupling.",
+  "de": "Öffnen einer in Betrieb befindlichen Hauptleitung für einen neuen Anschluss oder eine Armatur. Der Umfangsschnitt ergibt eine gleichmäßige, rechtwinklige Kante für Flansch oder Kupplung."
+ },
+ "Podział długiej rury na odcinki, które da się wyciągnąć koparką i wywieźć. Bez otwartego ognia, więc bez ograniczeń przy resztkach medium.": {
+  "en": "Cutting a long pipe into lengths an excavator can lift out and haul away. No open flame, so no restrictions where medium residue remains.",
+  "de": "Zerteilen eines langen Rohrs in Längen, die ein Bagger herausheben und abfahren kann. Ohne offene Flamme, also ohne Einschränkungen bei Restmedium."
+ },
+ "Tnąc rurę w czynnym rurociągu, wbijaj kliny rozporowe co 60 stopni, żeby szczelina nie zacisnęła tarczy.": {
+  "en": "When cutting a pipe in a live pipeline, drive spreader wedges every 60 degrees so the gap cannot pinch the blade.",
+  "de": "Beim Trennen eines Rohrs in einer betriebenen Leitung setzen Sie alle 60 Grad Spreizkeile, damit der Spalt die Scheibe nicht einklemmt."
+ },
+ "Przy rurach stalowych podłącz zraszanie. Bez wody iskry skracają żywotność pasa prowadzącego.": {
+  "en": "On steel pipes connect the water spray. Without water, sparks shorten the life of the guide belt.",
+  "de": "Bei Stahlrohren schließen Sie die Berieselung an. Ohne Wasser verkürzen Funken die Lebensdauer des Führungsbands."
+ },
+ "Cięcie mechaniczne zamiast palnika eliminuje strefę wpływu ciepła i otwarty ogień w wykopie.": {
+  "en": "Mechanical cutting instead of a torch removes the heat-affected zone and the open flame from the trench.",
+  "de": "Mechanisches Trennen statt Brenner beseitigt die Wärmeeinflusszone und offenes Feuer im Graben."
+ },
+ "Prowadź posuw równomiernie. Dociskanie tarczy nie przyspiesza cięcia, tylko ją zakleszcza.": {
+  "en": "Keep the feed even. Pressing the blade does not speed up the cut, it jams it.",
+  "de": "Führen Sie den Vorschub gleichmäßig. Druck auf die Scheibe beschleunigt den Schnitt nicht, sondern verklemmt sie."
+ },
+ "Podłącz zasilanie trzyliniowe: 23 do 26 l/min, 140 do 160 bar, z linią przecieku.": {
+  "en": "Connect a three-line supply: 23 to 26 l/min, 140 to 160 bar, with a leakage line.",
+  "de": "Schließen Sie eine Dreileiterversorgung an: 23 bis 26 l/min, 140 bis 160 bar, mit Leckleitung."
+ },
+ "Nie udało się wysłać. Zadzwoń pod +48 534 979 628 albo napisz na biuro@fijalo.pl.": {
+  "en": "Sending failed. Call +48 534 979 628 or write to biuro@fijalo.pl.",
+  "de": "Senden fehlgeschlagen. Rufen Sie +48 534 979 628 an oder schreiben Sie an biuro@fijalo.pl."
+ },
+ "Piła na rurze, materiał producenta. Film promocyjny zastąpi go po nagraniu.": {
+  "en": "The saw on the pipe, manufacturer footage. A promotional film will replace it once shot.",
+  "de": "Die Säge am Rohr, Herstellermaterial. Ein Imagefilm ersetzt es nach der Aufnahme."
+ },
+ "Pod obciążeniem hałas przekracza 100 dBA. Ochronniki słuchu bez wyjątków.": {
+  "en": "Under load the noise exceeds 100 dBA. Ear protection, no exceptions.",
+  "de": "Unter Last überschreitet der Lärm 100 dBA. Gehörschutz, ausnahmslos."
+ },
+ "Sprawdź, czy wokół rury jest 35 cm wolnego miejsca na całym obwodzie.": {
+  "en": "Check that there is 35 cm of clearance around the pipe over the whole circumference.",
+  "de": "Prüfen Sie, ob rund um das Rohr auf dem gesamten Umfang 35 cm Freiraum vorhanden sind."
+ },
+ "Zapytanie wysłane. Odezwiemy się w ciągu jednego dnia roboczego.": {
+  "en": "Enquiry sent. We will get back to you within one working day.",
+  "de": "Anfrage gesendet. Wir melden uns innerhalb eines Werktags."
+ },
+ "Otwarcie czynnej magistrali pod nowe przyłącze albo armaturę.": {
+  "en": "Opening a live main for a new connection or fitting.",
+  "de": "Öffnen einer betriebenen Hauptleitung für Anschluss oder Armatur."
+ },
+ "Drugi operator zostaje przy agregacie przez cały czas cięcia.": {
+  "en": "The second operator stays at the power pack for the whole cut.",
+  "de": "Die zweite Person bleibt während des gesamten Schnitts am Aggregat."
+ },
+ "Ustaw regulowaną osłonę tarczy pod średnicę ciętej rury.": {
+  "en": "Set the adjustable blade guard to the diameter of the pipe being cut.",
+  "de": "Stellen Sie die verstellbare Schutzhaube auf den Durchmesser des zu trennenden Rohrs ein."
+ },
+ "Odpowiadamy w ciągu jednego dnia roboczego.": {
+  "en": "We reply within one working day.",
+  "de": "Wir antworten innerhalb eines Werktags."
+ },
+ "skrzynia z łańcuchami i przewodami": {
+  "en": "case with chains and hoses",
+  "de": "Kiste mit Ketten und Schläuchen"
+ },
+ "Ciśnienie akustyczne na stanowisku": {
+  "en": "Sound pressure at the working point",
+  "de": "Schalldruck am Arbeitsplatz"
+ },
+ "Obwodowa piła hydrauliczna do rur": {
+  "en": "Hydraulic circumferential pipe saw",
+  "de": "Hydraulische Rohrtrennsäge"
+ },
+ "trzyliniowe, z linią przecieku": {
+  "en": "three-line, with leakage line",
+  "de": "Dreileiter, mit Leckleitung"
+ },
+ "regulowana, na całym obwodzie": {
+  "en": "adjustable, over the whole circumference",
+  "de": "verstellbar, auf dem gesamten Umfang"
+ },
+ "Chłodzenie tarczy przy stali": {
+  "en": "Blade cooling on steel",
+  "de": "Scheibenkühlung bei Stahl"
+ },
+ "Gdańsk, Kochanowskiego 130": {
+  "en": "Gdańsk, Kochanowskiego 130",
+  "de": "Gdańsk, Kochanowskiego 130"
+ },
+ "Maksymalna średnica tarczy": {
+  "en": "Maximum blade diameter",
+  "de": "Maximaler Scheibendurchmesser"
+ },
+ "Awarie sieci wodociągowych": {
+  "en": "Water main failures",
+  "de": "Wasserrohrbrüche"
+ },
+ "Instrukcja obsługi HPO1200": {
+  "en": "HPO1200 operating manual",
+  "de": "Betriebsanleitung HPO1200"
+ },
+ "Wymiana odcinka rurociągu": {
+  "en": "Replacing a pipeline section",
+  "de": "Austausch eines Leitungsabschnitts"
+ },
+ "Moc akustyczna urządzenia": {
+  "en": "Sound power of the machine",
+  "de": "Schallleistung des Geräts"
+ },
+ "Prędkość obrotowa tarczy": {
+  "en": "Blade speed",
+  "de": "Scheibendrehzahl"
+ },
+ "Wolne miejsce wokół rury": {
+  "en": "Clearance around the pipe",
+  "de": "Freiraum um das Rohr"
+ },
+ "Zalecany przepływ oleju": {
+  "en": "Recommended oil flow",
+  "de": "Empfohlener Ölstrom"
+ },
+ "Praca przy zalaniu wodą": {
+  "en": "Working while flooded",
+  "de": "Arbeit unter Wasser"
+ },
+ "Ciśnienie robocze piły": {
+  "en": "Saw working pressure",
+  "de": "Betriebsdruck der Säge"
+ },
+ "Praca i bezpieczeństwo": {
+  "en": "Work and safety",
+  "de": "Arbeit und Sicherheit"
+ },
+ "Zakres cięcia, HPO1200": {
+  "en": "Cutting range, HPO1200",
+  "de": "Schnittbereich, HPO1200"
+ },
+ "żeliwo, stal, PVC, PE": {
+  "en": "cast iron, steel, PVC, PE",
+  "de": "Guss, Stahl, PVC, PE"
+ },
+ "wysyłamy na zapytanie": {
+  "en": "sent on request",
+  "de": "auf Anfrage"
+ },
+ "Zakres cięcia, HPO600": {
+  "en": "Cutting range, HPO600",
+  "de": "Schnittbereich, HPO600"
+ },
+ "Rozbiórki i demontaże": {
+  "en": "Demolition and dismantling",
+  "de": "Rückbau und Demontage"
+ },
+ "zraszanie obowiązkowe": {
+  "en": "water spray mandatory",
+  "de": "Berieselung vorgeschrieben"
+ },
+ "Polityka prywatności": {
+  "en": "Privacy policy",
+  "de": "Datenschutzerklärung"
+ },
+ "Ciepłownictwo i gaz": {
+  "en": "District heating and gas",
+  "de": "Fernwärme und Gas"
+ },
+ "Cięcie po obwodzie": {
+  "en": "Circumferential cut",
+  "de": "Umfangsschnitt"
+ },
+ "Ciśnienie powrotne": {
+  "en": "Return pressure",
+  "de": "Rücklaufdruck"
+ },
+ "Wcinki i przyłącza": {
+  "en": "Tie-ins and connections",
+  "de": "Einbindungen und Anschlüsse"
+ },
+ "Ciśnienie robocze": {
+  "en": "Working pressure",
+  "de": "Betriebsdruck"
+ },
+ "Szlifierka kątowa": {
+  "en": "Angle grinder",
+  "de": "Winkelschleifer"
+ },
+ "Zapytanie wysłane": {
+  "en": "Enquiry sent",
+  "de": "Anfrage gesendet"
+ },
+ "Zawór nadmiarowy": {
+  "en": "Relief valve",
+  "de": "Überdruckventil"
+ },
+ "Wyślij zapytanie": {
+  "en": "Send enquiry",
+  "de": "Anfrage senden"
+ },
+ "Wymagania źródła": {
+  "en": "Source requirements",
+  "de": "Anforderungen an die Quelle"
+ },
+ "Filtracja układu": {
+  "en": "System filtration",
+  "de": "Systemfiltration"
+ },
+ "Cięte materiały": {
+  "en": "Materials cut",
+  "de": "Trennbare Werkstoffe"
+ },
+ "Porównaj modele": {
+  "en": "Compare models",
+  "de": "Modelle vergleichen"
+ },
+ "Średnica tarczy": {
+  "en": "Blade diameter",
+  "de": "Scheibendurchmesser"
+ },
+ "Zapytaj o cenę": {
+  "en": "Request a quote",
+  "de": "Preis anfragen"
+ },
+ "Rodzaj źródła": {
+  "en": "Source type",
+  "de": "Art der Quelle"
+ },
+ "Osłona tarczy": {
+  "en": "Blade guard",
+  "de": "Schutzhaube"
+ },
+ "Zakres cięcia": {
+  "en": "Cutting range",
+  "de": "Schnittbereich"
+ },
+ "Jak to działa": {
+  "en": "How it works",
+  "de": "Funktionsweise"
+ },
+ "Lepkość oleju": {
+  "en": "Oil viscosity",
+  "de": "Ölviskosität"
+ },
+ "możliwa": {
+  "en": "possible",
+  "de": "möglich"
+ },
+ "Cięcie": {
+  "en": "Cutting",
+  "de": "Schneiden"
+ },
+ "Piła": {
+  "en": "Saw",
+  "de": "Säge"
+ },
+ "Dzięki hydraulicznemu źródłu zasilania piła może być używana w mokrych warunkach bez uszkodzenia.": {
+  "en": "Because the power source is hydraulic, the saw can be used in wet conditions without damage.",
+  "de": "Da die Energiequelle hydraulisch ist, kann die Säge ohne Schaden unter nassen Bedingungen eingesetzt werden."
+ },
+ "Instrukcja obsługi HPO1200, FIJALO-POLAND": {
+  "en": "HPO1200 operating manual, FIJALO-POLAND",
+  "de": "Betriebsanleitung HPO1200, FIJALO-POLAND"
+ },
+ "Cztery kroki od założenia łańcucha do zejścia się linii cięcia.": {
+  "en": "Four steps from laying the chain to the cut meeting itself.",
+  "de": "Vier Schritte vom Anlegen der Kette bis zum Zusammentreffen der Schnittlinie."
+ },
+ "Wymiana odcinków, wcinki, awarie wodociągowe, kolektory, rozbiórki.": {
+  "en": "Section replacement, tie-ins, water main failures, collectors, demolition.",
+  "de": "Abschnittstausch, Einbindungen, Wasserrohrbrüche, Sammler, Rückbau."
+ },
+ "Karta produktu, DTR i deklaracja zgodności w PDF.": {
+  "en": "Data sheet, technical documentation and declaration of conformity as PDF.",
+  "de": "Datenblatt, technische Dokumentation und Konformitätserklärung als PDF."
+ },
+ "przez okres do uzupełnienia": {
+  "en": "for a period to be confirmed",
+  "de": "für einen noch festzulegenden Zeitraum"
+ },
+ "Jeżeli uruchomimy Google Analytics, uzupełnimy tę sekcję o informację o zgodzie.": {
+  "en": "If we switch on Google Analytics, we will add information about consent to this section.",
+  "de": "Wenn wir Google Analytics aktivieren, ergänzen wir diesen Abschnitt um Angaben zur Einwilligung."
+ },
+ "Cztery kroki pracy i zasady bezpieczeństwa.": {
+  "en": "Four working steps and the safety rules.",
+  "de": "Vier Arbeitsschritte und die Sicherheitsregeln."
+ },
+ "Zapytanie o cenę, termin i dobór tarczy.": {
+  "en": "An enquiry about price, lead time and the right blade.",
+  "de": "Anfrage zu Preis, Termin und passender Trennscheibe."
+ },
+ "Pełna specyfikacja obu modeli": {
+  "en": "The full specification of both models",
+  "de": "Die vollständige Spezifikation beider Modelle"
+ },
+ "Gdzie piła pracuje": {
+  "en": "Where the saw works",
+  "de": "Wo die Säge arbeitet"
+ },
+ "Bezpieczeństwo": {
+  "en": "Safety",
+  "de": "Sicherheit"
+ },
+ "Pełna specyfikacja maszyny w konfiguracji standardowej.": {
+  "en": "The full specification of the machine in its standard configuration.",
+  "de": "Die vollständige Spezifikation der Maschine in Standardkonfiguration."
+ },
+ "Gdzie ta metoda cięcia daje najwięcej oszczędności.": {
+  "en": "Where this cutting method saves the most.",
+  "de": "Wo diese Schnittmethode am meisten spart."
+ },
+ "Głębokość, średnica cięcia, silnik, masa i wyposażenie standardowe.": {
+  "en": "Depth, cutting diameter, engine, weight and standard equipment.",
+  "de": "Tiefe, Schnittdurchmesser, Motor, Gewicht und Standardausstattung."
+ },
+ "Przebieg cięcia po obwodzie krok po kroku.": {
+  "en": "The circumferential cut step by step.",
+  "de": "Der Umfangsschnitt Schritt für Schritt."
+ },
+ "Odpowiedzi na pytania o tarcze, transport, obsługę i cenę.": {
+  "en": "Answers about blades, transport, operation and price.",
+  "de": "Antworten zu Trennscheiben, Transport, Bedienung und Preis."
+ },
+ "Najczęstsze pytania o pracę maszyny.": {
+  "en": "The most common questions about how the machine works.",
+  "de": "Die häufigsten Fragen zum Betrieb der Maschine."
+ }
+}

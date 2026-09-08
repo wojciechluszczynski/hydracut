@@ -1,4 +1,5 @@
 ---
+import { localizeHref , ui } from '../lib/i18n';
 import Base from '../layouts/Base.astro';
 import Plane from '../components/Plane.astro';
 import PageHero from '../components/PageHero.astro';
@@ -37,9 +38,9 @@ const schema = [
       <aside class="faq-page__aside">
         <p class="label">Nie ma Twojego pytania?</p>
         <p class="faq-page__txt">
-          Zadzwoń albo wyślij zapytanie. Odpowiadamy w ciągu jednego dnia roboczego.
+          {ui("faqCta")}
         </p>
-        <a href="/kontakt/" class="btn btn--solid">Zapytaj o cenę</a>
+        <a href={localizeHref("/kontakt/")} class="btn btn--solid">{ui("quote")}</a>
       </aside>
       </div>
     </div>

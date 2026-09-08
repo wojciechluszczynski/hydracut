@@ -1,4 +1,5 @@
 ---
+import { ui } from '../lib/i18n';
 import Base from '../layouts/Base.astro';
 import Plane from '../components/Plane.astro';
 import PageHero from '../components/PageHero.astro';
@@ -27,48 +28,38 @@ const crumbs = [{ label: 'Polityka prywatności', href: '/polityka-prywatnosci/'
 
       <h2>Jakie dane zbieramy</h2>
       <p>
-        Wyłącznie te, które sam podajesz w formularzu: imię i nazwisko, nazwę firmy, numer telefonu,
-        adres e-mail, wybrany zakres średnic rur i treść wiadomości. Zapisujemy też adres IP
-        oraz datę wysłania, żeby ograniczyć spam.
+        {ui("privData")}
       </p>
 
       <h2>Po co je przetwarzamy</h2>
       <p>
-        Żeby odpowiedzieć na zapytanie i przedstawić ofertę. Podstawą prawną jest art. 6 ust. 1 lit. b
-        RODO (działania przed zawarciem umowy) oraz art. 6 ust. 1 lit. f RODO (prawnie uzasadniony
-        interes w postaci obsługi korespondencji i ochrony przed nadużyciami).
+        {ui("privWhy")}
       </p>
 
-      <h2>Jak długo je trzymamy</h2>
+      <h2>{ui("howLongKeep")}</h2>
       <p>
-        Korespondencję handlową przechowujemy przez okres niezbędny do obsługi zapytania, a następnie
-        <Val text="?przez okres do uzupełnienia" /> na potrzeby ewentualnych roszczeń. Dane z formularza
-        nie trafiają do systemu marketing automation ani na listę mailingową.
+        {ui("privKeep1")}
+        <Val text="?przez okres do uzupełnienia" /> {ui("privKeep2")}
       </p>
 
       <h2>Komu je przekazujemy</h2>
       <p>
-        Dostawcy hostingu, na którym działa serwis i skrzynka pocztowa. Nie sprzedajemy danych i nie
-        przekazujemy ich poza Europejski Obszar Gospodarczy.
+        {ui("privShare")}
       </p>
 
       <h2>Twoje prawa</h2>
       <p>
-        Masz prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania,
-        przenoszenia oraz wniesienia sprzeciwu. Możesz też złożyć skargę do Prezesa Urzędu Ochrony
-        Danych Osobowych. Żeby skorzystać z tych praw, napisz na adres podany wyżej.
+        {ui("privRights")}
       </p>
 
       <h2>Pliki cookie</h2>
       <p>
-        Serwis nie używa plików cookie do śledzenia i nie osadza skryptów reklamowych.
-        Film promocyjny ładuje się dopiero po kliknięciu w podgląd, więc do tego momentu przeglądarka
-        nie łączy się z serwerami YouTube.
+        {ui("privCookies")}
         <Val text="?Jeżeli uruchomimy Google Analytics, uzupełnimy tę sekcję o informację o zgodzie." />
       </p>
 
       <h2>Zmiany polityki</h2>
-      <p>Aktualna wersja obowiązuje od dnia publikacji na tej stronie.</p>
+      <p>{ui("policyValid")}</p>
       </div>
     </div>
   </section>

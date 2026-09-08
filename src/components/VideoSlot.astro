@@ -1,4 +1,5 @@
 ---
+import { ui } from '../lib/i18n';
 /**
  * Promo film slot. Empty youtubeId renders the reserved frame.
  * With an id it renders a click-to-load facade: no iframe, no YouTube
@@ -49,7 +50,7 @@ const { youtubeId = '', file = '', poster = '', caption, title } = Astro.props;
     <figure class="vid vid--empty">
       <div class="vid__frame">
         <span class="vid__tri vid__tri--ghost" aria-hidden="true" />
-        <span class="vid__soon mono">Film promocyjny &middot; wkrótce</span>
+        <span class="vid__soon mono">{ui("videoSoon")}</span>
       </div>
       <figcaption class="vid__cap mono">{caption}</figcaption>
     </figure>

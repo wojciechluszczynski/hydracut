@@ -26,3 +26,4 @@ pnpm-debug.log*
 # internal working notes (budget, contacts, tooling) — not part of the deliverable
 HANDOFF.md
 .git-hornetcut-backup/
+.i18n-build/

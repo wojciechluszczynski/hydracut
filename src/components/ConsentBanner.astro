@@ -1,4 +1,5 @@
 ---
+import { localizeHref , ui } from '../lib/i18n';
 /**
  * Cookie consent, shown only when an editor has actually configured a tag.
  *
@@ -16,13 +17,12 @@ const needed = Boolean(t.gtmId || t.ga4Id || t.googleAdsId || t.metaPixelId);
   <div class="consent" id="consent" hidden>
     <div class="consent__inner">
       <p class="consent__text">
-        Używamy statystyk i narzędzi reklamowych, żeby wiedzieć, które treści są przydatne.
-        Bez zgody nie ładujemy żadnych skryptów zewnętrznych.
-        <a href="/polityka-prywatnosci/">Polityka prywatności</a>
+        {ui("consentBody")}
+        <a href={localizeHref("/polityka-prywatnosci/")}>{ui("privacy")}</a>
       </p>
       <div class="consent__actions">
-        <button type="button" class="consent__btn mono" data-consent="denied">Tylko niezbędne</button>
-        <button type="button" class="consent__btn consent__btn--yes mono" data-consent="granted">Zgadzam się</button>
+        <button type="button" class="consent__btn mono" data-consent="denied">{ui("cookiesOnly")}</button>
+        <button type="button" class="consent__btn consent__btn--yes mono" data-consent="granted">{ui("cookiesOk")}</button>
       </div>
     </div>
   </div>

@@ -11,7 +11,7 @@
 import routes from './routes.json'
 import strings from './ui.json'
 
-export const LOCALES = ['pl', 'en', 'de'] as const
+export const LOCALES = ['pl', 'en', 'de', 'uk'] as const
 export type Locale = (typeof LOCALES)[number]
 
 /** Language of the current build. Everything else derives from it. */
@@ -20,8 +20,15 @@ export const LANG: Locale = (() => {
   return (LOCALES as readonly string[]).includes(raw) ? (raw as Locale) : 'pl'
 })()
 
-/** Polish stays at the root; the other two live under a prefix. */
-export const prefixOf = (lang: Locale) => (lang === 'pl' ? '' : `/${lang}`)
+/**
+ * The URL prefix is deliberately not the locale code. Ukrainian is `uk` under
+ * ISO 639-1 and has to stay `uk` in lang and hreflang, but a Ukrainian reader
+ * recognises UA, and `/uk/` next to `/en/` reads as the United Kingdom. The
+ * code stays correct for machines, the address stays legible for people.
+ */
+const URL_PREFIX: Record<Locale, string> = {pl: '', en: '/en', de: '/de', uk: '/ua'}
+
+export const prefixOf = (lang: Locale) => URL_PREFIX[lang]
 
 /**
  * Slugs are translated, not just prefixed. A German buyer landing on
@@ -41,9 +48,12 @@ export const alternates = (key: RouteKey) =>
   LOCALES.map((lang) => ({lang, href: L(key, lang)}))
 
 /** BCP 47 tags, for the lang attribute, og:locale and JSON-LD. */
-export const BCP47: Record<Locale, string> = {pl: 'pl-PL', en: 'en-GB', de: 'de-DE'}
-export const OG_LOCALE: Record<Locale, string> = {pl: 'pl_PL', en: 'en_GB', de: 'de_DE'}
-export const LANG_NAME: Record<Locale, string> = {pl: 'Polski', en: 'English', de: 'Deutsch'}
+export const BCP47: Record<Locale, string> = {pl: 'pl-PL', en: 'en-GB', de: 'de-DE', uk: 'uk-UA'}
+export const OG_LOCALE: Record<Locale, string> = {pl: 'pl_PL', en: 'en_GB', de: 'de_DE', uk: 'uk_UA'}
+export const LANG_NAME: Record<Locale, string> = {pl: 'Polski', en: 'English', de: 'Deutsch', uk: 'Українська'}
+
+/** Two-letter label on the switcher. Ukrainian shows its country code, not its language code. */
+export const LANG_SHORT: Record<Locale, string> = {pl: 'PL', en: 'EN', de: 'DE', uk: 'UA'}
 
 /** Static UI text that lives in components rather than in the CMS. */
 export const UI = {

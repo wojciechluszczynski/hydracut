@@ -7,13 +7,13 @@
  * people stop using them. The current language stays in the list, marked, so
  * the control reads as a state and not as a link to somewhere else.
  */
-import { LANG, LOCALES, BCP47, LANG_NAME, localizeHref } from '../lib/i18n';
+import { LANG, LOCALES, BCP47, LANG_NAME, LANG_SHORT, localizeHref } from '../lib/i18n';
 
 const here = Astro.url.pathname;
 const options = LOCALES.map((lang) => ({
   lang,
   name: LANG_NAME[lang],
-  short: lang.toUpperCase(),
+  short: LANG_SHORT[lang],
   href: localizeHref(here, lang),
   current: lang === LANG,
 }));

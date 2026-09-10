@@ -111,7 +111,10 @@ const urls = []
 for (const [key, byLang] of groups) {
   if (key.startsWith('solo:') && Object.values(byLang)[0].includes('404')) continue
   for (const [lang, p] of Object.entries(byLang)) {
-    if (p.includes('polityka-prywatnosci') || p.includes('privacy-policy') || p.includes('datenschutz')) continue
+    // Wykluczamy po kluczu trasy, nie po nazwie sluga: lista slugow milczaco
+    // przepuszczala kazdy nowy jezyk, przez co ukrainska polityka prywatnosci
+    // trafila do sitemapy, a jej trzy siostry nie.
+    if (key === 'privacy') continue
     const alts = Object.entries(byLang)
       .map(([l, ap]) => `    <xhtml:link rel="alternate" hreflang="${HREFLANG[l]}" href="${esc(SITE + ap)}"/>`)
       .join('\n')

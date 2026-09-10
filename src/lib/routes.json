@@ -2,51 +2,61 @@
   "home": {
     "pl": "/",
     "en": "/",
-    "de": "/"
+    "de": "/",
+    "uk": "/"
   },
   "specs": {
     "pl": "/dane-techniczne/",
     "en": "/specifications/",
-    "de": "/technische-daten/"
+    "de": "/technische-daten/",
+    "uk": "/tekhnichni-dani/"
   },
   "models": {
     "pl": "/modele/",
     "en": "/models/",
-    "de": "/modelle/"
+    "de": "/modelle/",
+    "uk": "/modeli/"
   },
   "how": {
     "pl": "/jak-to-dziala/",
     "en": "/how-it-works/",
-    "de": "/funktionsweise/"
+    "de": "/funktionsweise/",
+    "uk": "/yak-tse-pratsiuie/"
   },
   "uses": {
     "pl": "/zastosowania/",
     "en": "/applications/",
-    "de": "/anwendungen/"
+    "de": "/anwendungen/",
+    "uk": "/zastosuvannia/"
   },
   "faq": {
     "pl": "/faq/",
     "en": "/faq/",
-    "de": "/faq/"
+    "de": "/faq/",
+    "uk": "/faq/"
   },
   "files": {
     "pl": "/do-pobrania/",
     "en": "/downloads/",
-    "de": "/downloads/"
+    "de": "/downloads/",
+    "uk": "/zavantazhennia/"
   },
   "contact": {
     "pl": "/kontakt/",
     "en": "/contact/",
-    "de": "/kontakt/"
+    "de": "/kontakt/",
+    "uk": "/kontakty/"
   },
   "thanks": {
     "pl": "/kontakt/dziekujemy/",
     "en": "/contact/thank-you/",
-    "de": "/kontakt/danke/"
+    "de": "/kontakt/danke/",
+    "uk": "/kontakty/diakuiemo/"
   },
   "privacy": {
     "pl": "/polityka-prywatnosci/",
     "en": "/privacy-policy/",
-    "de": "/datenschutz/"
+    "de": "/datenschutz/",
+    "uk": "/polityka-konfidentsiinosti/"
   }
 }

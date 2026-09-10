@@ -13,7 +13,10 @@ import {existsSync} from 'node:fs'
 import path from 'node:path'
 
 const routes = JSON.parse(await readFile(new URL('../src/lib/routes.json', import.meta.url), 'utf8'))
-const LOCALES = ['pl', 'en', 'de']
+const LOCALES = ['pl', 'en', 'de', 'uk']
+const HREFLANG = {pl: 'pl-PL', en: 'en-GB', de: 'de-DE', uk: 'uk-UA'}
+// Musi zgadzac sie z URL_PREFIX w src/lib/i18n.ts: ukrainski jedzie pod /ua/.
+const PREFIX = {pl: '', en: 'en', de: 'de', uk: 'ua'}
 const SITE = process.env.SITE_URL || JSON.parse(await readFile(new URL('../package.json', import.meta.url), 'utf8')).homepage || ''
 
 const trim = (p) => p.replace(/^\/|\/$/g, '')
@@ -62,12 +65,12 @@ for (const lang of LOCALES) build(lang, path.join(staging, lang))
 await cp(path.join(staging, 'pl'), dist, {recursive: true})
 
 // The other languages go under their prefix, with directories renamed.
-const pages = {pl: [], en: [], de: []}
+const pages = Object.fromEntries(LOCALES.map((l) => [l, []]))
 for (const lang of LOCALES.filter((l) => l !== 'pl')) {
   const src = path.join(staging, lang)
   for (const rel of await walk(src)) {
     const mapped = remap(rel.split(path.sep).join('/'), lang)
-    const dest = path.join(dist, lang, mapped)
+    const dest = path.join(dist, PREFIX[lang], mapped)
     await mkdir(path.dirname(dest), {recursive: true})
     await cp(path.join(src, rel), dest)
   }
@@ -75,20 +78,20 @@ for (const lang of LOCALES.filter((l) => l !== 'pl')) {
 
 // Collect page URLs per language for the sitemap, from what actually exists.
 for (const lang of LOCALES) {
-  const base = lang === 'pl' ? dist : path.join(dist, lang)
+  const base = lang === 'pl' ? dist : path.join(dist, PREFIX[lang])
   if (!existsSync(base)) continue
   for (const rel of await walk(base)) {
     if (path.basename(rel) !== 'index.html') continue
-    if (lang === 'pl' && (rel.startsWith('en/') || rel.startsWith('de/'))) continue
+    if (lang === 'pl' && LOCALES.some((l) => l !== 'pl' && rel.startsWith(`${PREFIX[l]}/`))) continue
     const dir = path.dirname(rel).split(path.sep).join('/')
     const urlPath = dir === '.' ? '/' : `/${dir}/`
-    pages[lang].push(lang === 'pl' ? urlPath : `/${lang}${urlPath}`)
+    pages[lang].push(lang === 'pl' ? urlPath : `/${PREFIX[lang]}${urlPath}`)
   }
 }
 
 /** Pair each page with its siblings so the sitemap can carry hreflang. */
 const keyOf = (urlPath, lang) => {
-  const bare = lang === 'pl' ? urlPath : urlPath.replace(`/${lang}`, '') || '/'
+  const bare = lang === 'pl' ? urlPath : urlPath.replace(`/${PREFIX[lang]}`, '') || '/'
   for (const [key, r] of Object.entries(routes)) if (trim(r[lang]) === trim(bare)) return key
   const art = bare.match(/^\/[^/]+\/(.+?)\/$/)
   return art ? `article:${art[1]}` : null
@@ -110,7 +113,7 @@ for (const [key, byLang] of groups) {
   for (const [lang, p] of Object.entries(byLang)) {
     if (p.includes('polityka-prywatnosci') || p.includes('privacy-policy') || p.includes('datenschutz')) continue
     const alts = Object.entries(byLang)
-      .map(([l, ap]) => `    <xhtml:link rel="alternate" hreflang="${{pl: 'pl-PL', en: 'en-GB', de: 'de-DE'}[l]}" href="${esc(SITE + ap)}"/>`)
+      .map(([l, ap]) => `    <xhtml:link rel="alternate" hreflang="${HREFLANG[l]}" href="${esc(SITE + ap)}"/>`)
       .join('\n')
     urls.push(
       `  <url>\n    <loc>${esc(SITE + p)}</loc>\n    <lastmod>${today}</lastmod>\n${alts}\n` +
@@ -127,4 +130,5 @@ await rm(path.join(dist, 'sitemap-index.xml'), {force: true})
 await rm(path.join(dist, 'sitemap-0.xml'), {force: true})
 await rm(staging, {recursive: true, force: true})
 
-console.log(`\n✓ dist gotowy — pl:${pages.pl.length} en:${pages.en.length} de:${pages.de.length}, ${urls.length} adresów w sitemap.xml`)
+console.log(`
+✓ dist gotowy — ${LOCALES.map((l) => `${l}:${pages[l].length}`).join(' ')}, ${urls.length} adresów w sitemap.xml`)

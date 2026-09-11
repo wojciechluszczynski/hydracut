@@ -1,6 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /kontakt/dziekujemy/
 Disallow: /api/
 
 # Silniki odpowiedzi. Chcemy być cytowani, więc wpuszczamy je świadomie.
@@ -40,4 +39,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://hydracut.pl/sitemap-index.xml
+Sitemap: https://hydracut.pl/sitemap.xml

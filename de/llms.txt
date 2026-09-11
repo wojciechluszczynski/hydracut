@@ -1,0 +1,121 @@
+# HYDRACUT. HydraCut HPO
+
+> Die HydraCut legt eine Kette um das Rohr und führt die Trennscheibe rundherum, ohne das Rohr an die Oberfläche zu heben. Sie braucht 35 cm Freiraum, arbeitet auch unter Wasser und trennt Guss Ø800 in 14 Minuten.
+
+Producent: FIJALO-POLAND Cyprian Fijało, ul. Jana Kochanowskiego 130, 80-405 Gdańsk.
+Kontakt: +48 534 979 628, biuro@fijalo.pl. Montag bis Freitag, 9:00–18:00 Uhr.
+Strona: https://hydracut.pl
+Realizacja: Wojciech Łuszczyński, GTM Architect, wojciech.io
+
+## Czym jest HydraCut HPO
+
+Ein Brenner eignet sich nur für Metall und hinterlässt eine Wärmeeinflusszone, im Graben mit Gas oder Restmedium scheidet er oft aus. Der Winkelschleifer trennt alles, verlangt aber, um das Rohr herumzugehen und die Ebene von Hand zu halten. Die Umfangssäge löst beides: Sie wird am Rohr aufgespannt, führt die Scheibe entlang einer Kette und kehrt exakt zum Ausgangspunkt zurück. Der Bediener hält nicht die Linie, sondern nur den Vorschub.
+
+## Kluczowe parametry
+
+- Rohrdurchmesserbereich: 203–1200 mm
+- Freiraum um das Rohr: 35 cm
+- Guss Ø800: 14 min
+- Betriebsdruck: 138 bar
+- Gewicht der Säge: 13–14 kg
+
+## Pełna specyfikacja
+
+- Schnittbereich, HPO600: 203–603 mm
+- Schnittbereich, HPO1200: 600–1200 mm
+- Gewicht: 13 kg / 14 kg
+- Scheibendurchmesser: 200 mm
+- Scheibendrehzahl: 2000 U/min
+- Ölstrom: 20–26 l/min
+- Betriebsdruck: 138 bar
+- Freiraum um das Rohr: 35 cm
+
+## Jak działa
+
+1. Kette anlegen: Die feste Führungskette umschließt das Rohr 205 mm von der Schnittlinie und gibt die Ebene vor. Sie, nicht der Arm des Bedieners, bestimmt, wohin die Scheibe läuft.
+2. Säge aufsetzen: Die Säge sitzt auf der Führungskette, die Rollenkette verriegelt sie unter dem Rohr. Nötig sind 35 cm Freiraum, damit passt sie in einen engen Graben.
+3. Hydraulik anschließen: Versorgung aus dem Aggregat: Durchfluss 23 bis 26 l/min bei 140 bis 160 bar. Die Säge braucht eine Dreileiterquelle, weil eine eigene Leitung die Leckage der Pumpe abführt.
+4. Umfangsschnitt: Der Bediener zieht den Wagen am Führungsrohr entgegen der Scheibendrehung und wechselt auf halbem Umfang auf die andere Rohrseite. Der Schnitt trifft am Ausgangspunkt wieder zusammen, ohne Spiraleffekt.
+
+## Zastosowania
+
+### Austausch eines Leitungsabschnitts
+Das beschädigte Stück wird mit zwei Umfangsschnitten herausgetrennt und entnommen. Die übrige Leitung bleibt unberührt, und der Graben muss nicht länger sein als der ausgetauschte Abschnitt.
+
+### Einbindungen und Anschlüsse
+Öffnen einer in Betrieb befindlichen Hauptleitung für einen neuen Anschluss oder eine Armatur. Der Umfangsschnitt ergibt eine gleichmäßige, rechtwinklige Kante für Flansch oder Kupplung.
+
+### Wasserrohrbrüche
+Bei einer Störung läuft das Wasser meist weiter, bis der Abschnitt abgesperrt ist. Der Hydraulikantrieb arbeitet auch dann, wenn die Säge überflutet wird.
+
+### Kanalizacja i kolektory
+Die HPO1200 reicht bis 1200 mm und deckt damit Sammlerrohre ab. Fünfunddreißig Zentimeter Freiraum um das Rohr genügen, was in Schächten und engen Gräben zählt.
+
+### Rückbau und Demontage
+Zerteilen eines langen Rohrs in Längen, die ein Bagger herausheben und abfahren kann. Ohne offene Flamme, also ohne Einschränkungen bei Restmedium.
+
+### Fernwärme und Gas
+Mechanisches Trennen statt Brenner beseitigt die Wärmeeinflusszone und offenes Feuer im Graben.
+
+## Wyposażenie standardowe
+
+- Feste Führungskette: Gibt die Schnittebene vor und hält sie über den gesamten Umfang.
+- Bewegliche Kette: Bewegt die Säge beim Trennen um das Rohr.
+- Verstellbare Schutzhaube: Deckt die Funken- und Splitterzone ab, auf den Rohrdurchmesser einstellbar.
+- Diamanttrennscheibe: 200 mm, US SAWS Tiger Tooth APB08125. Guss, Stahl, PVC, PE.
+- Transportkiste: Säge, Ketten und Schläuche in einer Verpackung.
+- Hydraulikschläuche: Zum Anschluss an ein Aggregat im Dreileitersystem.
+
+## Pytania i odpowiedzi
+
+### Welche Rohre trennt die HydraCut?
+Guss, Stahl, PVC und PE. Der Durchmesserbereich hängt vom Modell ab: Die HPO600 trennt von 203 bis 603 mm, die HPO1200 von 600 bis 1200 mm.
+
+### Wie viel Platz wird um das Rohr benötigt?
+Fünfunddreißig Zentimeter Freiraum rundherum. Das genügt, damit die Kette das Rohr umschließt und die Säge es umrunden kann.
+
+### Funktioniert die Säge, wenn Wasser aus dem Rohr läuft?
+Ja. Der Antrieb ist hydraulisch, die Säge arbeitet also auch, wenn sie vom Wasser des getrennten Rohrs überflutet wird. Bei Wasserrohrbrüchen ist das der Normalfall.
+
+### Wie lange dauert das Trennen eines Rohrs?
+Der Hersteller nennt 14 Minuten für ein Gussrohr Ø800. Die Zeit hängt vom Werkstoff, der Wandstärke und dem Zustand der Scheibe ab.
+
+### Was wird zur Versorgung benötigt?
+Ein Aggregat mit 23 bis 26 l/min Durchfluss und 140 bis 160 bar Betriebsdruck, mit einem auf 155 bis 165 bar eingestellten Überdruckventil. Die Säge braucht eine Dreileiterquelle: Eine eigene Leitung führt die Pumpenleckage ab, und nicht jedes Aggregat hat diesen Anschluss.
+
+### Trifft sich der Schnitt in einem Punkt?
+Ja. Die Führungskette hält die Scheibe in einer Ebene, es gibt also weder Spiraleffekt noch versetzte Schnittlinien.
+
+### Welches Modell, HPO600 oder HPO1200?
+Der Durchmesserbereich entscheidet. Die HPO600 trennt bis 603 mm, die HPO1200 ab 600 mm aufwärts. Die Überschneidung beträgt drei Millimeter, außerhalb davon bestimmt der Rohrdurchmesser das Modell.
+
+### Muss die Trennscheibe mit Wasser gekühlt werden?
+Bei Stahlrohren ja, ausnahmslos. Die Berieselung wird mit einer Drucksprühflasche über die Schnellkupplung am Scheibengehäuse angeschlossen, ein Kugelhahn regelt die Wassermenge. Ohne Berieselung funkt Stahl so stark, dass die Lebensdauer des Führungsbands sinkt.
+
+### Wie ist der Bediener geschützt?
+Die verstellbare Schutzhaube deckt die Schnittzone auf dem gesamten Umfang ab und schützt vor Funken und Splittern. Der Schalldruck am Arbeitsplatz beträgt 93,4 dBA, unter Volllast kann der Lärm 100 dBA überschreiten, Gehörschutz ist daher Pflicht.
+
+### Wie viele Personen bedienen die Säge?
+Zwei. Eine führt die Säge am Rohr, die andere steuert den Ölstrom am Aggregat. Die Herstelleranleitung verlangt eine zweite Person beim Start und während des gesamten Schnitts.
+
+### Wie schwer ist die Säge?
+Dreizehn Kilogramm beim Modell HPO600 und vierzehn bei der HPO1200. Die Säge selbst wird von Hand in den Graben getragen, das Aggregat bleibt oben.
+
+### Was kostet die HydraCut?
+Der Preis hängt vom Modell und der Konfiguration des Satzes ab. Wir nennen ihn als Antwort auf eine Anfrage, in der Regel innerhalb eines Werktags.
+
+## Strony
+
+- https://hydracut.pl/ : strona główna
+- https://hydracut.pl/modele/ : porównanie HPO600 i HPO1200
+- https://hydracut.pl/dane-techniczne/ : pełna specyfikacja
+- https://hydracut.pl/zastosowania/ : zastosowania
+- https://hydracut.pl/jak-to-dziala/ : przebieg pracy krok po kroku
+- https://hydracut.pl/faq/ : pytania i odpowiedzi
+- https://hydracut.pl/kontakt/ : zapytanie ofertowe
+- https://hydracut.pl/do-pobrania/ : dokumentacja PDF
+
+## Uwagi
+
+Dane oznaczone jako "do potwierdzenia" nie zostały jeszcze zweryfikowane w dokumentacji
+technicznej producenta i nie powinny być cytowane jako pewne.

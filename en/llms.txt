@@ -1,0 +1,121 @@
+# HYDRACUT. HydraCut HPO
+
+> The HydraCut wraps a chain around the pipe and guides the blade all the way round, without lifting the pipe to the surface. It needs 35 cm of clearance, works while flooded with water and cuts Ø800 cast iron in 14 minutes.
+
+Producent: FIJALO-POLAND Cyprian Fijało, ul. Jana Kochanowskiego 130, 80-405 Gdańsk.
+Kontakt: +48 534 979 628, biuro@fijalo.pl. Monday to Friday, 9:00–18:00.
+Strona: https://hydracut.pl
+Realizacja: Wojciech Łuszczyński, GTM Architect, wojciech.io
+
+## Czym jest HydraCut HPO
+
+A torch works on metal only and leaves a heat-affected zone, and in a trench with gas or residual medium it is often ruled out. An angle grinder cuts anything, but you have to walk round the pipe and hold the plane by hand. The circumferential saw solves both: it clamps onto the pipe, guides the blade along a chain and comes back exactly to the starting point. The operator does not hold the line, only the feed.
+
+## Kluczowe parametry
+
+- Pipe diameter range: 203–1200 mm
+- Clearance around the pipe: 35 cm
+- Cast iron Ø800: 14 min
+- Working pressure: 138 bar
+- Saw weight: 13–14 kg
+
+## Pełna specyfikacja
+
+- Cutting range, HPO600: 203–603 mm
+- Cutting range, HPO1200: 600–1200 mm
+- Weight: 13 kg / 14 kg
+- Blade diameter: 200 mm
+- Blade speed: 2000 rpm
+- Oil flow: 20–26 l/min
+- Working pressure: 138 bar
+- Clearance around the pipe: 35 cm
+
+## Jak działa
+
+1. Laying the chain: The fixed guide chain wraps the pipe 205 mm from the cut line and sets the plane. That chain, not the operator's arm, decides where the blade goes.
+2. Mounting the saw: The saw sits on the guide chain and the roller chain locks it from underneath the pipe. It needs 35 cm of clearance, so it fits a tight trench.
+3. Connecting the hydraulics: Supply from a power pack: flow 23 to 26 l/min at 140 to 160 bar. The saw needs a three-line source, because a separate line returns pump leakage.
+4. Cutting round the pipe: The operator pulls the carriage by the guide tube, against the blade rotation, and switches to the other side of the pipe halfway round. The cut meets itself at the starting point, with no spiral.
+
+## Zastosowania
+
+### Replacing a pipeline section
+The damaged length is cut out with two circumferential cuts and lifted away. The rest of the pipeline is untouched, and the trench need be no longer than the section being replaced.
+
+### Tie-ins and connections
+Opening a live main for a new connection or fitting. A circumferential cut gives an even, square edge for a flange or a coupling.
+
+### Water main failures
+On a failure the water usually keeps running until the section is shut off. The hydraulic drive works even while the saw is flooded.
+
+### Kanalizacja i kolektory
+The HPO1200 reaches 1200 mm, so it covers collector pipes. Thirty-five centimetres of clearance around the pipe is enough, which matters in chambers and tight trenches.
+
+### Demolition and dismantling
+Cutting a long pipe into lengths an excavator can lift out and haul away. No open flame, so no restrictions where medium residue remains.
+
+### District heating and gas
+Mechanical cutting instead of a torch removes the heat-affected zone and the open flame from the trench.
+
+## Wyposażenie standardowe
+
+- Fixed guide chain: Sets the cutting plane and holds it all the way round.
+- Moving chain: Moves the saw around the pipe while cutting.
+- Adjustable blade guard: Covers the spark and fragment zone, set to the pipe diameter.
+- Diamond blade: 200 mm, US SAWS Tiger Tooth APB08125. Cast iron, steel, PVC, PE.
+- Transport case: Saw, chains and hoses in one package.
+- Hydraulic hoses: For connection to a power pack in a three-line circuit.
+
+## Pytania i odpowiedzi
+
+### What pipes does the HydraCut cut?
+Cast iron, steel, PVC and PE. The diameter range depends on the model: the HPO600 cuts from 203 to 603 mm, the HPO1200 from 600 to 1200 mm.
+
+### How much room is needed around the pipe?
+Thirty-five centimetres of clear space all round. That is enough for the chain to wrap the pipe and for the saw to travel around it.
+
+### Will the saw work while water is running from the pipe?
+Yes. The drive is hydraulic, so the saw works even when flooded by water from the pipe being cut. That is the normal situation on water main failures.
+
+### How long does it take to cut through a pipe?
+The manufacturer quotes 14 minutes for a Ø800 cast iron pipe. The time depends on the material, the wall thickness and the condition of the blade.
+
+### What is needed to power it?
+A power pack with a flow of 23 to 26 l/min and a working pressure of 140 to 160 bar, with the relief valve set to 155 to 165 bar. The saw needs a three-line source: a separate line returns pump leakage, and not every power pack has that connection.
+
+### Does the cut meet itself at one point?
+Yes. The guide chain keeps the blade in one plane, so there is no spiral and no missed line.
+
+### Which model, the HPO600 or the HPO1200?
+The diameter range decides. The HPO600 cuts up to 603 mm, the HPO1200 from 600 mm upwards. The overlap is three millimetres, so outside it the pipe diameter picks the model.
+
+### Does the blade need water cooling?
+On steel pipes yes, without exception. Water is fed from a pressure sprayer through the quick coupling on the blade housing, and a ball valve sets the amount. Without it, steel sparks enough to shorten the life of the guide belt.
+
+### How is the operator protected?
+The adjustable blade guard covers the cutting zone all the way round, against sparks and fragments. Sound pressure at the working point is 93.4 dBA, but under full load noise can exceed 100 dBA, so ear protection is mandatory.
+
+### How many people operate the saw?
+Two. One guides the saw around the pipe, the other controls the oil flow at the power pack. The manufacturer's manual requires a second operator at start-up and throughout the cut.
+
+### How much does the saw weigh?
+Thirteen kilograms on the HPO600 and fourteen on the HPO1200. The saw itself is carried down into the trench by hand, the power pack stays at the top.
+
+### What does the HydraCut cost?
+The price depends on the model and the configuration of the set. We give it in reply to an enquiry, usually within one working day.
+
+## Strony
+
+- https://hydracut.pl/ : strona główna
+- https://hydracut.pl/modele/ : porównanie HPO600 i HPO1200
+- https://hydracut.pl/dane-techniczne/ : pełna specyfikacja
+- https://hydracut.pl/zastosowania/ : zastosowania
+- https://hydracut.pl/jak-to-dziala/ : przebieg pracy krok po kroku
+- https://hydracut.pl/faq/ : pytania i odpowiedzi
+- https://hydracut.pl/kontakt/ : zapytanie ofertowe
+- https://hydracut.pl/do-pobrania/ : dokumentacja PDF
+
+## Uwagi
+
+Dane oznaczone jako "do potwierdzenia" nie zostały jeszcze zweryfikowane w dokumentacji
+technicznej producenta i nie powinny być cytowane jako pewne.

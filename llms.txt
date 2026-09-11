@@ -1,0 +1,121 @@
+# HYDRACUT. HydraCut HPO
+
+> HydraCut obejmuje rurę łańcuchem i prowadzi tarczę po obwodzie, bez wyciągania rury na powierzchnię. Potrzebuje 35 cm wolnego miejsca dookoła, pracuje zalewana wodą i tnie żeliwo fi 800 w 14 minut.
+
+Producent: FIJALO-POLAND Cyprian Fijało, ul. Jana Kochanowskiego 130, 80-405 Gdańsk.
+Kontakt: +48 534 979 628, biuro@fijalo.pl. Poniedziałek do piątku, 9:00–18:00.
+Strona: https://hydracut.pl
+Realizacja: Wojciech Łuszczyński, GTM Architect, wojciech.io
+
+## Czym jest HydraCut HPO
+
+Palnik nadaje się tylko do metalu i zostawia strefę wpływu ciepła, a w wykopie z gazem albo resztkami medium bywa wykluczony. Szlifierka kątowa tnie wszystko, ale wymaga obejścia rury dookoła i utrzymania płaszczyzny ręką. Piła obwodowa rozwiązuje jedno i drugie: mocuje się na rurze, prowadzi tarczę po łańcuchu i wraca dokładnie w punkt startu. Operator nie utrzymuje linii, tylko posuw.
+
+## Kluczowe parametry
+
+- Zakres średnic rur: 203–1200 mm
+- Wolnego miejsca wokół rury: 35 cm
+- Żeliwo fi 800: 14 min
+- Ciśnienie robocze: 138 bar
+- Masa piły: 13–14 kg
+
+## Pełna specyfikacja
+
+- Zakres cięcia, HPO600: 203–603 mm
+- Zakres cięcia, HPO1200: 600–1200 mm
+- Masa: 13 kg / 14 kg
+- Średnica tarczy: 200 mm
+- Prędkość obrotowa tarczy: 2000 1/min
+- Przepływ oleju: 20–26 l/min
+- Ciśnienie robocze: 138 bar
+- Wolne miejsce wokół rury: 35 cm
+
+## Jak działa
+
+1. Założenie łańcucha: Łańcuch prowadzący stały obejmuje rurę 205 mm od linii cięcia i wyznacza płaszczyznę. To on, a nie ręka operatora, decyduje o tym, gdzie pójdzie tarcza.
+2. Zamocowanie piły: Piła siada na łańcuchu prowadzącym, a łańcuch rolkowy blokuje ją od spodu rury. Potrzeba 35 cm wolnego miejsca dookoła, więc mieści się w ciasnym wykopie.
+3. Podłączenie hydrauliki: Zasilanie z agregatu: przepływ 23 do 26 l/min przy 140 do 160 bar. Piła wymaga źródła trzyliniowego, bo osobną linią odprowadza przecieki z pompy.
+4. Cięcie po obwodzie: Operator ciągnie wózek rurką prowadzącą, przeciwnie do obrotu tarczy, i w połowie obwodu przechodzi na drugą stronę rury. Cięcie schodzi się w punkcie startu, bez efektu spirali.
+
+## Zastosowania
+
+### Wymiana odcinka rurociągu
+Uszkodzony fragment wycina się dwoma cięciami po obwodzie i wyjmuje. Reszta rurociągu zostaje nietknięta, a wykop nie musi być dłuższy niż wymieniany odcinek.
+
+### Wcinki i przyłącza
+Otwarcie czynnej magistrali pod nowe przyłącze albo armaturę. Cięcie po obwodzie daje równą, prostopadłą krawędź pod kołnierz albo złączkę.
+
+### Awarie sieci wodociągowych
+Przy awarii woda zwykle nie przestaje lecieć, dopóki odcinek nie zostanie odcięty. Napęd hydrauliczny pracuje także wtedy, gdy piła jest zalewana.
+
+### Kanalizacja i kolektory
+Model HPO1200 schodzi do 1200 mm, więc obejmuje rury kolektorowe. Wystarczy 35 cm wolnego miejsca wokół rury, co ma znaczenie w komorach i ciasnych wykopach.
+
+### Rozbiórki i demontaże
+Podział długiej rury na odcinki, które da się wyciągnąć koparką i wywieźć. Bez otwartego ognia, więc bez ograniczeń przy resztkach medium.
+
+### Ciepłownictwo i gaz
+Cięcie mechaniczne zamiast palnika eliminuje strefę wpływu ciepła i otwarty ogień w wykopie.
+
+## Wyposażenie standardowe
+
+- Łańcuch prowadzący stały: Wyznacza płaszczyznę cięcia i trzyma ją przez cały obwód.
+- Łańcuch ruchomy: Przesuwa piłę wokół rury podczas cięcia.
+- Regulowana osłona tarczy: Zasłania strefę iskier i odprysków, ustawiana pod średnicę rury.
+- Tarcza diamentowa: 200 mm, US SAWS Tiger Tooth APB08125. Żeliwo, stal, PVC, PE.
+- Skrzynia transportowa: Piła, łańcuchy i przewody w jednym opakowaniu.
+- Przewody hydrauliczne: Do podłączenia do agregatu w układzie trzyliniowym.
+
+## Pytania i odpowiedzi
+
+### Jakie rury tnie HydraCut?
+Żeliwne, stalowe, PVC i PE. Zakres średnic zależy od modelu: HPO600 tnie od 203 do 603 mm, HPO1200 od 600 do 1200 mm.
+
+### Ile miejsca potrzeba wokół rury?
+Trzydzieści pięć centymetrów wolnej przestrzeni dookoła. Tyle wystarczy, żeby łańcuch objął rurę, a piła obeszła ją po obwodzie.
+
+### Czy piła zadziała, gdy z rury leci woda?
+Tak. Napęd jest hydrauliczny, więc piła pracuje także wtedy, gdy jest zalewana wodą z ciętej rury. To sytuacja typowa przy awariach wodociągowych.
+
+### Ile trwa przecięcie rury?
+Producent podaje 14 minut dla rury żeliwnej fi 800. Czas zależy od materiału, grubości ścianki i stanu tarczy.
+
+### Czego potrzeba do zasilania?
+Agregatu o przepływie 23 do 26 l/min i ciśnieniu roboczym 140 do 160 bar, z zaworem nadmiarowym ustawionym na 155 do 165 bar. Piła wymaga źródła trzyliniowego: osobną linią odprowadza przecieki z pompy, a nie każdy agregat ma to przyłącze.
+
+### Czy cięcie schodzi się w jednym punkcie?
+Tak. Łańcuch prowadzący utrzymuje tarczę w jednej płaszczyźnie, więc nie ma efektu spirali ani mijania się linii cięcia.
+
+### Który model wybrać, HPO600 czy HPO1200?
+Decyduje zakres średnic. HPO600 tnie do 603 mm, HPO1200 od 600 mm w górę. Zakład wynosi trzy milimetry, więc poza nim średnica rury wskazuje model.
+
+### Czy tarczę trzeba chłodzić wodą?
+Przy rurach stalowych tak, i to bezwzględnie. Zraszanie podłącza się hydronetką pod szybkozłącze na obudowie tarczy, a ilość wody reguluje zawór kulowy. Bez zraszania stal iskrzy tak, że skraca żywotność pasa prowadzącego.
+
+### Jak zabezpieczony jest operator?
+Regulowana osłona tarczy zasłania strefę cięcia na całym obwodzie, chroniąc przed iskrzeniem i odpryskami. Ciśnienie akustyczne na stanowisku wynosi 93,4 dBA, ale pod pełnym obciążeniem hałas potrafi przekroczyć 100 dBA, więc ochronniki słuchu są obowiązkowe.
+
+### Ile osób obsługuje piłę?
+Dwie. Jedna prowadzi piłę po rurze, druga steruje przepływem oleju na agregacie. Instrukcja producenta wymaga drugiego operatora przy uruchomieniu i przez cały czas cięcia.
+
+### Ile waży piła?
+Trzynaście kilogramów w modelu HPO600 i czternaście w HPO1200. Sama piła schodzi do wykopu w rękach, agregat zostaje na górze.
+
+### Ile kosztuje HydraCut?
+Cena zależy od modelu i konfiguracji zestawu. Podajemy ją w odpowiedzi na zapytanie, zwykle w ciągu jednego dnia roboczego.
+
+## Strony
+
+- https://hydracut.pl/ : strona główna
+- https://hydracut.pl/modele/ : porównanie HPO600 i HPO1200
+- https://hydracut.pl/dane-techniczne/ : pełna specyfikacja
+- https://hydracut.pl/zastosowania/ : zastosowania
+- https://hydracut.pl/jak-to-dziala/ : przebieg pracy krok po kroku
+- https://hydracut.pl/faq/ : pytania i odpowiedzi
+- https://hydracut.pl/kontakt/ : zapytanie ofertowe
+- https://hydracut.pl/do-pobrania/ : dokumentacja PDF
+
+## Uwagi
+
+Dane oznaczone jako "do potwierdzenia" nie zostały jeszcze zweryfikowane w dokumentacji
+technicznej producenta i nie powinny być cytowane jako pewne.
